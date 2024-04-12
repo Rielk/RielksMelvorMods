@@ -44,7 +44,7 @@ export function betterGetNextAutoSurveyHex(hex, nextHexes=[]) {
 }
 
 function canSurvey(hex) {
-    if (hex.isMaxLevel || !checkRequirements(hex) || !hex.hasSurveyedOrQueuedNeighbour)
+    if (hex.isMaxLevel || !checkRequirements(hex) || !hex.hasSurveyedOrQueuedNeighbour(hex.map.cartography))
         return false;
     return true;
 }

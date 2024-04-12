@@ -4,8 +4,3 @@ export async function setup(ctx) {
 
     ctx.patch(Cartography, 'surveyInterval').get((old_val) => old_val() / 100);
 }
-
-// getNextAutoSurveyHexes in cartography
-// surveyAuto in cartography
-// this.renderQueue.poiMarkers in cartography
-//updateAutoSurveyMarkers in certographyMenu
