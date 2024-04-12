@@ -1,3 +1,5 @@
 {
-  "setup": "setup.mjs"
+  "namespace": "beeLineAutoSurvey",
+  "icon": "assets/icon.png",
+  "setup": "src/setup.mjs"
 }

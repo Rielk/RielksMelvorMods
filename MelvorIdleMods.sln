@@ -6,12 +6,20 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BetterAutoCartography", "BetterAutoCartography", "{2923B32C-CD49-41A4-8E8C-94DB808431A4}"
 	ProjectSection(SolutionItems) = preProject
 		BetterAutoCartography\manifest.json = BetterAutoCartography\manifest.json
-		BetterAutoCartography\setup.mjs = BetterAutoCartography\setup.mjs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F668175F-0D2B-4066-821F-782EAAF69BE3}"
+	ProjectSection(SolutionItems) = preProject
+		BetterAutoCartography\src\betterGetNextAutoSurveyHex.mjs = BetterAutoCartography\src\betterGetNextAutoSurveyHex.mjs
+		BetterAutoCartography\src\setup.mjs = BetterAutoCartography\src\setup.mjs
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F668175F-0D2B-4066-821F-782EAAF69BE3} = {2923B32C-CD49-41A4-8E8C-94DB808431A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A68F0369-0E8B-4ED3-BE12-16F9EBC090A9}
