@@ -11,9 +11,9 @@ export async function setup(ctx) {
     ctx.patch(Cartography, 'getNextAutoSurveyHex').before(getNextAutoSurveyHexPatches.beforePatch);
 
     //Cheats
-    ctx.patch(Cartography, 'surveyInterval').get(_ => 50);
-    ctx.patch(WorldMap, 'sightRange').get(_ => 3);
-    ctx.patch(WorldMap, 'surveyRange').get(_ => 2);
+    //ctx.patch(Cartography, 'surveyInterval').get(_ => 50);
+    //ctx.patch(WorldMap, 'sightRange').get(_ => 3);
+    //ctx.patch(WorldMap, 'surveyRange').get(_ => 2);
 }
 
 function setupGeneralSettings(ctx) {
