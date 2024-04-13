@@ -1,9 +1,65 @@
-export function getPatch(getIgnoreVisionFunc) {
-    return (_, hex, nextHexes = []) => priorityGetNextAutoSurveyHex(hex, nextHexes, getIgnoreVisionFunc)
+export function getPatches(getIgnoreVision, getLastAutosOrDefault, setLastAutos) {
+    const getLastAutos = () => {
+        let lastAutos = getLastAutosOrDefault();
+        if (lastAutos === undefined)
+            lastAutos = {
+                actual: {
+                    q: undefined,
+                    r: undefined
+                },
+                render: {
+                    q: undefined,
+                    r: undefined
+                }
+            };
+        return lastAutos;
+    };
+
+    const afterPatch = (_, hex, nextHexes = []) => {
+        const ignoreVision = getIgnoreVision();
+        const ret = priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision);
+        return setLastAutosThenReturn(ret, nextHexes, getLastAutos, setLastAutos);
+    };
+
+    const beforePatch = (hex, nextHexes = []) => {
+        return checkIfResetNeeded(hex, nextHexes, getLastAutos);
+    };
+
+    return {
+        afterPatch: afterPatch,
+        beforePatch: beforePatch
+    };
 }
 
-function priorityGetNextAutoSurveyHex(hex, nextHexes, getIgnoreVisionFunc) {
-    const ignoreVision = getIgnoreVisionFunc();
+function checkIfResetNeeded(hex, nextHexes, getLastAutos,) {
+    const lastAutos = getLastAutos();
+    if ((lastAutos.actual.q === hex.q && lastAutos.actual.r === hex.r) ||
+        (lastAutos.render.q === hex.q && lastAutos.render.r === hex.r))
+        hex = hex.map.playerPosition;
+    return [hex, nextHexes];
+}
+
+function setLastAutosThenReturn(retHex, nextHexes, getLastAutos, setLastAutos) {
+    const lastAutos = getLastAutos();
+    if (retHex !== undefined) {
+        if (nextHexes.length === 0) {
+            lastAutos.actual = {
+                q: retHex.q,
+                r: retHex.r
+            };
+            setLastAutos(lastAutos);
+        } else {
+            lastAutos.render = {
+                q: retHex.q,
+                r: retHex.r
+            };
+            setLastAutos(lastAutos);
+        }
+    }
+    return retHex;
+}
+
+function priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision) {
     const map = hex.map;
     if (map.isFullySurveyed)
         return undefined;
