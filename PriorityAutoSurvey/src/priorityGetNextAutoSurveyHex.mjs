@@ -1,11 +1,16 @@
-export function betterGetNextAutoSurveyHex(hex, nextHexes=[]) {
+export function getPatch(getIgnoreVisionFunc) {
+    return (_, hex, nextHexes = []) => priorityGetNextAutoSurveyHex(hex, nextHexes, getIgnoreVisionFunc)
+}
+
+function priorityGetNextAutoSurveyHex(hex, nextHexes, getIgnoreVisionFunc) {
+    const ignoreVision = getIgnoreVisionFunc();
     const map = hex.map;
     if (map.isFullySurveyed)
         return undefined;
 
     const unreachableHexes = [];
     while (true) {
-        const closestPOI = findClosestRemainingPointOfInterest(map, nextHexes, unreachableHexes);
+        const closestPOI = findClosestRemainingPointOfInterest(ignoreVision, map, nextHexes, unreachableHexes);
         if (closestPOI === undefined) //All POIs have been surveyed, the requirements aren't met, or are unreachable.
             return undefined;
         if (canSurvey(closestPOI, nextHexes))
@@ -57,11 +62,13 @@ function checkRequirements(hex) {
     return hex.map.game.checkRequirements(hex.requirements);
 }
 
-function findClosestRemainingPointOfInterest(map, nextHexes = [], unreachableHexes = []) {
+function findClosestRemainingPointOfInterest(ignoreVision, map, nextHexes, unreachableHexes) {
     const game = map.game;
     let closestPoint = undefined;
     let closestDistance = Infinity;
     map.pointsOfInterest.forEach((poi) => {
+        if (!ignoreVision && !poi.hex.inSightRange)
+            return
         if (poi.hex.isMaxLevel || !game.checkRequirements(poi.hex.requirements) || unreachableHexes.includes(poi.hex) || nextHexes.includes(poi.hex))
             return;
         const distance = HexCoords.distance(poi.hex, map.playerPosition);
