@@ -8,7 +8,7 @@ export function betterGetNextAutoSurveyHex(hex, nextHexes=[]) {
         const closestPOI = findClosestRemainingPointOfInterest(map, nextHexes, unreachableHexes);
         if (closestPOI === undefined) //All POIs have been surveyed, the requirements aren't met, or are unreachable.
             return undefined;
-        if (canSurvey(closestPOI))
+        if (canSurvey(closestPOI, nextHexes))
             return closestPOI;
 
         let nextHex = undefined;
@@ -31,7 +31,7 @@ export function betterGetNextAutoSurveyHex(hex, nextHexes=[]) {
             nextHex = map.getHex(nextCoords);
             if (nextHex !== undefined) {
                 expandSearch = true;
-                if (!canSurvey(nextHex) || nextHexes.includes(nextHex))
+                if (!canSurvey(nextHex, nextHexes) || nextHexes.includes(nextHex))
                     nextHex = undefined;
             }
 
@@ -43,8 +43,12 @@ export function betterGetNextAutoSurveyHex(hex, nextHexes=[]) {
     }
 }
 
-function canSurvey(hex) {
-    if (hex.isMaxLevel || !checkRequirements(hex) || !hex.hasSurveyedOrQueuedNeighbour(hex.map.cartography))
+function canSurvey(hex, nextHexes = []) {
+    if (hex.isMaxLevel)
+        return false;
+    if (!checkRequirements(hex))
+        return false;
+    if (!(hex.hasSurveyedOrQueuedNeighbour(hex.map.cartography) || hex.someNeighbour(n => nextHexes.includes(n))))
         return false;
     return true;
 }
@@ -58,7 +62,7 @@ function findClosestRemainingPointOfInterest(map, nextHexes = [], unreachableHex
     let closestPoint = undefined;
     let closestDistance = Infinity;
     map.pointsOfInterest.forEach((poi) => {
-        if (unreachableHexes.includes(poi.hex) || poi.hex.isMaxLevel || !game.checkRequirements(poi.hex.requirements) || nextHexes.includes(poi.hex))
+        if (poi.hex.isMaxLevel || !game.checkRequirements(poi.hex.requirements) || unreachableHexes.includes(poi.hex) || nextHexes.includes(poi.hex))
             return;
         const distance = HexCoords.distance(poi.hex, map.playerPosition);
         if (distance < closestDistance) {
