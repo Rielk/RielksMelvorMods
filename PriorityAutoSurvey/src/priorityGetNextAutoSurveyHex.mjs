@@ -1,11 +1,72 @@
-export function betterGetNextAutoSurveyHex(hex, nextHexes=[]) {
+export function getPatches(getIgnoreVision, getLastAutosOrDefault, setLastAutos) {
+    const getLastAutos = () => {
+        let lastAutos = getLastAutosOrDefault();
+        if (lastAutos === undefined)
+            lastAutos = {
+                actual: {
+                    q: undefined,
+                    r: undefined
+                },
+                render: {
+                    q: undefined,
+                    r: undefined
+                }
+            };
+        return lastAutos;
+    };
+
+    const afterPatch = (_, hex, nextHexes = []) => {
+        const ignoreVision = getIgnoreVision();
+        const ret = priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision);
+        return setLastAutosThenReturn(ret, nextHexes, getLastAutos, setLastAutos);
+    };
+
+    const beforePatch = (hex, nextHexes = []) => {
+        return checkIfResetNeeded(hex, nextHexes, getLastAutos);
+    };
+
+    return {
+        afterPatch: afterPatch,
+        beforePatch: beforePatch
+    };
+}
+
+function checkIfResetNeeded(hex, nextHexes, getLastAutos,) {
+    const lastAutos = getLastAutos();
+    if ((lastAutos.actual.q === hex.q && lastAutos.actual.r === hex.r) ||
+        (lastAutos.render.q === hex.q && lastAutos.render.r === hex.r))
+        hex = hex.map.playerPosition;
+    return [hex, nextHexes];
+}
+
+function setLastAutosThenReturn(retHex, nextHexes, getLastAutos, setLastAutos) {
+    const lastAutos = getLastAutos();
+    if (retHex !== undefined) {
+        if (nextHexes.length === 0) {
+            lastAutos.actual = {
+                q: retHex.q,
+                r: retHex.r
+            };
+            setLastAutos(lastAutos);
+        } else {
+            lastAutos.render = {
+                q: retHex.q,
+                r: retHex.r
+            };
+            setLastAutos(lastAutos);
+        }
+    }
+    return retHex;
+}
+
+function priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision) {
     const map = hex.map;
     if (map.isFullySurveyed)
         return undefined;
 
     const unreachableHexes = [];
     while (true) {
-        const closestPOI = findClosestRemainingPointOfInterest(map, nextHexes, unreachableHexes);
+        const closestPOI = findClosestRemainingPointOfInterest(ignoreVision, map, nextHexes, unreachableHexes);
         if (closestPOI === undefined) //All POIs have been surveyed, the requirements aren't met, or are unreachable.
             return undefined;
         if (canSurvey(closestPOI, nextHexes))
@@ -57,11 +118,13 @@ function checkRequirements(hex) {
     return hex.map.game.checkRequirements(hex.requirements);
 }
 
-function findClosestRemainingPointOfInterest(map, nextHexes = [], unreachableHexes = []) {
+function findClosestRemainingPointOfInterest(ignoreVision, map, nextHexes, unreachableHexes) {
     const game = map.game;
     let closestPoint = undefined;
     let closestDistance = Infinity;
     map.pointsOfInterest.forEach((poi) => {
+        if (!ignoreVision && !poi.hex.inSightRange)
+            return
         if (poi.hex.isMaxLevel || !game.checkRequirements(poi.hex.requirements) || unreachableHexes.includes(poi.hex) || nextHexes.includes(poi.hex))
             return;
         const distance = HexCoords.distance(poi.hex, map.playerPosition);
