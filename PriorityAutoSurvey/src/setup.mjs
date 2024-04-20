@@ -3,9 +3,10 @@ export async function setup(ctx) {
 
     const generalSettings = setupGeneralSettings(ctx);
     const getIgnoreVision = () => generalSettings.get('ignore-vision');
+    const getSurveyHidden = () => generalSettings.get('survey-hidden');
     const getLastAutos = () => ctx.characterStorage.getItem('lastAutos');
     const setLastAutos = obj => ctx.characterStorage.setItem('lastAutos', obj);
-    const getNextAutoSurveyHexPatches = getGetNextAutoSurveyHexPatches(getIgnoreVision, getLastAutos, setLastAutos)
+    const getNextAutoSurveyHexPatches = getGetNextAutoSurveyHexPatches(getIgnoreVision, getSurveyHidden, getLastAutos, setLastAutos)
 
     ctx.patch(Cartography, 'getNextAutoSurveyHex').after(getNextAutoSurveyHexPatches.afterPatch);
     ctx.patch(Cartography, 'getNextAutoSurveyHex').before(getNextAutoSurveyHexPatches.beforePatch);
@@ -23,6 +24,13 @@ function setupGeneralSettings(ctx) {
         name: 'ignore-vision',
         label: 'Ignore Vision',
         hint: 'Turn on to search for POIs outside of vision range.',
+        default: false
+    });
+    generalSettings.add({
+        type: 'switch',
+        name: 'survey-hidden',
+        label: 'Survey Hidden',
+        hint: 'Turn on to survey tiles with hidden POIs on.',
         default: false
     });
     return generalSettings;

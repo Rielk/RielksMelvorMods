@@ -1,4 +1,4 @@
-export function getPatches(getIgnoreVision, getLastAutosOrDefault, setLastAutos) {
+export function getPatches(getIgnoreVision, getSurveyHidden, getLastAutosOrDefault, setLastAutos) {
     const getLastAutos = () => {
         let lastAutos = getLastAutosOrDefault();
         if (lastAutos === undefined)
@@ -17,7 +17,8 @@ export function getPatches(getIgnoreVision, getLastAutosOrDefault, setLastAutos)
 
     const afterPatch = (_, hex, nextHexes = []) => {
         const ignoreVision = getIgnoreVision();
-        const ret = priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision);
+        const surveyHidden = getSurveyHidden();
+        const ret = priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision, surveyHidden);
         return setLastAutosThenReturn(ret, nextHexes, getLastAutos, setLastAutos);
     };
 
@@ -59,14 +60,15 @@ function setLastAutosThenReturn(retHex, nextHexes, getLastAutos, setLastAutos) {
     return retHex;
 }
 
-function priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision) {
+
+function priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision, surveyHidden) {
     const map = hex.map;
     if (map.isFullySurveyed)
         return undefined;
 
     const unreachableHexes = [];
     while (true) {
-        const closestPOI = findClosestRemainingPointOfInterest(ignoreVision, map, nextHexes, unreachableHexes);
+        const closestPOI = findClosestRemainingPointOfInterest(ignoreVision, surveyHidden, map, nextHexes, unreachableHexes);
         if (closestPOI === undefined) //All POIs have been surveyed, the requirements aren't met, or are unreachable.
             return undefined;
         if (canSurvey(closestPOI, nextHexes))
@@ -118,13 +120,17 @@ function checkRequirements(hex) {
     return hex.map.game.checkRequirements(hex.requirements);
 }
 
-function findClosestRemainingPointOfInterest(ignoreVision, map, nextHexes, unreachableHexes) {
+function findClosestRemainingPointOfInterest(ignoreVision, surveyHidden, map, nextHexes, unreachableHexes) {
     const game = map.game;
+    const cartography = map.cartography;
     let closestPoint = undefined;
     let closestDistance = Infinity;
     map.pointsOfInterest.forEach((poi) => {
         if (!ignoreVision && !poi.hex.inSightRange)
-            return
+            return;
+        if (!surveyHidden && poi.hidden !== undefined)
+            if (!poi.hidden.showMarker || !cartography.isHiddenPOIMet(poi.hidden))
+                return;
         if (poi.hex.isMaxLevel || !game.checkRequirements(poi.hex.requirements) || unreachableHexes.includes(poi.hex) || nextHexes.includes(poi.hex))
             return;
         const distance = HexCoords.distance(poi.hex, map.playerPosition);
