@@ -60,6 +60,7 @@ function setLastAutosThenReturn(retHex, nextHexes, getLastAutos, setLastAutos) {
     return retHex;
 }
 
+
 function priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision, surveyHidden) {
     const map = hex.map;
     if (map.isFullySurveyed)
