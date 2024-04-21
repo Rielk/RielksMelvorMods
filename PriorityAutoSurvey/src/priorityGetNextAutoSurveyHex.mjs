@@ -1,4 +1,4 @@
-export function getPatches(getIgnoreVision, getSurveyHidden, getLastAutosOrDefault, setLastAutos) {
+export function getPatches(generalSettings, getLastAutosOrDefault, setLastAutos) {
     const getLastAutos = () => {
         let lastAutos = getLastAutosOrDefault();
         if (lastAutos === undefined)
@@ -16,8 +16,8 @@ export function getPatches(getIgnoreVision, getSurveyHidden, getLastAutosOrDefau
     };
 
     const afterPatch = (_, hex, nextHexes = []) => {
-        const ignoreVision = getIgnoreVision();
-        const surveyHidden = getSurveyHidden();
+        const ignoreVision = generalSettings.get('ignore-vision');
+        const surveyHidden = generalSettings.get('survey-hidden');
         const ret = priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision, surveyHidden);
         return setLastAutosThenReturn(ret, nextHexes, getLastAutos, setLastAutos);
     };
