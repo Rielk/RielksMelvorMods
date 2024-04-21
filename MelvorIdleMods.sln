@@ -16,6 +16,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F668175F-0D2
 		PriorityAutoSurvey\src\setup.mjs = PriorityAutoSurvey\src\setup.mjs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TownshipExcessTrader", "TownshipExcessTrader", "{0A64BEDB-24B9-4AF8-90A1-AC45639B7B18}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F2E2947-2A55-4BDC-801A-794212CD142D}"
+	ProjectSection(SolutionItems) = preProject
+		TownshipExcessTrader\src\setup.mjs = TownshipExcessTrader\src\setup.mjs
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DebugCheats", "DebugCheats", "{2EC0D6DC-55D7-4B7C-8964-0DC69758DF71}"
 	ProjectSection(SolutionItems) = preProject
 		DebugCheats\manifest.json = DebugCheats\manifest.json
@@ -35,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F668175F-0D2B-4066-821F-782EAAF69BE3} = {2923B32C-CD49-41A4-8E8C-94DB808431A4}
 		{B1538070-B5ED-4D23-9419-5FC1ACE4C551} = {2EC0D6DC-55D7-4B7C-8964-0DC69758DF71}
+		{3F2E2947-2A55-4BDC-801A-794212CD142D} = {0A64BEDB-24B9-4AF8-90A1-AC45639B7B18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A68F0369-0E8B-4ED3-BE12-16F9EBC090A9}
