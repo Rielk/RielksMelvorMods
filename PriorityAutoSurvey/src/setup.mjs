@@ -1,37 +1,15 @@
 export async function setup(ctx) {
-    const getGetNextAutoSurveyHexPatches = (await ctx.loadModule('src/priorityGetNextAutoSurveyHex.mjs')).getPatches;
+    (await ctx.loadModule('src/settings.mjs')).setupGeneralSettings(ctx);
 
-    const generalSettings = setupGeneralSettings(ctx);
-    const getIgnoreVision = () => generalSettings.get('ignore-vision');
-    const getSurveyHidden = () => generalSettings.get('survey-hidden');
-    const getLastAutos = () => ctx.characterStorage.getItem('lastAutos');
-    const setLastAutos = obj => ctx.characterStorage.setItem('lastAutos', obj);
-    const getNextAutoSurveyHexPatches = getGetNextAutoSurveyHexPatches(getIgnoreVision, getSurveyHidden, getLastAutos, setLastAutos)
+    ctx.onCharacterLoaded((await ctx.loadModule('src/characterStore.mjs')).onCharacterLoaded);
 
-    ctx.patch(Cartography, 'getNextAutoSurveyHex').after(getNextAutoSurveyHexPatches.afterPatch);
-    ctx.patch(Cartography, 'getNextAutoSurveyHex').before(getNextAutoSurveyHexPatches.beforePatch);
+    const priorityGetNextAutoSurveyHex = await ctx.loadModule('src/priorityGetNextAutoSurveyHex.mjs');
+    ctx.patch(Cartography, 'getNextAutoSurveyHex').after(priorityGetNextAutoSurveyHex.afterPatch);
+    ctx.patch(Cartography, 'getNextAutoSurveyHex').before(priorityGetNextAutoSurveyHex.beforePatch);
+    ctx.patch(Cartography, 'startAutoSurvey').after(priorityGetNextAutoSurveyHex.startAutoSurveyPatch);
 
     //Cheats
     //ctx.patch(Cartography, 'surveyInterval').get(_ => 50);
     //ctx.patch(WorldMap, 'sightRange').get(_ => 3);
     //ctx.patch(WorldMap, 'surveyRange').get(_ => 2);
-}
-
-function setupGeneralSettings(ctx) {
-    const generalSettings = ctx.settings.section('General');
-    generalSettings.add({
-        type: 'switch',
-        name: 'ignore-vision',
-        label: 'Ignore Vision',
-        hint: 'Turn on to search for POIs outside of vision range.',
-        default: false
-    });
-    generalSettings.add({
-        type: 'switch',
-        name: 'survey-hidden',
-        label: 'Survey Hidden',
-        hint: 'Turn on to survey tiles with hidden POIs on.',
-        default: false
-    });
-    return generalSettings;
 }
