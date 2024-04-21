@@ -3,8 +3,10 @@ const settings = (await ctx.loadModule('src/settings.mjs'));
 const characterStore = (await ctx.loadModule('src/characterStore.mjs'));
 
 export function afterPatch(_, hex, nextHexes = []) {
-    if (!settings.getEnabled(ctx))
+    if (!settings.getEnabled(ctx)) {
+        checkThenSetLastAutos(hex, nextHexes);
         return;
+    }
 
     const ignoreVision = settings.getIgnoreVision(ctx);
     const surveyHidden = settings.getSurveyHidden(ctx);
