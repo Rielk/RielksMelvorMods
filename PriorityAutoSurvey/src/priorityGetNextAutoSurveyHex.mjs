@@ -16,6 +16,10 @@ export function getPatches(generalSettings, getLastAutosOrDefault, setLastAutos)
     };
 
     const afterPatch = (_, hex, nextHexes = []) => {
+        const enabled = generalSettings.get('enabled');
+        if (!enabled)
+            return;
+
         const ignoreVision = generalSettings.get('ignore-vision');
         const surveyHidden = generalSettings.get('survey-hidden');
         const ret = priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision, surveyHidden);
@@ -23,6 +27,10 @@ export function getPatches(generalSettings, getLastAutosOrDefault, setLastAutos)
     };
 
     const beforePatch = (hex, nextHexes = []) => {
+        const enabled = generalSettings.get('enabled');
+        if (!enabled)
+            return;
+
         return checkIfResetNeeded(hex, nextHexes, getLastAutos);
     };
 

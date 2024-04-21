@@ -19,6 +19,12 @@ function setupGeneralSettings(ctx) {
     const generalSettings = ctx.settings.section('General');
     generalSettings.add({
         type: 'switch',
+        name: 'enabled',
+        label: 'Enable Priority Auto Survey',
+        default: true
+    });
+    generalSettings.add({
+        type: 'switch',
         name: 'ignore-vision',
         label: 'Ignore Vision',
         hint: 'Turn on to search for POIs outside of vision range.',
