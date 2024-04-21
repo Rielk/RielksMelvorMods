@@ -10,8 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PriorityAutoSurvey", "Prior
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F668175F-0D2B-4066-821F-782EAAF69BE3}"
 	ProjectSection(SolutionItems) = preProject
-		PriorityAutoSurvey\src\setup.mjs = PriorityAutoSurvey\src\setup.mjs
 		PriorityAutoSurvey\src\priorityGetNextAutoSurveyHex.mjs = PriorityAutoSurvey\src\priorityGetNextAutoSurveyHex.mjs
+		PriorityAutoSurvey\src\setup.mjs = PriorityAutoSurvey\src\setup.mjs
 	EndProjectSection
 EndProject
 Global
