@@ -1,73 +1,51 @@
-export function getPatches(generalSettings, getLastAutosOrDefault, setLastAutos) {
-    const getLastAutos = () => {
-        let lastAutos = getLastAutosOrDefault();
-        if (lastAutos === undefined)
-            lastAutos = {
-                actual: {
-                    q: undefined,
-                    r: undefined
-                },
-                render: {
-                    q: undefined,
-                    r: undefined
-                }
-            };
-        return lastAutos;
-    };
+const ctx = mod.getContext(import.meta);
+const settings = (await ctx.loadModule('src/settings.mjs'));
+const characterStore = (await ctx.loadModule('src/characterStore.mjs'));
 
-    const afterPatch = (_, hex, nextHexes = []) => {
-        const enabled = generalSettings.get('enabled');
-        if (!enabled)
-            return;
+export function afterPatch(_, hex, nextHexes = []) {
+    if (!settings.getEnabled(ctx))
+        return;
 
-        const ignoreVision = generalSettings.get('ignore-vision');
-        const surveyHidden = generalSettings.get('survey-hidden');
-        const ret = priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision, surveyHidden);
-        return setLastAutosThenReturn(ret, nextHexes, getLastAutos, setLastAutos);
-    };
+    const ignoreVision = settings.getIgnoreVision(ctx);
+    const surveyHidden = settings.getSurveyHidden(ctx);
+    const ret = priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision, surveyHidden);
+    checkThenSetLastAutos(ret, nextHexes);
+    return ret;
+};
 
-    const beforePatch = (hex, nextHexes = []) => {
-        const enabled = generalSettings.get('enabled');
-        if (!enabled)
-            return;
+export function beforePatch(hex, nextHexes = []) {
+    if (!settings.getEnabled(ctx))
+        return;
 
-        return checkIfResetNeeded(hex, nextHexes, getLastAutos);
-    };
+    return checkIfResetNeeded(hex, nextHexes);
+};
 
-    return {
-        afterPatch: afterPatch,
-        beforePatch: beforePatch
-    };
-}
-
-function checkIfResetNeeded(hex, nextHexes, getLastAutos,) {
-    const lastAutos = getLastAutos();
+function checkIfResetNeeded(hex, nextHexes) {
+    const lastAutos = characterStore.getLastAutos(ctx);
     if ((lastAutos.actual.q === hex.q && lastAutos.actual.r === hex.r) ||
         (lastAutos.render.q === hex.q && lastAutos.render.r === hex.r))
         hex = hex.map.playerPosition;
     return [hex, nextHexes];
 }
 
-function setLastAutosThenReturn(retHex, nextHexes, getLastAutos, setLastAutos) {
-    const lastAutos = getLastAutos();
+function checkThenSetLastAutos(retHex, nextHexes) {
+    const lastAutos = characterStore.getLastAutos(ctx);
     if (retHex !== undefined) {
         if (nextHexes.length === 0) {
             lastAutos.actual = {
                 q: retHex.q,
                 r: retHex.r
             };
-            setLastAutos(lastAutos);
+            characterStore.setLastAutos(ctx, lastAutos);
         } else {
             lastAutos.render = {
                 q: retHex.q,
                 r: retHex.r
             };
-            setLastAutos(lastAutos);
+            characterStore.setLastAutos(ctx, lastAutos);
         }
     }
-    return retHex;
 }
-
 
 function priorityGetNextAutoSurveyHex(hex, nextHexes, ignoreVision, surveyHidden) {
     const map = hex.map;
