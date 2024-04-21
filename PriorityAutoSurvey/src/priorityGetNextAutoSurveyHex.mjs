@@ -20,11 +20,27 @@ export function beforePatch(hex, nextHexes = []) {
     return checkIfResetNeeded(hex, nextHexes);
 };
 
+export function startAutoSurveyPatch(canStart, hex) {
+    if (canStart) {
+        const lastManual = {
+            q: hex.q,
+            r: hex.r
+        }
+        characterStore.setLastManual(ctx, lastManual)
+    }
+}
+
 function checkIfResetNeeded(hex, nextHexes) {
     const lastAutos = characterStore.getLastAutos(ctx);
     if ((lastAutos.actual.q === hex.q && lastAutos.actual.r === hex.r) ||
-        (lastAutos.render.q === hex.q && lastAutos.render.r === hex.r))
-        hex = hex.map.playerPosition;
+        (lastAutos.render.q === hex.q && lastAutos.render.r === hex.r)) {
+        const lastManual = characterStore.getLastManual(ctx);
+        const lastManualHex = hex.map.getHex(lastManual);
+        if (lastManualHex)
+            hex = lastManualHex
+        else
+            hex = hex.map.playerPosition;
+    }
     return [hex, nextHexes];
 }
 

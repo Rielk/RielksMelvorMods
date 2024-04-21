@@ -6,6 +6,7 @@ export async function setup(ctx) {
     const priorityGetNextAutoSurveyHex = await ctx.loadModule('src/priorityGetNextAutoSurveyHex.mjs');
     ctx.patch(Cartography, 'getNextAutoSurveyHex').after(priorityGetNextAutoSurveyHex.afterPatch);
     ctx.patch(Cartography, 'getNextAutoSurveyHex').before(priorityGetNextAutoSurveyHex.beforePatch);
+    ctx.patch(Cartography, 'startAutoSurvey').after(priorityGetNextAutoSurveyHex.startAutoSurveyPatch);
 
     //Cheats
     //ctx.patch(Cartography, 'surveyInterval').get(_ => 50);
