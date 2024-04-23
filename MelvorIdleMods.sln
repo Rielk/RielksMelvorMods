@@ -25,9 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F2E2947-2A5
 	ProjectSection(SolutionItems) = preProject
 		TownshipExcessTrader\src\automaticTrader.mjs = TownshipExcessTrader\src\automaticTrader.mjs
 		TownshipExcessTrader\src\characterStore.mjs = TownshipExcessTrader\src\characterStore.mjs
+		TownshipExcessTrader\src\setTradesUI.mjs = TownshipExcessTrader\src\setTradesUI.mjs
 		TownshipExcessTrader\src\setup.mjs = TownshipExcessTrader\src\setup.mjs
-		TownshipExcessTrader\src\templates.html = TownshipExcessTrader\src\templates.html
-		TownshipExcessTrader\src\ui.mjs = TownshipExcessTrader\src\ui.mjs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DebugCheats", "DebugCheats", "{2EC0D6DC-55D7-4B7C-8964-0DC69758DF71}"
