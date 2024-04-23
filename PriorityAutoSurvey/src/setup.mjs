@@ -7,9 +7,4 @@ export async function setup(ctx) {
     ctx.patch(Cartography, 'getNextAutoSurveyHex').after(priorityGetNextAutoSurveyHex.afterPatch);
     ctx.patch(Cartography, 'getNextAutoSurveyHex').before(priorityGetNextAutoSurveyHex.beforePatch);
     ctx.patch(Cartography, 'startAutoSurvey').after(priorityGetNextAutoSurveyHex.startAutoSurveyPatch);
-
-    //Cheats
-    //ctx.patch(Cartography, 'surveyInterval').get(_ => 50);
-    //ctx.patch(WorldMap, 'sightRange').get(_ => 3);
-    //ctx.patch(WorldMap, 'surveyRange').get(_ => 2);
 }
