@@ -1,7 +1,7 @@
 const fastSurveyName = 'fast-survey';
 const sightRangeName = 'sight-range';
 const surveyRangeName = 'survey-range';
-const settingsName = 'Priority Auto Survey';
+const settingsName = 'Cartography';
 
 export function setupSettings(ctx) {
     const generalSettings = ctx.settings.section(settingsName);
