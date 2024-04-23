@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B1538070-B5E
 	ProjectSection(SolutionItems) = preProject
 		DebugCheats\src\cartography.mjs = DebugCheats\src\cartography.mjs
 		DebugCheats\src\cartographySettings.mjs = DebugCheats\src\cartographySettings.mjs
+		DebugCheats\src\gold.mjs = DebugCheats\src\gold.mjs
+		DebugCheats\src\goldSettings.mjs = DebugCheats\src\goldSettings.mjs
 		DebugCheats\src\setup.mjs = DebugCheats\src\setup.mjs
 	EndProjectSection
 EndProject

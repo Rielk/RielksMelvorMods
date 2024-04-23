@@ -16,14 +16,6 @@ export async function setup(ctx) {
             }
         });
     });
-
-    ctx.onCharacterLoaded(() => {
-        game.township.PASSIVE_TICK_LENGTH = 5;
-        game.township.tickTimer._maxTicks = 5;
-        game.township.tickTimer._ticksLeft = 5;
-        game.township.tickTimer.tick();
-    });
-    ctx.patch(Township, 'tick').after(() => game.gp.set(1000000000));
 }
 
 function Counter(props) {
