@@ -14,7 +14,9 @@ export function setupSettings(ctx) {
         type: 'button',
         name: setGoldName,
         display: 'Set Gold',
-        onClick: triggerSetGold
+        onClick() {
+            setGoldFuncs.forEach(func => func());
+        }
     });
 }
 
@@ -25,6 +27,3 @@ export var registerForSetGold = (func) => {
         setGoldFuncs.push(func);
 }
 const setGoldFuncs = [];
-function triggerSetGold() {
-    setGoldFuncs.forEach(func => func());
-}
