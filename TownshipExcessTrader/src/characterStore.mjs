@@ -1,0 +1,2 @@
+export function onCharacterLoaded(ctx) {
+}
