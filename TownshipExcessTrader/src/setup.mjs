@@ -1,6 +1,4 @@
 export async function setup(ctx) {
-    ctx.onCharacterLoaded((await ctx.loadModule('src/characterStore.mjs')).onCharacterLoaded);
-
     const automaticTrader = await ctx.loadModule('src/automaticTrader.mjs');
     ctx.patch(Township, 'tick').after(automaticTrader.afterPatch);
 

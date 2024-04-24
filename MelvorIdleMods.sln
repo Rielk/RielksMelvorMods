@@ -24,7 +24,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3F2E2947-2A55-4BDC-801A-794212CD142D}"
 	ProjectSection(SolutionItems) = preProject
 		TownshipExcessTrader\src\automaticTrader.mjs = TownshipExcessTrader\src\automaticTrader.mjs
-		TownshipExcessTrader\src\characterStore.mjs = TownshipExcessTrader\src\characterStore.mjs
+		TownshipExcessTrader\src\config.mjs = TownshipExcessTrader\src\config.mjs
 		TownshipExcessTrader\src\setTradesUI.mjs = TownshipExcessTrader\src\setTradesUI.mjs
 		TownshipExcessTrader\src\setup.mjs = TownshipExcessTrader\src\setup.mjs
 	EndProjectSection

@@ -1,3 +1,5 @@
+const config = (await mod.getContext(import.meta).loadModule('src/config.mjs')).config;
+
 export function createAutoTradeConfig() {
     game.township.resources.forEach((resource) => {
         const element = document.getElementById(`jump-to-resource-${resource.id}`);
@@ -37,7 +39,7 @@ function createAutoTradeConfigElement(resource) {
     });
 
     const quantityId = `${resource.name}--auto-limit-quanity`;
-    const quantityDiv = createNumberInput(quantityId, `Minimum ${resource.name}`, 0, {
+    const quantityDiv = createNumberInput(quantityId, `Minimum ${resource.name}`, config.resourceLimit(resource.id), {
         maxWidth: 200,
         hint: `Limit minimum amount of ${resource.name} that will be left in storage`
     });
@@ -55,7 +57,8 @@ function createHeader(resource) {
     header.innerText = `AutoTrade ${resource.name}`;
 
     const enabledId = `${resource.name}-enabled`;
-    const enabledDiv = createToggle(enabledId, header, true);
+    const isResourceEnabled = config.isResourceEnabled(resource.id);
+    const enabledDiv = createToggle(enabledId, header, isResourceEnabled);
     div.append(enabledDiv);
 
     return div;
