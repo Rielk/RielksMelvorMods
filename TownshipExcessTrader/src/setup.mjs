@@ -5,11 +5,8 @@ export async function setup(ctx) {
     ctx.patch(Township, 'tick').after(automaticTrader.afterPatch);
 
     const setTradesUI = await ctx.loadModule('src/setTradesUI.mjs');
-    ctx.onInterfaceReady(() => {
-        game.township.resources.forEach((_, resource) => {
-            const element = document.getElementById(`jump-to-resource-${resource}`);
-            if (element)
-                element.after(setTradesUI.createAutoTradeConfig(resource));
-        });
-    });
+    ctx.onInterfaceReady(setTradesUI.createAutoTradeConfig);
+
+    //conversion.unlockRequirements
+    //isRequirementMet(conversion.unlockRequirements)
 }
