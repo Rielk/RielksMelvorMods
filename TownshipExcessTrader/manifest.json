@@ -1,5 +1,5 @@
 {
-  "namespace": "townshipExcessTrader",
+  "namespace": "townshipAutoTrader",
   "icon": "assets/icon.png",
   "setup": "src/setup.mjs"
 }

@@ -28,20 +28,17 @@ function createAutoTradeConfigElement(resource) {
     contentDiv.append(unorderedList);
 
     game.township.getResourceItemConversionsFromTownship(resource).forEach((conversion) => {
-        const conversionDiv = createConversionListItem(conversion);
-        tippy(conversionDiv, {
-            content: conversion.item.name,
-            animation: false,
-            allowHTML: true
-        });
-
+        const conversionDiv = createConversionListItem(resource, conversion);
         unorderedList.append(conversionDiv);
     });
 
     const quantityId = `${resource.name}--auto-limit-quanity`;
-    const quantityDiv = createNumberInput(quantityId, `Minimum ${resource.name}`, config.resourceLimit(resource.id), {
+    const quantityDiv = createNumberInput(quantityId, `Minimum ${resource.name}`, config.getResourceLimit(resource.id), {
         maxWidth: 200,
-        hint: `Limit minimum amount of ${resource.name} that will be left in storage`
+        hint: `Limit minimum amount of ${resource.name} that will be left in storage`,
+        onInput: (e) => {
+            config.setResourceLimit(resource.id, e.target.value);
+        }
     });
     contentDiv.append(quantityDiv);
 
@@ -58,7 +55,11 @@ function createHeader(resource) {
 
     const enabledId = `${resource.name}-enabled`;
     const isResourceEnabled = config.isResourceEnabled(resource.id);
-    const enabledDiv = createToggle(enabledId, header, isResourceEnabled);
+    const enabledDiv = createToggle(enabledId, header, isResourceEnabled, {
+        onInput: (e) => {
+            config.setResourceEnabled(resource.id, e.target.checked);
+        }
+    });
     div.append(enabledDiv);
 
     return div;
@@ -93,6 +94,8 @@ function createNumberInput(id, labelContent, value, optional = {}) {
     input.setAttribute('id', id);
     input.setAttribute('name', id);
     input.value = value;
+    if (optional.onInput)
+        input.addEventListener('input', optional.onInput);
     div.append(input);
 
     return div;
@@ -109,6 +112,8 @@ function createToggle(id, labelContent, checked, optional = {}) {
     input.setAttribute('id', id);
     input.setAttribute('name', id);
     input.checked = checked;
+    if (optional.onInput)
+        input.addEventListener('input', optional.onInput);
     div.append(input);
 
     const label = document.createElement('label');
@@ -130,11 +135,12 @@ function createToggle(id, labelContent, checked, optional = {}) {
     return div;
 }
 
-function createConversionListItem(conversion) {
+function createConversionListItem(resource, conversion) {
     const li = document.createElement('li');
-    li.setAttribute('class', 'btn btn-outline-secondary township-excess-trader-item-selector')
-    li.setAttribute('data-action', conversion.item.id);
+    li.setAttribute('class', 'btn btn-outline-secondary township-auto-trader-item-selector')
     li.setAttribute('style', 'margin: 2px; padding: 6px; float: left;')
+    li.onclick = () => conversionListItemOnClick(li, resource.id, conversion.item.id);
+    setConversionListItemOpacity(li, config.isConversionEnabled(resource.id, conversion.item.id));
 
     const img = document.createElement('img');
     img.setAttribute('src', conversion.item.media);
@@ -142,5 +148,24 @@ function createConversionListItem(conversion) {
     img.setAttribute('height', '30');
     li.append(img);
 
+    tippy(li, {
+        content: conversion.item.name,
+        animation: false,
+        allowHTML: true
+    });
+
     return li;
+}
+
+function setConversionListItemOpacity(li, enabled, animate = false) {
+    const opacity = enabled ? 1 : 0.25; 
+    if (animate)
+        $(li).fadeTo(200, opacity);
+    else 
+        li.style.opacity = opacity;
+}
+
+function conversionListItemOnClick(li, resourceID, conversionID) {
+    const newEnabled = config.toggleConversionEnabled(resourceID, conversionID);
+    setConversionListItemOpacity(li, newEnabled, true);
 }

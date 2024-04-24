@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F668175F-0D2
 		PriorityAutoSurvey\src\setup.mjs = PriorityAutoSurvey\src\setup.mjs
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TownshipExcessTrader", "TownshipExcessTrader", "{0A64BEDB-24B9-4AF8-90A1-AC45639B7B18}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TownshipAutoTrader", "TownshipAutoTrader", "{0A64BEDB-24B9-4AF8-90A1-AC45639B7B18}"
 	ProjectSection(SolutionItems) = preProject
 		TownshipExcessTrader\manifest.json = TownshipExcessTrader\manifest.json
 	EndProjectSection

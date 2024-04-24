@@ -11,20 +11,48 @@ class Config {
         return this._resources[resourceID]?.enabled;
     }
 
-    resourceLimit(resourceID) {
+    setResourceEnabled(resourceID, enabled) {
+        const config = this._resources[resourceID];
+        if (config === undefined)
+            return false;
+        if (config.enabled === enabled)
+            return true;
+        config.enabled = enabled;
+        this.saveState();
+        return true;
+    }
+
+    getResourceLimit(resourceID) {
         return this._resources[resourceID]?.limit;
     }
 
+    setResourceLimit(resourceID, limit) {
+        const config = this._resources[resourceID];
+        if (config === undefined)
+            return false;
+        if (config.limit === limit)
+            return true;
+        config.limit = limit;
+        this.saveState();
+        return true;
+    }
+
     isConversionEnabled(resourceID, conversionID) {
-        return this.getConversion(resourceID, conversionID)?.enabled;
+        return this._getConversionConfig(resourceID, conversionID)?.enabled;
     }
 
-    getConversion(resourceID, conversionID) {
-        return this.getConversionForResource(resourceID)[conversionID];
+    _getConversionConfig(resourceID, conversionID) {
+        return this._conversionStore[resourceID]?.[conversionID];
     }
 
-    getConversionForResource(resourceID) {
-        return this._conversionStore[resourceID];
+    toggleConversionEnabled(resourceID, conversionID) {
+        const config = this._getConversionConfig(resourceID, conversionID);
+        if (config) {
+            config.enabled = !config.enabled;
+            this.saveState();
+            return config.enabled;
+        }
+        return undefined;
     }
 
     onCharacterLoaded(ctx) {
@@ -55,7 +83,7 @@ class Config {
             var subConfig = resourceConfigs[resource.id];
             if (subConfig === undefined)
                 subConfig = {
-                    enableed: false,
+                    enabled: false,
                     limit: 0
                 };
             resources[resource.id] = {
@@ -70,6 +98,8 @@ class Config {
     }
 
     saveState() {
+        console.log('Config would have saved!')
+        return; //Disable while testing.
         const enabledConversions = [];
         for (var resourceID in this._conversionStore)
             for (var conversionID in this._conversionStore[resourceID.id])
