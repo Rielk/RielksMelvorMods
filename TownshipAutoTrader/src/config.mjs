@@ -134,8 +134,8 @@ class Config {
     saveState() {
         const enabledConversions = [];
         for (var resourceID in this._conversionStore)
-            for (var conversionID in this._conversionStore[resourceID.id])
-                if (getConversion(resourceID, conversionID).enabled)
+            for (var conversionID in this._conversionStore[resourceID])
+                if (this.isConversionEnabled(resourceID, conversionID))
                     enabledConversions.push(conversionID);
 
         const resourceConfigs = {};
