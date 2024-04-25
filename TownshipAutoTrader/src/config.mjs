@@ -25,20 +25,34 @@ class Config {
         return enabledResources;
     }
 
+    enabledConversionsForResource(resourceID) {
+        const enabledConversions = [];
+        if (!this.isResourceEnabled(resourceID))
+            return enabledConversions;
+
+        const resourceConfig = this._conversionStore[resourceID];
+        for (var conversionID in resourceConfig) {
+            const conversionConfig = resourceConfig[conversionID];
+            if (conversionConfig.enabled)
+                enabledConversions.push(conversionConfig.conversion);
+        }
+        return enabledConversions;
+    }
+
     isResourceEnabled(resourceID) {
         return this._resources[resourceID]?.enabled;
     }
 
     setResourceEnabled(resourceID, enabled) {
-        const config = this._resources[resourceID];
-        if (config === undefined)
+        const resourceConfig = this._resources[resourceID];
+        if (resourceConfig === undefined)
             return false;
-        if (config.enabled === enabled)
+        if (resourceConfig.enabled === enabled)
             return true;
-        config.enabled = enabled;
+        resourceConfig.enabled = enabled;
         this.saveState();
         if (enabled)
-            automaticTrader.autoTrade(config, [config.resource]);
+            automaticTrader.autoTrade(this, [resourceConfig.resource]);
         return true;
     }
 
