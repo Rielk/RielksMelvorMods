@@ -3,6 +3,10 @@ const automaticTrader = await mod.getContext(import.meta).loadModule('src/automa
 const enabledConversionsName = 'enabled-conversions';
 const resourceConfigsName = 'resource-configs';
 
+export function createConfig(ctx) {
+    return new Config(ctx);
+}
+
 class Config {
     constructor(ctx) {
         this._conversionStore = undefined;
@@ -134,5 +138,3 @@ class Config {
         this._ctx.characterStorage.setItem(resourceConfigsName, resourceConfigs);
     }
 }
-
-export const config = new Config(mod.getContext(import.meta));

@@ -1,14 +1,18 @@
-export const config = (await mod.getContext(import.meta).loadModule('src/config.mjs')).config;
+export function createOnInterfaceReadyFunction(config) {
+    return () => {
+        createAutoTradeConfig(config);
+    };
+}
 
-export function createAutoTradeConfig() {
+function createAutoTradeConfig(config) {
     game.township.resources.forEach((resource) => {
         const element = document.getElementById(`jump-to-resource-${resource.id}`);
         if (element)
-            element.after(createAutoTradeConfigElement(resource));
+            element.after(createAutoTradeConfigElement(config, resource));
     });
 }
 
-function createAutoTradeConfigElement(resource) {
+function createAutoTradeConfigElement(config, resource) {
     const id = `auto-trade-from-resource-${resource.id}-settings`;
 
     const div = document.createElement('div');
@@ -16,7 +20,7 @@ function createAutoTradeConfigElement(resource) {
     div.setAttribute('style', 'padding-bottom: 12px;');
     div.setAttribute('id', id);
 
-    const headerDiv = createHeader(resource);
+    const headerDiv = createHeader(config, resource);
     div.append(headerDiv);
 
     const contentDiv = document.createElement('div');
@@ -28,7 +32,7 @@ function createAutoTradeConfigElement(resource) {
     contentDiv.append(unorderedList);
 
     game.township.getResourceItemConversionsFromTownship(resource).forEach((conversion) => {
-        const conversionDiv = createConversionListItem(resource, conversion);
+        const conversionDiv = createConversionListItem(config, resource, conversion);
         unorderedList.append(conversionDiv);
     });
 
@@ -45,7 +49,7 @@ function createAutoTradeConfigElement(resource) {
     return div;
 }
 
-function createHeader(resource) {
+function createHeader(config, resource) {
     const div = document.createElement('div');
     div.setAttribute('class', 'block-header border-bottom bg-combat-inner-dark');
 
@@ -135,11 +139,11 @@ function createToggle(id, labelContent, checked, optional = {}) {
     return div;
 }
 
-function createConversionListItem(resource, conversion) {
+function createConversionListItem(config, resource, conversion) {
     const li = document.createElement('li');
     li.setAttribute('class', 'btn btn-outline-secondary township-auto-trader-item-selector')
     li.setAttribute('style', 'margin: 2px; padding: 6px; float: left;')
-    li.onclick = () => conversionListItemOnClick(li, resource.id, conversion.item.id);
+    li.onclick = () => conversionListItemOnClick(config, li, resource.id, conversion.item.id);
     setConversionListItemOpacity(li, config.isConversionEnabled(resource.id, conversion.item.id));
 
     const img = document.createElement('img');
@@ -165,7 +169,7 @@ function setConversionListItemOpacity(li, enabled, animate = false) {
         li.style.opacity = opacity;
 }
 
-function conversionListItemOnClick(li, resourceID, conversionID) {
+function conversionListItemOnClick(config, li, resourceID, conversionID) {
     const newEnabled = config.toggleConversionEnabled(resourceID, conversionID);
     setConversionListItemOpacity(li, newEnabled, true);
 }

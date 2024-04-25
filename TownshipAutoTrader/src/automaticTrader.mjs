@@ -2,7 +2,7 @@ export function createAfterTickPatch(config) {
     return (ret) => {
         autoTrade(config, config.enabledResources);
         return ret;
-    }
+    };
 }
 
 export function autoTrade(config, resources) {
