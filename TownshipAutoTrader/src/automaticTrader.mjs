@@ -1,10 +1,12 @@
-const config = (await mod.getContext(import.meta).loadModule('src/config.mjs')).config;
-
-export function afterPatch(ret) {
-    autoTrade();
-    return ret;
+export function createAfterTickPatch(config) {
+    return (ret) => {
+        autoTrade(config, config.enabledResources);
+        return ret;
+    }
 }
 
-export function autoTrade() {
-    console.log('Would have done the trading!');
+export function autoTrade(config, resources) {
+    resources.forEach((resource) => {
+        console.log(`Would have done the trading for ${resource.name}!`);
+    });
 }

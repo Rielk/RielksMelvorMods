@@ -1,4 +1,4 @@
-const config = (await mod.getContext(import.meta).loadModule('src/config.mjs')).config;
+export const config = (await mod.getContext(import.meta).loadModule('src/config.mjs')).config;
 
 export function createAutoTradeConfig() {
     game.township.resources.forEach((resource) => {

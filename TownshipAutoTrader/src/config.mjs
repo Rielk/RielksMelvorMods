@@ -1,10 +1,24 @@
+const automaticTrader = await mod.getContext(import.meta).loadModule('src/automaticTrader.mjs');
+
 const enabledConversionsName = 'enabled-conversions';
 const resourceConfigsName = 'resource-configs';
 
 class Config {
     constructor(ctx) {
+        this._conversionStore = undefined;
+        this._resources = undefined;
         this._ctx = ctx;
         ctx.onCharacterLoaded((ctx) => this.onCharacterLoaded(ctx));
+    }
+
+    get enabledResources() {
+        const enabledResources = [];
+        for (var resourceID in this._resources) {
+            const config = this._resources[resourceID];
+            if (config.enabled)
+                enabledResources.push(config.resource);
+        }
+        return enabledResources;
     }
 
     isResourceEnabled(resourceID) {
@@ -19,6 +33,8 @@ class Config {
             return true;
         config.enabled = enabled;
         this.saveState();
+        if (enabled)
+            automaticTrader.autoTrade(config, [config.resource]);
         return true;
     }
 
