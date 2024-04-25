@@ -132,8 +132,6 @@ class Config {
     }
 
     saveState() {
-        console.log('Config would have saved!')
-        return; //Disable while testing.
         const enabledConversions = [];
         for (var resourceID in this._conversionStore)
             for (var conversionID in this._conversionStore[resourceID.id])
@@ -144,7 +142,7 @@ class Config {
         for (var resourceID in this._resources) {
             resourceConfigs[resourceID] = {
                 enabled: this.isResourceEnabled(resourceID),
-                limit: this.resourceLimit(resourceID),
+                limit: this.getResourceLimit(resourceID),
             }
         }
 
