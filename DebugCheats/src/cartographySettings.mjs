@@ -4,25 +4,23 @@ const surveyRangeName = 'survey-range';
 const settingsName = 'Cartography';
 
 export function setupSettings(ctx) {
-    const generalSettings = ctx.settings.section(settingsName);
-    generalSettings.add({
+    const settings = ctx.settings.section(settingsName);
+    settings.add({
         type: 'switch',
         name: fastSurveyName,
         label: 'Enable Fast Survey',
         default: false
     });
-    generalSettings.add({
+    settings.add({
         type: 'number',
         name: sightRangeName,
         label: 'Sight Range',
-        hint: 'Set Sight Range',
         default: undefined
     });
-    generalSettings.add({
+    settings.add({
         type: 'number',
         name: surveyRangeName,
         label: 'Survey Range',
-        hint: 'Set Survey Range',
         default: undefined
     });
 }
