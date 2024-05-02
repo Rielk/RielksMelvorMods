@@ -1,3 +1,6 @@
+const ctx = mod.getContext(import.meta);
+const settings = (await ctx.loadModule('src/settings.mjs'));
+
 export function createAfterTickPatch(config) {
     return (ret) => {
         autoTrade(config, config.enabledResources);
@@ -21,7 +24,7 @@ function autoTradeResource(config, resource) {
 
         const item = conversion.item;
         const ratio = game.township.getBaseConvertFromTownshipRatio(resource, item);
-        const currentQuantity = game.bank.getQty(item) + game.combat.player.equipment.getQuantityOfItem(item);
+        const currentQuantity = getQuantityOfItemAndUpgrades(item);
 
         pendingItems.push({
             item: item,
@@ -69,4 +72,15 @@ function autoTradeResource(config, resource) {
         game.township.convertQty = i.amountToAdd;
         game.township.processConversionFromTownship(i.item, resource);
     });
+}
+
+function getQuantityOfItemAndUpgrades(item) {
+    const baseQnt = game.bank.getQty(item);
+    const equipQnt = settings.getCountEquipped(ctx) ? game.combat.player.equipment.getQuantityOfItem(item) : 0;
+
+    var itemUpgrades;
+    const upgradeQnt = (!settings.getCountUpgrades(ctx) || (itemUpgrades = game.bank.itemUpgrades.get(item)) === undefined)
+        ? 0 : itemUpgrades.reduce((count, i) => count + getQuantityOfItemAndUpgrades(i.upgradedItem), 0);
+
+    return baseQnt + equipQnt + upgradeQnt;
 }
