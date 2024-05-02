@@ -15,7 +15,7 @@ export function setupGeneralSettings(ctx) {
         type: 'switch',
         name: countEquipped,
         label: 'Include Equipped in Count',
-        hint: 'Include equipped when calculating current quantities.',
+        hint: 'Include equipped items when calculating current quantities.',
         default: true
     });
 }
