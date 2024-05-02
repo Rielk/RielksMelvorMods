@@ -21,7 +21,7 @@ function autoTradeResource(config, resource) {
 
         const item = conversion.item;
         const ratio = game.township.getBaseConvertFromTownshipRatio(resource, item);
-        const currentQuantity = game.bank.getQty(item);
+        const currentQuantity = game.bank.getQty(item) + game.combat.player.equipment.getQuantityOfItem(item);
 
         pendingItems.push({
             item: item,
