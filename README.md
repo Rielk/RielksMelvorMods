@@ -23,3 +23,9 @@ Adds several UI elements to the trader screen. Allowing you to turn on automatic
 A limit can be set for each category to save a minimum amount of the resource to continue building the township with.
 
 If multiple items are enabled for one category, then trades are completed for the lowest quantity items first.
+
+### Options:
+
+Include Upgrades in Count: Include upgrades of items when calculating current quantities of items.
+
+Include Equipped in Count: Include equipped items when calculating current quantities of items.
