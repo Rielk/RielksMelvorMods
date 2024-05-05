@@ -15,6 +15,12 @@ class Config {
         ctx.onCharacterLoaded((ctx) => this.onCharacterLoaded(ctx));
     }
 
+    static TradeModes = Object.freeze({
+        lowestQuantity: 0,
+        buyEqualQuantity: 1,
+        buyEqualCost: 2
+    })
+
     get enabledResources() {
         const enabledResources = [];
         for (var resourceID in this._resources) {
@@ -71,6 +77,21 @@ class Config {
         return true;
     }
 
+    getResourceTradeMode(resourceID) {
+        return this._resources[resourceID]?.tradeMode;
+    }
+
+    setResourceTradeMode(resourceID, tradeMode) {
+        const config = this._resources[resourceID];
+        if (config === undefined)
+            return false;
+        if (config.tradeMode === tradeMode)
+            return true;
+        config.tradeMode = tradeMode;
+        this.saveState();
+        return true;
+    }
+
     isConversionEnabled(resourceID, conversionID) {
         return this._getConversionConfig(resourceID, conversionID)?.enabled;
     }
@@ -114,15 +135,11 @@ class Config {
                 };
             });
 
-            var subConfig = resourceConfigs[resource.id];
-            if (subConfig === undefined)
-                subConfig = {
-                    enabled: false,
-                    limit: 0
-                };
+            var subConfig = resourceConfigs[resource.id] ?? {};
             resources[resource.id] = {
-                enabled: subConfig.enabled,
-                limit: subConfig.limit,
+                enabled: subConfig.enabled ?? false,
+                limit: subConfig.limit ?? 0,
+                tradeMode: subConfig.tradeMode ?? Config.TradeModes.lowestQuantity,
                 resource: resource
             };
         });
@@ -143,6 +160,7 @@ class Config {
             resourceConfigs[resourceID] = {
                 enabled: this.isResourceEnabled(resourceID),
                 limit: this.getResourceLimit(resourceID),
+                tradeMode: this.getResourceTradeMode(resourceID)
             }
         }
 
