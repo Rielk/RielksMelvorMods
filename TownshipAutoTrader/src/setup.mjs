@@ -8,7 +8,4 @@ export async function setup(ctx) {
 
     const automaticTrader = await ctx.loadModule('src/automaticTrader.mjs');
     ctx.patch(Township, 'tick').after(automaticTrader.createAfterTickPatch(config));
-
-    //conversion.unlockRequirements
-    //isRequirementMet(conversion.unlockRequirements)
 }
