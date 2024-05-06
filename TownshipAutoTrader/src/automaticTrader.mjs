@@ -37,16 +37,68 @@ function autoTradeResource(config, resource) {
         return;
 
     //Calculate Spending
+    const tradeMode = config.getResourceTradeMode(resource.id);
+    let resourceAtStart = Math.max(0, resource.amount - config.getResourceLimit(resource.id));
+    var buyingItems;
+    switch (tradeMode) {
+        case config.TradeModes.buyEqualCost:
+            buyingItems = equalCostBuying(resourceAtStart, pendingItems);
+            break;
+        case config.TradeModes.buyEqualQuantity:
+            buyingItems = equalQuantityBuying(resourceAtStart, pendingItems);
+            break;
+        default:
+        case config.TradeModes.lowestQuantity:
+            buyingItems = lowestQuantityBuying(resourceAtStart, pendingItems);
+            break;
+    }
+
+    //Commit Purchases
+    buyingItems.forEach(i => {
+        if (i.amountToAdd <= 0)
+            return;
+        game.township.convertQty = Math.floor(i.amountToAdd);
+        game.township.processConversionFromTownship(i.item, resource);
+    });
+}
+
+function equalCostBuying(resourceAtStart, pendingItems) {
+    const resourcePerItem = Math.floor(resourceAtStart / pendingItems.length);
+
+    const buyingItems = [];
+    while (pendingItems.length > 0) {
+        const item = pendingItems.pop();
+        const amountToBuy = item.ratio === 0 ? 0 : Math.floor(resourcePerItem / item.ratio);
+        item.amountToAdd = amountToBuy;
+        buyingItems.push(item);
+    }
+    return buyingItems;
+}
+
+function equalQuantityBuying(resourceAtStart, pendingItems) {
+    const totalRatio = pendingItems.reduce((a, i) =>  a + i.ratio , 0);
+    const maxCanBuy = totalRatio === 0 ? 0 : Math.floor(resourceAtStart / totalRatio);
+
+    const buyingItems = [];
+    while (pendingItems.length > 0) {
+        const item = pendingItems.pop();
+        item.amountToAdd = maxCanBuy;
+        buyingItems.push(item);
+    }
+    return buyingItems;
+}
+
+function lowestQuantityBuying(resourceAtStart, pendingItems) {
     pendingItems.sort((a, b) => b.currentQuantity - a.currentQuantity);
 
-    let resourceToSpend = Math.max(0, resource.amount - config.getResourceLimit(resource.id));
+    let resourceToSpend = resourceAtStart;
     const buyingItems = [];
     while (pendingItems.length > 0) {
         buyingItems.push(pendingItems.pop());
         const totalRatio = buyingItems.reduce((a, i) => a + i.ratio, 0);
         const qtyLimit = pendingItems.slice(-1)[0]?.currentQuantity; //Will be undefined on final pass
         const currentTotal = buyingItems[0].currentQuantity + buyingItems[0].amountToAdd;
-        const maxCanBuy = Math.floor(resourceToSpend / totalRatio);
+        const maxCanBuy = totalRatio === 0 ? 0 : Math.floor(resourceToSpend / totalRatio);
         var qtyToBuy;
         if (qtyLimit === undefined)
             qtyToBuy = maxCanBuy;
@@ -61,17 +113,11 @@ function autoTradeResource(config, resource) {
         if (i.ratio < resourceToSpend) {
             resourceToSpend -= i.ratio;
             i.amountToAdd += 1;
-        } else
+        }
+        else
             break;
     };
-
-    //Commit Purchases
-    buyingItems.forEach(i => {
-        if (i.amountToAdd <= 0)
-            return;
-        game.township.convertQty = i.amountToAdd;
-        game.township.processConversionFromTownship(i.item, resource);
-    });
+    return buyingItems;
 }
 
 function getQuantityOfItemAndUpgrades(item) {
