@@ -27,6 +27,24 @@ function createAutoTradeConfigElement(config, resource) {
     contentDiv.setAttribute('class', 'block-content');
     div.append(contentDiv);
 
+    const tradeModeId = `${resource.name}--auto-trade-mode`;
+    const tradeModeOptions = [];
+    for (const option of config.getTradeModesAndDescriptors()) {
+        tradeModeOptions.push({
+            value: option.mode,
+            labelContent: option.name,
+            tippy: option.description
+        });
+    }
+    const tradeModeDiv = createRadioInput(tradeModeId, tradeModeOptions, config.getResourceTradeMode(resource.id), {
+        maxWidth: 500,
+        onInput: (e) => {
+            if (e.target.checked)
+                config.setResourceTradeMode(resource.id, parseInt(e.target.value));
+        }
+    });
+    contentDiv.append(tradeModeDiv);
+
     const unorderedList = document.createElement('ul');
     unorderedList.setAttribute('class', 'nav-main nav-main-horizontal nav-main-horizontal-override font-w400 font-size-sm mb-2 auto-trader-settings');
     contentDiv.append(unorderedList);
@@ -81,7 +99,6 @@ function createNumberInput(id, labelContent, value, optional = {}) {
     else
         label.append(labelContent);
     div.append(label);
-    div.append(label);
 
     if (optional.hint) {
         const small = document.createElement('small');
@@ -104,6 +121,54 @@ function createNumberInput(id, labelContent, value, optional = {}) {
 
     return div;
 }
+
+function createRadioInput(id, options, startValue, optional = {}) {
+    const div = document.createElement('div');
+    div.setAttribute('class', 'form-group');
+    if (optional.maxWidth)
+        div.setAttribute('style', `max-width: ${optional.maxWidth}px;`);
+
+    var first = true;
+    for (const option of options) {
+        const subDiv = document.createElement('div');
+        subDiv.setAttribute('class', 'custom-control custom-radio custom-control-inline');
+        subDiv.setAttribute('style', 'z-index: auto;');
+        div.append(subDiv);
+
+        const subId = `${id}-${option.value}`;
+
+        const input = document.createElement('input');
+        input.setAttribute('type', 'radio');
+        input.setAttribute('class', 'custom-control-input');
+        input.setAttribute('id', subId);
+        input.setAttribute('name', id);
+        input.setAttribute('value', option.value);
+        input.checked = first || option.value === startValue;
+        first = false;
+        if (optional.onInput)
+            input.addEventListener('input', optional.onInput);
+        subDiv.append(input);
+
+        const label = document.createElement('label');
+        label.setAttribute('class', 'font-weight-normal flex-wrap justify-content-start ml-2 custom-control-label');
+        label.setAttribute('for', subId);
+        if (typeof option.labelContent === 'string')
+            label.innerHTML = option.labelContent;
+        else
+            label.append(option.labelContent);
+        subDiv.append(label);
+
+        if (option.tippy)
+            tippy(subDiv, {
+                content: option.tippy,
+                animation: false,
+                allowHTML: true
+            });
+    }
+
+    return div;
+}
+
 
 function createToggle(id, labelContent, checked, optional = {}) {
     const div = document.createElement('div');

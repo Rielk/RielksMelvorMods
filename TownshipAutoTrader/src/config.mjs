@@ -3,6 +3,7 @@ const automaticTrader = await mod.getContext(import.meta).loadModule('src/automa
 const enabledConversionsName = 'enabled-conversions';
 const resourceConfigsName = 'resource-configs';
 
+
 export function createConfig(ctx) {
     return new Config(ctx);
 }
@@ -15,11 +16,28 @@ class Config {
         ctx.onCharacterLoaded((ctx) => this.onCharacterLoaded(ctx));
     }
 
-    static TradeModes = Object.freeze({
+    TradeModes = Object.freeze({
         lowestQuantity: 0,
         buyEqualQuantity: 1,
         buyEqualCost: 2
     })
+    getTradeModesAndDescriptors() {
+        return [{
+            mode: this.TradeModes.lowestQuantity,
+            name: 'Lowest Quantity',
+            description: 'Items with the lowest quantity owned are bought first'
+        },
+        {
+            mode: this.TradeModes.buyEqualQuantity,
+            name: 'Equal Quantity',
+            description: 'Buy an equal amount of all items'
+        },
+        {
+            mode: this.TradeModes.buyEqualCost,
+            name: 'Equal Cost',
+            description: 'Spend an equal amount of all items'
+        }];
+    }
 
     get enabledResources() {
         const enabledResources = [];
@@ -139,7 +157,7 @@ class Config {
             resources[resource.id] = {
                 enabled: subConfig.enabled ?? false,
                 limit: subConfig.limit ?? 0,
-                tradeMode: subConfig.tradeMode ?? Config.TradeModes.lowestQuantity,
+                tradeMode: subConfig.tradeMode ?? this.TradeModes.lowestQuantity,
                 resource: resource
             };
         });
