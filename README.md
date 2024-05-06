@@ -22,7 +22,7 @@ Adds several UI elements to the trader screen. Allowing you to turn on automatic
 
 A limit can be set for each category to save a minimum amount of the resource to continue building the township with.
 
-If multiple items are enabled for one category, then trades are completed for the lowest quantity items first.
+If multiple items are enabled for one category, then trade behaviour can be configured to buy the lowest quantity items first, buy an equal number off all selected items, or spend an equal number of resources on each item.
 
 ### Options:
 
