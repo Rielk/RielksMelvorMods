@@ -3,6 +3,7 @@ const automaticTrader = await mod.getContext(import.meta).loadModule('src/automa
 const enabledConversionsName = 'enabled-conversions';
 const resourceConfigsName = 'resource-configs';
 
+
 export function createConfig(ctx) {
     return new Config(ctx);
 }
@@ -13,6 +14,29 @@ class Config {
         this._resources = undefined;
         this._ctx = ctx;
         ctx.onCharacterLoaded((ctx) => this.onCharacterLoaded(ctx));
+    }
+
+    TradeModes = Object.freeze({
+        lowestQuantity: 0,
+        buyEqualQuantity: 1,
+        buyEqualCost: 2
+    })
+    getTradeModesAndDescriptors() {
+        return [{
+            mode: this.TradeModes.lowestQuantity,
+            name: 'Lowest Quantity',
+            description: 'Items with the lowest quantity owned are bought first'
+        },
+        {
+            mode: this.TradeModes.buyEqualQuantity,
+            name: 'Equal Quantity',
+            description: 'Buy an equal amount of all items'
+        },
+        {
+            mode: this.TradeModes.buyEqualCost,
+            name: 'Equal Cost',
+            description: 'Spend an equal amount of all items'
+        }];
     }
 
     get enabledResources() {
@@ -71,6 +95,21 @@ class Config {
         return true;
     }
 
+    getResourceTradeMode(resourceID) {
+        return this._resources[resourceID]?.tradeMode;
+    }
+
+    setResourceTradeMode(resourceID, tradeMode) {
+        const config = this._resources[resourceID];
+        if (config === undefined)
+            return false;
+        if (config.tradeMode === tradeMode)
+            return true;
+        config.tradeMode = tradeMode;
+        this.saveState();
+        return true;
+    }
+
     isConversionEnabled(resourceID, conversionID) {
         return this._getConversionConfig(resourceID, conversionID)?.enabled;
     }
@@ -114,15 +153,11 @@ class Config {
                 };
             });
 
-            var subConfig = resourceConfigs[resource.id];
-            if (subConfig === undefined)
-                subConfig = {
-                    enabled: false,
-                    limit: 0
-                };
+            var subConfig = resourceConfigs[resource.id] ?? {};
             resources[resource.id] = {
-                enabled: subConfig.enabled,
-                limit: subConfig.limit,
+                enabled: subConfig.enabled ?? false,
+                limit: subConfig.limit ?? 0,
+                tradeMode: subConfig.tradeMode ?? this.TradeModes.lowestQuantity,
                 resource: resource
             };
         });
@@ -143,6 +178,7 @@ class Config {
             resourceConfigs[resourceID] = {
                 enabled: this.isResourceEnabled(resourceID),
                 limit: this.getResourceLimit(resourceID),
+                tradeMode: this.getResourceTradeMode(resourceID)
             }
         }
 
