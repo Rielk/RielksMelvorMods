@@ -19,11 +19,12 @@ export async function setup(ctx) {
             let modifiedQuantity = cost.quantity - ((_a = this.runesProvided.get(cost.item)) !== null && _a !== void 0 ? _a : 0) + flatModifier;
             modifiedQuantity += this.modifiers.getValue("melvorD:flatSpellRuneCost", cost.item.modQuery);
             //modifiedQuantity = Math.max(1, modifiedQuantity); //Removed line
-            spellCost.push({
-                item: cost.item,
-                quantity: modifiedQuantity,
-            });
+            if (modifiedQuantity > 0) // Added line
+                spellCost.push({
+                    item: cost.item,
+                    quantity: modifiedQuantity,
+                });
         });
-        return spellCost.filter(cost => cost.quantity > 0); //Modified line
+        return spellCost;
     });
 }
