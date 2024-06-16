@@ -29,3 +29,9 @@ If multiple items are enabled for one category, then trade behaviour can be conf
 Include Upgrades in Count: Include upgrades of items when calculating current quantities of items.
 
 Include Equipped in Count: Include equipped items when calculating current quantities of items.
+
+# [Rune Costs Can Be Zero](https://mod.io/g/melvoridle/m/rune-costs-can-be-zero)
+
+Undo the fix made with 1.3 and allow spell rune costs to be reduced to 0.
+
+(Note, the staff descriptions have not been changed, I may do that in the future)

@@ -45,6 +45,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B1538070-B5E
 		DebugCheats\src\township.mjs = DebugCheats\src\township.mjs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RuneCostsCanBeZero", "RuneCostsCanBeZero", "{FFDE3A78-292E-4B90-B20A-41AE1B2362D2}"
+	ProjectSection(SolutionItems) = preProject
+		RuneCostsCanBeZero\manifest.json = RuneCostsCanBeZero\manifest.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827265F2-DD73-461E-822E-59A0F56B4577}"
+	ProjectSection(SolutionItems) = preProject
+		RuneCostsCanBeZero\src\settings.mjs = RuneCostsCanBeZero\src\settings.mjs
+		RuneCostsCanBeZero\src\setup.mjs = RuneCostsCanBeZero\src\setup.mjs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +64,7 @@ Global
 		{F668175F-0D2B-4066-821F-782EAAF69BE3} = {2923B32C-CD49-41A4-8E8C-94DB808431A4}
 		{3F2E2947-2A55-4BDC-801A-794212CD142D} = {0A64BEDB-24B9-4AF8-90A1-AC45639B7B18}
 		{B1538070-B5ED-4D23-9419-5FC1ACE4C551} = {2EC0D6DC-55D7-4B7C-8964-0DC69758DF71}
+		{827265F2-DD73-461E-822E-59A0F56B4577} = {FFDE3A78-292E-4B90-B20A-41AE1B2362D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A68F0369-0E8B-4ED3-BE12-16F9EBC090A9}
