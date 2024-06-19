@@ -35,3 +35,9 @@ Include Equipped in Count: Include equipped items when calculating current quant
 Undo the fix made with 1.3 and allow spell rune costs to be reduced to 0.
 
 (Note, the staff descriptions have not been changed, I may do that in the future)
+
+# [Reset Temporary Cartography Boosts](https://mod.io/g/melvoridle/m/reset-temporary-cartography-boosts)
+
+Adds a button in the mod's options which resets the points of interest with temporary survey interval bonuses so they can be reused.
+
+I realised that I wasted the boosts early on while I was still learning the game, and now that I'm trying to complete the map, I wish I still had the boosts available. Now I do :)
