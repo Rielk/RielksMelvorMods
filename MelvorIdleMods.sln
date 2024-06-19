@@ -56,6 +56,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827265F2-DD7
 		RuneCostsCanBeZero\src\setup.mjs = RuneCostsCanBeZero\src\setup.mjs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResetTemporaryCartographyBoosts", "ResetTemporaryCartographyBoosts", "{A14CB2AA-9575-4BC1-89FB-0CB436BBB13D}"
+	ProjectSection(SolutionItems) = preProject
+		ResetTemporaryCartographyBoosts\manifest.json = ResetTemporaryCartographyBoosts\manifest.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{43D757DA-D992-4953-AFE2-9B08DC895368}"
+	ProjectSection(SolutionItems) = preProject
+		ResetTemporaryCartographyBoosts\src\setup.mjs = ResetTemporaryCartographyBoosts\src\setup.mjs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,6 +75,7 @@ Global
 		{3F2E2947-2A55-4BDC-801A-794212CD142D} = {0A64BEDB-24B9-4AF8-90A1-AC45639B7B18}
 		{B1538070-B5ED-4D23-9419-5FC1ACE4C551} = {2EC0D6DC-55D7-4B7C-8964-0DC69758DF71}
 		{827265F2-DD73-461E-822E-59A0F56B4577} = {FFDE3A78-292E-4B90-B20A-41AE1B2362D2}
+		{43D757DA-D992-4953-AFE2-9B08DC895368} = {A14CB2AA-9575-4BC1-89FB-0CB436BBB13D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A68F0369-0E8B-4ED3-BE12-16F9EBC090A9}
