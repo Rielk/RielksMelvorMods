@@ -2,8 +2,7 @@
 
 ## Supported Versions
 
-I will endeavour to keep these up to date with current Melvor Idle versions.
-They all currently run on 1.3.
+I will endeavour to keep these up to date with current Melvor Idle versions, however, I can make no promises, especially after new updates.
 
 ## Reporting a Vulnerability
 
