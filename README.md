@@ -32,9 +32,23 @@ Include Equipped in Count: Include equipped items when calculating current quant
 
 # [Rune Costs Can Be Zero](https://mod.io/g/melvoridle/m/rune-costs-can-be-zero)
 
-Undo the fix made with 1.3 and allow spell rune costs to be reduced to 0.
+Undo the fix made with 1.3 and remove the cap on rune cost reduction, allowing spell rune costs to be reduced to 0.
 
-(Note, the staff descriptions have not been changed, I may do that in the future)
+(Note, the staff descriptions have not been changed, I doubt I will do that in the future).
+
+As of 1.3, rune cost reduction can't make a spell cost 0 for any rune.
+
+For example, Wind Strike normally costs: 1 Mind Rune and 2 Air Runes.
+
+When equipped with a Staff of Air, this is reduced to: 1 Mind Rune and 1 Air Rune.
+
+This mod undoes the 1.3 change and allows the full reduction to: 1 Mind Rune (and 0 Air Runes).
+
+ 
+
+There is the option to turn the mod off in the mod's settings. It starts on by default.
+
+
 
 # [Remove Rune Costs](https://mod.io/g/melvoridle/m/remove-rune-costs)
 
