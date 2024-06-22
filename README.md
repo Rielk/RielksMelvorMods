@@ -36,6 +36,12 @@ Undo the fix made with 1.3 and allow spell rune costs to be reduced to 0.
 
 (Note, the staff descriptions have not been changed, I may do that in the future)
 
+# [Remove Rune Costs](https://mod.io/g/melvoridle/m/remove-rune-costs)
+
+Removes all rune costs from casting spells. 
+
+There is the option to turn the mod off in the mod's settings. It starts on by default.
+
 # [Reset Temporary Cartography Boosts](https://mod.io/g/melvoridle/m/reset-temporary-cartography-boosts)
 
 Adds a button in the mod's options which resets the points of interest with temporary survey interval bonuses so they can be reused.
