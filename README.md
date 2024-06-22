@@ -56,6 +56,14 @@ Removes all rune costs from casting spells.
 
 There is the option to turn the mod off in the mod's settings. It starts on by default.
 
+# [Remove Ammo Consumption](https://mod.io/g/melvoridle/m/remove-ammo-consumption)
+
+Provides 100% Ammo preservation and removes Ammunition consumption.
+
+Note: Ammunition must still be equipped, it will just not be used up.
+
+There is the option to turn the mod off in the mod's settings. It starts on by default.
+
 # [Reset Temporary Cartography Boosts](https://mod.io/g/melvoridle/m/reset-temporary-cartography-boosts)
 
 Adds a button in the mod's options which resets the points of interest with temporary survey interval bonuses so they can be reused.

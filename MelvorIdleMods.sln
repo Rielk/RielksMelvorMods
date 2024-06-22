@@ -77,6 +77,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{84377E41-FA3
 		RuneCostsAreZero\src\setup.mjs = RuneCostsAreZero\src\setup.mjs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemoveAmmoConsumption", "RemoveAmmoConsumption", "{07B3FE4B-0F42-480D-89C7-3F0D80B6B43A}"
+	ProjectSection(SolutionItems) = preProject
+		RemoveAmmoConsumption\manifest.json = RemoveAmmoConsumption\manifest.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02C30E80-8029-4730-B3A0-C2EABFCF7FF6}"
+	ProjectSection(SolutionItems) = preProject
+		RemoveAmmoConsumption\src\settings.mjs = RemoveAmmoConsumption\src\settings.mjs
+		RemoveAmmoConsumption\src\setup.mjs = RemoveAmmoConsumption\src\setup.mjs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +99,7 @@ Global
 		{827265F2-DD73-461E-822E-59A0F56B4577} = {FFDE3A78-292E-4B90-B20A-41AE1B2362D2}
 		{43D757DA-D992-4953-AFE2-9B08DC895368} = {A14CB2AA-9575-4BC1-89FB-0CB436BBB13D}
 		{84377E41-FA3C-4E38-8BC1-F08E682DA6AB} = {9B5031CA-17FE-4632-88A9-98A854DE9F37}
+		{02C30E80-8029-4730-B3A0-C2EABFCF7FF6} = {07B3FE4B-0F42-480D-89C7-3F0D80B6B43A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A68F0369-0E8B-4ED3-BE12-16F9EBC090A9}
