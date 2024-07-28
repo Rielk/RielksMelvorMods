@@ -88,6 +88,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02C30E80-802
 		RemoveAmmoConsumption\src\setup.mjs = RemoveAmmoConsumption\src\setup.mjs
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RemoveConsumption", "RemoveConsumption", "{0061ED92-A949-48F3-91C9-9ECDFCBCC057}"
+	ProjectSection(SolutionItems) = preProject
+		RemoveConsumption\manifest.json = RemoveConsumption\manifest.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{38377148-9D63-4983-ADDF-2DB2B2DB77ED}"
+	ProjectSection(SolutionItems) = preProject
+		RemoveConsumption\src\settings.mjs = RemoveConsumption\src\settings.mjs
+		RemoveConsumption\src\setup.mjs = RemoveConsumption\src\setup.mjs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +111,7 @@ Global
 		{43D757DA-D992-4953-AFE2-9B08DC895368} = {A14CB2AA-9575-4BC1-89FB-0CB436BBB13D}
 		{84377E41-FA3C-4E38-8BC1-F08E682DA6AB} = {9B5031CA-17FE-4632-88A9-98A854DE9F37}
 		{02C30E80-8029-4730-B3A0-C2EABFCF7FF6} = {07B3FE4B-0F42-480D-89C7-3F0D80B6B43A}
+		{38377148-9D63-4983-ADDF-2DB2B2DB77ED} = {0061ED92-A949-48F3-91C9-9ECDFCBCC057}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A68F0369-0E8B-4ED3-BE12-16F9EBC090A9}
