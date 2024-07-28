@@ -64,6 +64,27 @@ Note: Ammunition must still be equipped, it will just not be used up.
 
 There is the option to turn the mod off in the mod's settings. It starts on by default.
 
+# [Remove Consumptions](https://mod.io/g/melvoridle/m/remove-consumptions)
+Removes the consumptions of various items in the game. Each type of item can be turned on individually in the mod's settings.
+
+Note: You still need to obtain and/or equip the item in order to use it. This will only provide 100% preservation and stop them being removed.
+
+### Options:
+
+Remove Ammunition Consumption: Stops ammo being consumed.
+
+Remove Rune Consumption: Stops runes being consumed.
+
+Remove Prayer Point Consumption: Stops prayer points (and soul points if you have ItA) being consumed.
+
+Remove Food Consumption: Stops food being consumed.
+
+Remove Summoning Tablet Consumption: Stops summoning tablets being consumed.
+
+Remove Consumable Consumption: Stops items in the consumable slot being consumed.
+
+Remove Potion Consumption: Stops potion charges being consumed. (Note: This will still use 1 potion when it is first activated.)
+
 # [Reset Temporary Cartography Boosts](https://mod.io/g/melvoridle/m/reset-temporary-cartography-boosts)
 
 Adds a button in the mod's options which resets the points of interest with temporary survey interval bonuses so they can be reused.
