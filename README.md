@@ -48,26 +48,12 @@ This mod undoes the 1.3 change and allows the full reduction to: 1 Mind Rune (an
 
 There is the option to turn the mod off in the mod's settings. It starts on by default.
 
-
-
-# [Remove Rune Costs](https://mod.io/g/melvoridle/m/remove-rune-costs)
-
-Removes all rune costs from casting spells. 
-
-There is the option to turn the mod off in the mod's settings. It starts on by default.
-
-# [Remove Ammo Consumption](https://mod.io/g/melvoridle/m/remove-ammo-consumption)
-
-Provides 100% Ammo preservation and removes Ammunition consumption.
-
-Note: Ammunition must still be equipped, it will just not be used up.
-
-There is the option to turn the mod off in the mod's settings. It starts on by default.
-
 # [Remove Consumptions](https://mod.io/g/melvoridle/m/remove-consumptions)
 Removes the consumptions of various items in the game. Each type of item can be turned on individually in the mod's settings.
 
 Note: You still need to obtain and/or equip the item in order to use it. This will only provide 100% preservation and stop them being removed.
+
+Note 2: Only potion charges are preserved. So, 1 potion will be used when a potion is selected.
 
 ### Options:
 
@@ -83,10 +69,27 @@ Remove Summoning Tablet Consumption: Stops summoning tablets being consumed.
 
 Remove Consumable Consumption: Stops items in the consumable slot being consumed.
 
-Remove Potion Consumption: Stops potion charges being consumed. (Note: This will still use 1 potion when it is first activated.)
+Remove Potion Consumption: Stops potion charges being consumed. (Note: This will still use 1 potion when it is first selected.)
 
 # [Reset Temporary Cartography Boosts](https://mod.io/g/melvoridle/m/reset-temporary-cartography-boosts)
 
 Adds a button in the mod's options which resets the points of interest with temporary survey interval bonuses so they can be reused.
 
 I realised that I wasted the boosts early on while I was still learning the game, and now that I'm trying to complete the map, I wish I still had the boosts available. Now I do :)
+
+
+# Depreciated mods:
+
+# [Remove Rune Costs](https://mod.io/g/melvoridle/m/remove-rune-costs)
+
+Removes all rune costs from casting spells. 
+
+There is the option to turn the mod off in the mod's settings. It starts on by default.
+
+# [Remove Ammo Consumption](https://mod.io/g/melvoridle/m/remove-ammo-consumption)
+
+Provides 100% Ammo preservation and removes Ammunition consumption.
+
+Note: Ammunition must still be equipped, it will just not be used up.
+
+There is the option to turn the mod off in the mod's settings. It starts on by default.
