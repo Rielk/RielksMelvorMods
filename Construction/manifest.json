@@ -1,0 +1,5 @@
+{
+  "namespace": "rielkConstruction",
+  "icon": "assets/icon.png",
+  "setup": "src/setup.mjs"
+}
