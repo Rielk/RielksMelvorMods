@@ -1,0 +1,20 @@
+{
+    "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+    "namespace": "rielkConstruction",
+    "data": {
+        "pages": [
+            {
+                "id": "Construction",
+                "media": "assets/construction_header.png",
+                "containerID": "construction-container",
+                "headerBgClass": "bg-construction",
+                "hasGameGuide": false,
+                "canBeDefault": true,
+                "skills": [
+                  "rielkConstruction:Construction"
+                ],
+                "skillSidebarCategoryID": "Passive"
+              }
+        ]
+    }
+}
