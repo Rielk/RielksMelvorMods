@@ -1,0 +1,8 @@
+body.darkMode .bg-construction,.bg-construction {
+    background-color: #925da3!important
+}
+
+body.darkMode.superDark .bg-construction
+{
+    background-color: #000!important
+}
