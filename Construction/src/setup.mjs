@@ -18,10 +18,7 @@ export async function setup(ctx) {
 
 class Setup {
     constructor(ctx) {
-        Object.defineProperty(this, 'ctx', {
-            value: ctx,
-            writable: false
-        });
+        this.ctx = ctx;
     }
 
     async loadData() {
@@ -30,5 +27,6 @@ class Setup {
 
     async createInterface() {
         const UI = new ConstructionInterface(this.ctx, game.construction);
+        game.construction.UI = UI;
     }
 }
