@@ -1,20 +1,359 @@
 {
-    "$schema": "https://melvoridle.com/assets/schema/gameData.json",
-    "namespace": "rielkConstruction",
-    "data": {
-        "pages": [
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "rielkConstruction",
+  "data": {
+    "pages": [
+      {
+        "id": "Construction",
+        "media": "assets/construction_header.png",
+        "containerID": "construction-container",
+        "headerBgClass": "bg-construction",
+        "hasGameGuide": false,
+        "canBeDefault": true,
+        "skills": [
+          "rielkConstruction:Construction"
+        ],
+        "action": "rielkConstruction:Construction"
+      }
+    ],
+    "items": [
+      {
+        "itemType": "Item",
+        "id": "Iron_Nails",
+        "name": "Iron Nails",
+        "category": "Construction",
+        "type": "Nails",
+        "media": "assets/items/nails_iron.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 1
+      },
+      {
+        "itemType": "Equipment",
+        "id": "Construction_Skillcape",
+        "name": "Construction Skillcape",
+        "category": "Combat",
+        "type": "Armour",
+        "media": "assets/items/skillcape_construction.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 250000,
+        "tier": "Skillcape",
+        "validSlots": [
+          "Cape"
+        ],
+        "occupiesSlots": [],
+        "equipRequirements": [
+          {
+            "type": "SkillLevel",
+            "skillID": "rielkConstruction:Construction",
+            "level": 99
+          }
+        ],
+        "equipmentStats": [
+          {
+            "key": "meleeDefenceBonus",
+            "value": 9
+          },
+          {
+            "key": "rangedDefenceBonus",
+            "value": 9
+          },
+          {
+            "key": "magicDefenceBonus",
+            "value": 9
+          }
+        ],
+        "modifiers": {
+          "skillInterval": [
             {
-                "id": "Construction",
-                "media": "assets/construction_header.png",
-                "containerID": "construction-container",
-                "headerBgClass": "bg-construction",
-                "hasGameGuide": false,
-                "canBeDefault": true,
-                "skills": [
-                  "rielkConstruction:Construction"
-                ],
-                "skillSidebarCategoryID": "Passive"
+              "skillID": "rielkConstruction:Construction",
+              "value": -15
+            }
+          ]
+        }
+      }
+    ],
+    "shopPurchases": [
+      {
+        "id": "Construction_Skillcape",
+        "media": "assets/items/skillcape_construction.png",
+        "category": "melvorD:Skillcapes",
+        "contains": {
+          "items": [
+            {
+              "id": "rielkConstruction:Construction_Skillcape",
+              "quantity": 1
+            }
+          ]
+        },
+        "cost": {
+          "items": [],
+          "currencies": [
+            {
+              "currency": "melvorD:GP",
+              "type": "Fixed",
+              "cost": 1000000
+            }
+          ]
+        },
+        "allowQuantityPurchase": false,
+        "unlockRequirements": [],
+        "purchaseRequirements": [
+          {
+            "type": "SkillLevel",
+            "skillID": "rielkConstruction:Construction",
+            "level": 99
+          }
+        ],
+        "defaultBuyLimit": 1,
+        "buyLimitOverrides": [],
+        "showBuyLimit": false
+      }
+    ],
+    "pets": [
+        {
+            "id": "ChuckTheBeaver",
+            "name": "Chuck The Beaver",
+            "media": "assets/chuck_the_beaver.png",
+            "ignoreCompletion": true,
+            "modifiers": {
+              "skillPreservationChance": [
+                {
+                  "skillID": "rielkConstruction:Construction",
+                  "value": 10
+                }
+              ]
+            },
+            "activeInRaid": false,
+            "scaleChanceWithMasteryPool": true,
+            "skillID": "rielkConstruction:Construction"
+        }
+    ],
+    "skillData": [
+      {
+        "skillID": "rielkConstruction:Construction",
+        "data": {
+          "pets": [
+            "rielkConstruction:ChuckTheBeaver"
+          ],
+          "rareDrops": [
+            {
+              "itemID": "melvorD:Gold_Topaz_Ring",
+              "altItemID": "melvorD:Signet_Ring_Half_A",
+              "quantity": 1,
+              "requirements": [],
+              "chance": {
+                "type": "LevelScaling",
+                "maxChance": 100,
+                "baseChance": 0,
+                "scalingFactor": 0.000006060606060606061
+              },
+              "realms": [
+                "melvorD:Melvor"
+              ]
+            },
+            {
+              "itemID": "melvorD:Jewel_of_Rhaelyx",
+              "quantity": 1,
+              "requirements": [],
+              "chance": {
+                "type": "TotalMasteryScaling",
+                "maxChance": 0.001,
+                "baseChance": 0.00001,
+                "scalingFactor": 4e-8
               }
-        ]
-    }
+            },
+            {
+              "itemID": "melvorD:Mysterious_Stone",
+              "quantity": 1,
+              "requirements": [
+                {
+                  "type": "ItemFound",
+                  "itemID": "melvorD:Crown_of_Rhaelyx"
+                }
+              ],
+              "chance": {
+                "type": "Fixed",
+                "chance": 0.025
+              }
+            }
+          ],
+          "minibar": {
+            "defaultItems": [
+              "rielkConstruction:Construction_Skillcape"
+            ],
+            "upgrades": [],
+            "pets": [
+              "rielkConstruction:ChuckTheBeaver"
+            ]
+          },
+          "masteryLevelUnlocks": [
+            {
+              "level": 50,
+              "descriptionID": 1,
+              "description": "15% base chance to obtain 2 items"
+            },
+            {
+              "level": 99,
+              "descriptionID": 2,
+              "description": "30% base chance to preserve resources. +35% chance to obtain 2 items."
+            }
+          ],
+          "masteryLevelBonuses": [
+            {
+              "modifiers": {
+                "skillItemDoublingChance": [
+                  {
+                    "skillID": "rielkConstruction:Construction",
+                    "actionID": "rielkConstruction:Iron_Nails",
+                    "value": 5
+                  }
+                ]
+              },
+              "level": 10,
+              "levelScalingSlope": 20,
+              "levelScalingMax": 90
+            },
+            {
+              "modifiers": {
+                "skillPreservationChance": [
+                  {
+                    "skillID": "rielkConstruction:Construction",
+                    "actionID": "rielkConstruction:Iron_Nails",
+                    "value": 5
+                  }
+                ]
+              },
+              "level": 20,
+              "levelScalingSlope": 20,
+              "levelScalingMax": 80
+            },
+            {
+              "modifiers": {
+                "skillItemDoublingChance": [
+                  {
+                    "skillID": "rielkConstruction:Construction",
+                    "actionID": "rielkConstruction:Iron_Nails",
+                    "value": 10
+                  }
+                ],
+                "skillPreservationChance": [
+                  {
+                    "skillID": "rielkConstruction:Construction",
+                    "actionID": "rielkConstruction:Iron_Nails",
+                    "value": 10
+                  }
+                ]
+              },
+              "level": 99
+            }
+          ],
+          "masteryPoolBonuses": [
+            {
+              "realm": "melvorD:Melvor",
+              "modifiers": {
+                "masteryXP": [
+                  {
+                    "skillID": "rielkConstruction:Construction",
+                    "realmID": "melvorD:Melvor",
+                    "value": 5
+                  }
+                ]
+              },
+              "percent": 10
+            },
+            {
+              "realm": "melvorD:Melvor",
+              "modifiers": {
+                "skillPreservationChance": [
+                  {
+                    "skillID": "rielkConstruction:Construction",
+                    "realmID": "melvorD:Melvor",
+                    "value": 5
+                  }
+                ]
+              },
+              "percent": 25
+            },
+            {
+              "realm": "melvorD:Melvor",
+              "modifiers": {
+                "skillPreservationChance": [
+                  {
+                    "skillID": "rielkConstruction:Construction",
+                    "realmID": "melvorD:Melvor",
+                    "value": 5
+                  }
+                ]
+              },
+              "percent": 50
+            },
+            {
+              "realm": "melvorD:Melvor",
+              "modifiers": {
+                "skillItemDoublingChance": [
+                  {
+                    "skillID": "rielkConstruction:Construction",
+                    "realmID": "melvorD:Melvor",
+                    "value": 10
+                  }
+                ]
+              },
+              "percent": 95
+            }
+          ],
+          "categories": [
+            {
+              "id": "Supplies",
+              "media": "assets/categories/supplies.png",
+              "name": "Supplies",
+              "type": "Artisan"
+            },
+            {
+              "id": "Bedroom",
+              "media": "assets/categories/bedroom.png",
+              "name": "Bedroom",
+              "type": "Room",
+              "room": "Bedroom"
+            },
+            {
+              "id": "Kitchen",
+              "media": "assets/categories/kitchen.png",
+              "name": "Kitchen",
+              "type": "Room",
+              "room": "Kitchen"
+            }
+          ],
+          "subcategories": [
+            {
+              "id": "Nails",
+              "name": "Nails",
+              "nameLang": "RIELK_CONSTRUCTION_NAILS"
+            }
+          ],
+          "recipes": [
+            {
+              "id": "Iron_Nails",
+              "level": 1,
+              "productID": "rielkConstruction:Iron_Nails",
+              "baseQuantity": 5,
+              "baseExperience": 5,
+              "categoryID": "rielkConstruction:Supplies",
+              "subcategoryID": "rielkConstruction:Nails",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Iron_Bar",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            }
+          ]
+        }
+      }
+    ]
+  }
 }
