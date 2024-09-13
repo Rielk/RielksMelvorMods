@@ -1,3 +1,8 @@
+const { loadModule } = mod.getContext(import.meta);
+
+const { ConstructionActionEvent } = await loadModule('src/construction/gameEvents.mjs');
+const { ConstructionStats } = await loadModule('src/construction/statistics.mjs');
+
 export class Construction extends ArtisanSkill {
     constructor(namespace, game) {
         super(namespace, 'Construction', game, ConstructionRecipe.name);
@@ -56,6 +61,75 @@ export class Construction extends ArtisanSkill {
         }
         );
         super.registerData(namespace, data);
+    }
+    modifyData(data) {
+        var _a;
+        super.modifyData(data);
+        (_a = data.recipes) === null || _a === void 0 ? void 0 : _a.forEach((modData)=>{
+            const recipe = this.actions.getObjectByID(modData.id);
+            if (recipe === undefined)
+                throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
+            recipe.applyDataModification(modData, this.game);
+        }
+        );
+    }
+    postDataRegistration() {
+        super.postDataRegistration();
+        this.sortedMasteryActions = sortRecipesByCategoryAndLevel(this.actions.allObjects, this.categories.allObjects);
+        this.actions.forEach((action)=>{
+            if (action.abyssalLevel > 0)
+                this.abyssalMilestones.push(action);
+            else
+                this.milestones.push(action);
+        }
+        );
+        this.sortMilestones();
+    }
+    getActionModifierQueryParams(action) {
+        const scope = super.getActionModifierQueryParams(action);
+        if (action instanceof ConstructionRecipe) {
+            scope.category = action.category;
+            scope.subcategory = action.subcategory;
+        }
+        return scope;
+    }
+    onMasteryLevelUp(action, oldLevel, newLevel) {
+        super.onMasteryLevelUp(action, oldLevel, newLevel);
+        if (this.selectedRecipe === action)
+            this.renderQueue.selectedRecipe = true;
+    }
+    recordCostPreservationStats(costs) {
+        super.recordCostPreservationStats(costs);
+        costs.recordBulkItemStat(this.game.stats.Construction, ConstructionStats.ItemsPreserved);
+    }
+    recordCostConsumptionStats(costs) {
+        super.recordCostConsumptionStats(costs);
+        costs.recordBulkItemStat(this.game.stats.Construction, ConstructionStats.ItemsUsed);
+    }
+    preAction() {}
+    get actionRewards() {
+        const rewards = new Rewards(this.game);
+        const recipe = this.activeRecipe;
+        rewards.setActionInterval(this.actionInterval);
+        const actionEvent = new ConstructionActionEvent(this,recipe);
+        const item = recipe.product;
+        const qtyToAdd = this.modifyPrimaryProductQuantity(item, this.unmodifiedActionQuantity, recipe);
+        rewards.addItem(item, qtyToAdd);
+        this.addCurrencyFromPrimaryProductGain(rewards, item, qtyToAdd, recipe);
+        actionEvent.productQuantity = qtyToAdd;
+        this.game.stats.Construction.add(ConstructionStats.ItemsProduced, qtyToAdd);
+        rewards.addXP(this, this.actionXP, recipe);
+        rewards.addAbyssalXP(this, this.actionAbyssalXP, recipe);
+        this.addCommonRewards(rewards, recipe);
+        actionEvent.interval = this.currentActionInterval;
+        this._events.emit('action', actionEvent);
+        return rewards;
+    }
+    postAction() {
+        this.game.stats.Construction.inc(ConstructionStats.Actions);
+        this.game.stats.Construction.add(ConstructionStats.TimeSpent, this.currentActionInterval);
+        this.renderQueue.recipeInfo = true;
+        this.renderQueue.quantities = true;
     }
 
     getRegistry(type) {
