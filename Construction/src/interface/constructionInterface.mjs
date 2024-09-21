@@ -1,7 +1,10 @@
+const { loadModule } = mod.getContext(import.meta);
+
+const { ConstructionHouseMenu } = await loadModule('src/interface/constructionHouseMenu.mjs');
+
 export class ConstructionInterface {
     constructor(ctx, construction) {
         this.ctx = ctx;
-        this.construction = construction;
 
         this.constructionSelectionTabs = new Map();
 
@@ -11,39 +14,47 @@ export class ConstructionInterface {
             const frag = new DocumentFragment();
             frag.append(getTemplateNode('rielk-construction-template'));
             document.getElementById('main-container').append(...frag.children);
-            this.constructionCategoryMenu = document.getElementById('construction-category-menu');
-            this.constructionArtisanMenu = document.getElementById('construction-artisan-menu',);
+            this.constructionCategoryMenu = document.getElementById('rielk-construction-category-menu');
+            this.constructionArtisanMenu = document.getElementById('rielk-construction-artisan-menu',);
         });
 
         this.ctx.onCharacterLoaded(async () => {
-            this.constructionCategoryMenu.addOptions(game.construction.categories.allObjects, getLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), switchToCategory(this.constructionSelectionTabs));
-            this.constructionArtisanMenu.init(game.construction);
-            const constructionCategoryContainer = document.getElementById('construction-category-container');
-            this.construction.categories.forEach((category) => {
-                const recipes = game.construction.actions.filter((r) => r.category === category);
+            this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this.switchConstructionCategory(this));
+            this.constructionArtisanMenu.init(construction);
+            const constructionCategoryContainer = document.getElementById('rielk-construction-category-container');
+            construction.categories.forEach((category) => {
+                if (category.type !== 'Artisan')
+                    return;
+                const recipes = construction.actions.filter((r) => r.category === category);
                 recipes.sort(BasicSkillRecipe.sortByLevels);
                 const tab = createElement('recipe-selection-tab', {
                     className: 'col-12 col-md-8 d-none',
-                    attributes: [['data-option-tag-name', 'construction-recipe-option']],
+                    attributes: [['data-option-tag-name', 'rielk-construction-recipe-option']],
                     parent: constructionCategoryContainer,
                 });
-                tab.setRecipes(recipes, game.construction);
+                tab.setRecipes(recipes, construction);
                 this.constructionSelectionTabs.set(category, tab);
             });
+            this.constructionHouseElement = document.getElementById('rielk-construction-house-element');
+            this.constructionHouseMenu = new ConstructionHouseMenu(this.constructionHouseElement, construction);
         });
     }
 
-    switchConstructionCategory(category) {
-        switch (category.type) {
-            case 'Creation':
-                showElement();
-                hideElement();
-                break;
-            case 'Room':
-                showElement();
-                hideElement();
-                break;
-        }
+    switchConstructionCategory(ui) {
+        return (category) => {
+            switch (category.type) {
+                case 'House':
+                    showElement(ui.constructionHouseElement);
+                    hideElement(ui.constructionArtisanMenu);
+                    switchToCategory(ui.constructionSelectionTabs)(category)
+                    break;
+                case 'Artisan':
+                    showElement(ui.constructionArtisanMenu);
+                    hideElement(ui.constructionHouseElement);
+                    switchToCategory(ui.constructionSelectionTabs)(category)
+                    break;
+            }
+        };
     }
 }
 
@@ -56,4 +67,4 @@ class ConstructionRecipeOptionElement extends ItemRecipeOptionElement {
         return game.construction.getRecipeCosts(recipe);
     }
 }
-window.customElements.define('construction-recipe-option', ConstructionRecipeOptionElement);
+window.customElements.define('rielk-construction-recipe-option', ConstructionRecipeOptionElement);
