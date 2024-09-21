@@ -1,8 +1,5 @@
 {
   "namespace": "rielkConstruction",
   "icon": "assets/icon.png",
-  "setup": "src/setup.mjs",
-  "load": [
-    "src/interface/templates/construction.html"
-  ]
+  "setup": "src/setup.mjs"
 }

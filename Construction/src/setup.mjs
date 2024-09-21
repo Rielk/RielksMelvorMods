@@ -34,6 +34,7 @@ class Setup {
     }
 
     async createInterface() {
+        await this.ctx.loadTemplates('src/interface/templates/construction.html');
         const UI = new ConstructionInterface(this.ctx, game.construction);
         game.construction.UI = UI;
     }

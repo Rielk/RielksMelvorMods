@@ -6,8 +6,8 @@
       {
         "id": "Construction",
         "media": "assets/construction_header.png",
-        "containerID": "construction-container",
-        "headerBgClass": "bg-construction",
+        "containerID": "rielk-construction-container",
+        "headerBgClass": "bg-rielk-construction",
         "hasGameGuide": false,
         "canBeDefault": true,
         "skills": [
@@ -307,31 +307,22 @@
           ],
           "categories": [
             {
-              "id": "Supplies",
-              "media": "assets/categories/supplies.png",
-              "name": "Supplies",
+              "id": "Nails",
+              "media": "assets/categories/nails.png",
+              "name": "Nails",
               "type": "Artisan"
             },
             {
-              "id": "Bedroom",
-              "media": "assets/categories/bedroom.png",
-              "name": "Bedroom",
-              "type": "Room",
-              "room": "Bedroom"
+              "id": "Planks",
+              "media": "assets/categories/planks.png",
+              "name": "Planks",
+              "type": "Artisan"
             },
             {
-              "id": "Kitchen",
-              "media": "assets/categories/kitchen.png",
-              "name": "Kitchen",
-              "type": "Room",
-              "room": "Kitchen"
-            }
-          ],
-          "subcategories": [
-            {
-              "id": "Nails",
-              "name": "Nails",
-              "nameLang": "RIELK_CONSTRUCTION_NAILS"
+              "id": "House",
+              "media": "assets/categories/house.png",
+              "name": "House",
+              "type": "House"
             }
           ],
           "recipes": [
@@ -341,11 +332,70 @@
               "productID": "rielkConstruction:Iron_Nails",
               "baseQuantity": 5,
               "baseExperience": 5,
-              "categoryID": "rielkConstruction:Supplies",
-              "subcategoryID": "rielkConstruction:Nails",
+              "categoryID": "rielkConstruction:Nails",
               "itemCosts": [
                 {
                   "id": "melvorD:Iron_Bar",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            }
+          ],
+          "rooms": [
+            {
+              "id": "Bedroom",
+              "name": "Bedroom"
+            },
+            {
+              "id": "Kitchen",
+              "name": "Kitchen"
+            }
+          ],
+          "fixtures": [
+            {
+              "id": "Storage_Chest",
+              "name": "Storage Chest",
+              "media": "assets/categories/storage_chest/icon.png",
+              "room": "rielkConstruction:Bedroom"
+            }
+          ],
+          "fixtureRecipes": [
+            {
+              "id": "Storage_Chest1",
+              "tier": 1,
+              "level": 1,
+              "media": "assets/categories/storage_chest/1.png",
+              "fixtureID": "rielkConstruction:Storage_Chest",
+              "baseExperience": 5,
+              "baseActionCost": 100,
+              "itemCosts": [
+                {
+                  "id": "rielkConstruction:Iron_Nails",
+                  "quantity": 1
+                },
+                {
+                  "id": "melvorD:Normal_Logs",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Storage_Chest2",
+              "tier": 2,
+              "level": 5,
+              "media": "assets/categories/storage_chest/2.png",
+              "fixtureID": "rielkConstruction:Storage_Chest",
+              "baseExperience": 50,
+              "baseActionCost": 200,
+              "itemCosts": [
+                {
+                  "id": "rielkConstruction:Iron_Nails",
+                  "quantity": 1
+                },
+                {
+                  "id": "melvorD:Oak_Logs",
                   "quantity": 1
                 }
               ],

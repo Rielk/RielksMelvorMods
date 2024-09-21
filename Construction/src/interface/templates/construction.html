@@ -1,17 +1,19 @@
 <template id="rielk-construction-template">
     <!-- CONSTRUCTION Content -->
-    <div class="content d-none" id="construction-container">
+    <div class="content d-none" id="rielk-construction-container">
         <div class="skill-info">
             <skill-header data-skill-id="rielkConstruction:Construction"></skill-header>
         </div>
         <div class="row row-deck">
-            <realmed-category-menu class="col-12" id="construction-category-menu"></realmed-category-menu>
+            <realmed-category-menu class="col-12" id="rielk-construction-category-menu"></realmed-category-menu>
 
             <div class="col-12">
-                <div class="block block-rounded block-link-pop border-top border-construction border-4x">
-                    <div class="row no-gutters" id="construction-category-container">
+                <div class="block block-rounded block-link-pop border-top border-rielk-construction border-4x">
+                    <div class="row no-gutters" id="rielk-construction-category-container">
                         <div class="col-12 col-md-4">
-                            <artisan-menu id="construction-artisan-menu"></artisan-menu>
+                            <artisan-menu id="rielk-construction-artisan-menu"></artisan-menu>
+                            <div id="rielk-construction-house-element" class="col-12 d-none">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -20,3 +22,83 @@
     </div>
     <!-- END CONSTRUCTION Content -->
 </template>
+
+<template id="rielk-construction-room-panel-template">
+    <div class="block block-rounded border-top border-rielk-construction border-4x">
+        <div class="row no-gutters">
+            <div class="col-12 pointer-enabled" id="header">
+                <div class="block-content text-center">
+                    <i class="fa fa-eye text-muted mr-2 font-w300" id="eye-icon"></i>
+                    <span class="h5 font-w600" id="room-name"></span>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="block-content block-content-full text-center" id="target-container"></div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="block-content block-content-full text-center" id="info-container">
+                    <div class="font-size-sm font-w600 text-center text-muted">
+                        <small id="info-skill-name"></small><br>
+                        <span id="info-box-name">-</span><br>
+                        <img class="fishing-img m-2" id="info-box-image">
+                    </div>
+                    <div class="justify-vertical-center">
+                        <rielk-construction-info-box id="info-box"></rielk-construction-info-box>
+                    </div>
+                    <button class="btn btn-sm btn-success m-1 mt-3" role="button" id="start-button">
+                        <lang-string lang-id="MENU_TEXT_RIELK_BUILD"></lang-string>
+                    </button>
+                    <button class="btn btn-sm btn-info m-1 mt-3" role="button" id="drops-button">
+                        <lang-string lang-id="MENU_TEXT_SHOW_TIERS"></lang-string>
+                    </button>
+                    <progress-bar class="mt-3 progress-height-5" id="progress-bar"></progress-bar>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<template id="rielk-construction-info-box-template">
+    <div class="media-body">
+      <div class="row justify-content-center pb-2 icon-size-48">
+        <stealth-icon id="stealth"></stealth-icon>
+        <doubling-icon id="double"></doubling-icon>
+      </div>
+      <div class="row justify-content-center icon-size-48">
+        <xp-icon id="xp"></xp-icon>
+        <abyssal-xp-icon id="abyssal-xp"></abyssal-xp-icon>
+        <mastery-xp-icon id="mastery-xp"></mastery-xp-icon>
+        <mastery-pool-icon id="pool-xp"></mastery-pool-icon>
+        <interval-icon id="interval"></interval-icon>
+      </div>
+    </div>
+  </template>
+  <template id="rielk-construction-fixture-nav-template">
+    <ul class="nav nav-pills nav-justified">
+      <li class="nav-item mr-1">
+        <a class="block block-link-pop nav-link border pointer-enabled font-w600 p-1" id="button">
+          <div class="media d-flex align-items-center" id="button-content">
+            <div class="m-1">
+              <img class="skill-icon-md mr-1" id="fixture-image">
+            </div>
+            <div class="media-body">
+              <div class="text-center">
+                <h5 class="font-w700 text-combat-smoke mb-1 d-flex flex-wrap justify-content-center">
+                  <span id="fixture-name"></span>
+                  <compact-mastery-display id="mastery-display"></compact-mastery-display>
+                </h5>
+              </div>
+              <div class="font-w400 font-size-xs mb-2">
+                <span id="perception"></span><br>
+                <span id="success"></span><br>
+                <span id="max-hit"></span>
+              </div>
+            </div>
+          </div>
+          <div class="justify-vertical-center" id="unlock">
+            <span class="text-danger" id="level"></span>
+            <span class="text-danger" id="abyssal-level"></span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </template>
