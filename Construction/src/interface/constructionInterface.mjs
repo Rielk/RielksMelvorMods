@@ -4,43 +4,36 @@ const { ConstructionHouseMenu } = await loadModule('src/interface/constructionHo
 const { getRielkLangString } = await loadModule('src/language/translationManager.mjs');
 
 export class ConstructionInterface {
-    constructor(ctx, construction) {
-        this.ctx = ctx;
+    constructor(construction) {
         this.renderQueue = new ConstructionRenderQueue();
         this.construction = construction;
 
         this.constructionSelectionTabs = new Map();
 
-        this.ctx.onInterfaceAvailable(async () => {
-            await this.ctx.loadStylesheet('src/interface/construction-styles.css');
+        const frag = new DocumentFragment();
+        frag.append(getTemplateNode('rielk-construction-template'));
+        document.getElementById('main-container').append(...frag.children);
+        this.constructionCategoryMenu = document.getElementById('rielk-construction-category-menu');
+        this.constructionArtisanMenu = document.getElementById('rielk-construction-artisan-menu',);
 
-            const frag = new DocumentFragment();
-            frag.append(getTemplateNode('rielk-construction-template'));
-            document.getElementById('main-container').append(...frag.children);
-            this.constructionCategoryMenu = document.getElementById('rielk-construction-category-menu');
-            this.constructionArtisanMenu = document.getElementById('rielk-construction-artisan-menu',);
-        });
-
-        this.ctx.onCharacterLoaded(async () => {
-            this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this.switchConstructionCategory(this));
-            this.constructionArtisanMenu.init(construction);
-            const constructionCategoryContainer = document.getElementById('rielk-construction-category-container');
-            construction.categories.forEach((category) => {
-                if (category.type !== 'Artisan')
-                    return;
-                const recipes = construction.actions.filter((r) => r.category === category);
-                recipes.sort(BasicSkillRecipe.sortByLevels);
-                const tab = createElement('recipe-selection-tab', {
-                    className: 'col-12 col-md-8 d-none',
-                    attributes: [['data-option-tag-name', 'rielk-construction-recipe-option']],
-                    parent: constructionCategoryContainer,
-                });
-                tab.setRecipes(recipes, construction);
-                this.constructionSelectionTabs.set(category, tab);
+        this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this.switchConstructionCategory(this));
+        this.constructionArtisanMenu.init(construction);
+        const constructionCategoryContainer = document.getElementById('rielk-construction-category-container');
+        construction.categories.forEach((category) => {
+            if (category.type !== 'Artisan')
+                return;
+            const recipes = construction.actions.filter((r) => r.category === category);
+            recipes.sort(BasicSkillRecipe.sortByLevels);
+            const tab = createElement('recipe-selection-tab', {
+                className: 'col-12 col-md-8 d-none',
+                attributes: [['data-option-tag-name', 'rielk-construction-recipe-option']],
+                parent: constructionCategoryContainer,
             });
-            this.constructionHouseElement = document.getElementById('rielk-construction-house-element');
-            this.constructionHouseMenu = new ConstructionHouseMenu(this.constructionHouseElement, construction);
+            tab.setRecipes(recipes, construction);
+            this.constructionSelectionTabs.set(category, tab);
         });
+        this.constructionHouseElement = document.getElementById('rielk-construction-house-element');
+        this.constructionHouseMenu = new ConstructionHouseMenu(this.constructionHouseElement, construction);
     }
 
     switchConstructionCategory(ui) {
@@ -58,7 +51,7 @@ export class ConstructionInterface {
                     break;
             }
         };
-    }    
+    }
 
     render() {
         this.renderMenu();
@@ -67,7 +60,7 @@ export class ConstructionInterface {
         this.renderFixtureUnlock();
         this.renderRoomRealmVisibility();
     }
-    
+
     renderFixtureUnlock() {
         if (!this.renderQueue.fictureUnlock)
             return;
@@ -81,7 +74,7 @@ export class ConstructionInterface {
             return;
         if (this.constructionHouseMenu == undefined)
             return;
-        this.construction.rooms.forEach((room)=>{
+        this.construction.rooms.forEach((room) => {
             room.realm === this.construction.currentRealm ? this.constructionHouseMenu.showRoom(room) : this.constructionHouseMenu.hideRoom(room);
         }
         );
@@ -134,7 +127,7 @@ export class ConstructionInterface {
         this.renderQueue.progressBar = false;
     }
     renderVisibleRooms() {
-        this.construction.rooms.forEach((room)=>{
+        this.construction.rooms.forEach((room) => {
             if (this.construction.hiddenRooms.has(room)) {
                 this.hideRoomPanel(room);
             } else {
@@ -176,14 +169,3 @@ class ConstructionRenderQueue extends ArtisanSkillRenderQueue {
         this.roomRealmVisibility = false;
     }
 }
-
-class ConstructionRecipeOptionElement extends ItemRecipeOptionElement {
-    setUnlocked(recipe) {
-        super.setUnlocked(recipe);
-        this.unlocked.onclick = ()=>game.construction.selectRecipeOnClick(recipe);
-    }
-    getRecipeIngredients(recipe) {
-        return game.construction.getRecipeCosts(recipe);
-    }
-}
-window.customElements.define('rielk-construction-recipe-option', ConstructionRecipeOptionElement);
