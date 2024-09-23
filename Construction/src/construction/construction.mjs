@@ -3,6 +3,7 @@ const { loadModule, characterStorage, onCharacterLoaded, onInterfaceReady } = mo
 const { ConstructionActionEvent } = await loadModule('src/construction/gameEvents.mjs');
 const { ConstructionStats } = await loadModule('src/construction/statistics.mjs');
 const { getRielkLangString } = await loadModule('src/language/translationManager.mjs');
+const { ConstructionInterface } = await loadModule('src/interface/constructionInterface.mjs');
 
 export class Construction extends ArtisanSkill {
     constructor(namespace, game) {
@@ -15,6 +16,11 @@ export class Construction extends ArtisanSkill {
         this.fixtures = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionFixture');
         this.fixtureRecipes = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionFixtureRecipes');
         this.hiddenRooms = new Set();
+    }
+
+    initMenus() {
+        super.initMenus(...arguments);
+        this.ui = new ConstructionInterface(this);
     }
 
     get name() {
