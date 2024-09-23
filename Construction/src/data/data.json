@@ -20,7 +20,6 @@
       {
         "itemType": "Item",
         "id": "Iron_Nails",
-        "name": "Iron Nails",
         "category": "Construction",
         "type": "Nails",
         "media": "assets/items/nails_iron.png",
@@ -32,7 +31,6 @@
       {
         "itemType": "Equipment",
         "id": "Construction_Skillcape",
-        "name": "Construction Skillcape",
         "category": "Combat",
         "type": "Armour",
         "media": "assets/items/skillcape_construction.png",
@@ -309,19 +307,16 @@
             {
               "id": "Nails",
               "media": "assets/categories/nails.png",
-              "name": "Nails",
               "type": "Artisan"
             },
             {
               "id": "Planks",
               "media": "assets/categories/planks.png",
-              "name": "Planks",
               "type": "Artisan"
             },
             {
               "id": "House",
               "media": "assets/categories/house.png",
-              "name": "House",
               "type": "House"
             }
           ],
@@ -362,7 +357,7 @@
             {
               "id": "Storage_Chest",
               "name": "Storage Chest",
-              "media_folder": "assets/categories/storage_chest",
+              "media_folder": "assets/fixtures/storage_chest",
               "recipes": [
                 "rielkConstruction:Storage_Chest1",
                 "rielkConstruction:Storage_Chest2"
@@ -371,7 +366,7 @@
             {
               "id": "Sink",
               "name": "Sink",
-              "media_folder": "assets/categories/sink",
+              "media_folder": "assets/fixtures/sink",
               "recipes": [
                 "rielkConstruction:Sink1"
               ]

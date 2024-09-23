@@ -10,10 +10,14 @@ export class Construction extends ArtisanSkill {
         this.baseInterval = 3000;
         this.ui = undefined;
         this.categories = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionCategory');
-        this.rooms = new NamespaceRegistry(game.registeredNamespaces,'ConstructionRoom');
-        this.fixtures = new NamespaceRegistry(game.registeredNamespaces,'ConstructionFixture');
-        this.fixtureRecipes = new NamespaceRegistry(game.registeredNamespaces,'ConstructionFixtureRecipes');
+        this.rooms = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionRoom');
+        this.fixtures = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionFixture');
+        this.fixtureRecipes = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionFixtureRecipes');
         this.hiddenRooms = new Set();
+    }
+
+    get name() {
+        return getLangString('SKILL_NAME_RielkConstruction');
     }
 
     get renderQueue() {
@@ -58,24 +62,24 @@ export class Construction extends ArtisanSkill {
 
     registerData(namespace, data) {
         var _a, _b, _c, _d, _e;
-        (_a = data.categories) === null || _a === void 0 ? void 0 : _a.forEach((categoryData)=>{
-            this.categories.registerObject(new ConstructionCategory(namespace,categoryData,this,this.game));
+        (_a = data.categories) === null || _a === void 0 ? void 0 : _a.forEach((categoryData) => {
+            this.categories.registerObject(new ConstructionCategory(namespace, categoryData, this, this.game));
         }
         );
-        (_b = data.recipes) === null || _b === void 0 ? void 0 : _b.forEach((recipeData)=>{
-            this.actions.registerObject(new ConstructionRecipe(namespace,recipeData,this.game,this));
+        (_b = data.recipes) === null || _b === void 0 ? void 0 : _b.forEach((recipeData) => {
+            this.actions.registerObject(new ConstructionRecipe(namespace, recipeData, this.game, this));
         }
         );
-        (_c = data.fixtureRecipes ) === null || _c === void 0 ? void 0 : _c.forEach((fixtureRecipeData)=>{
-            this.fixtureRecipes.registerObject(new ConstructionFixtureRecipes(namespace,fixtureRecipeData,this.game));
+        (_c = data.fixtureRecipes) === null || _c === void 0 ? void 0 : _c.forEach((fixtureRecipeData) => {
+            this.fixtureRecipes.registerObject(new ConstructionFixtureRecipes(namespace, fixtureRecipeData, this.game));
         }
         );
-        (_d = data.fixtures ) === null || _d === void 0 ? void 0 : _d.forEach((fixtureData)=>{
-            this.fixtures.registerObject(new ConstructionFixture(namespace,fixtureData,this.game,this));
+        (_d = data.fixtures) === null || _d === void 0 ? void 0 : _d.forEach((fixtureData) => {
+            this.fixtures.registerObject(new ConstructionFixture(namespace, fixtureData, this.game, this));
         }
         );
-        (_e = data.rooms) === null || _e === void 0 ? void 0 : _e.forEach((roomData)=>{
-            this.rooms.registerObject(new ConstructionRoom(namespace,roomData,this.game,this));
+        (_e = data.rooms) === null || _e === void 0 ? void 0 : _e.forEach((roomData) => {
+            this.rooms.registerObject(new ConstructionRoom(namespace, roomData, this.game, this));
         }
         );
         super.registerData(namespace, data);
@@ -83,42 +87,42 @@ export class Construction extends ArtisanSkill {
     modifyData(data) {
         var _a, _b, _c;
         super.modifyData(data);
-        (_a = data.recipes) === null || _a === void 0 ? void 0 : _a.forEach((modData)=>{
+        (_a = data.recipes) === null || _a === void 0 ? void 0 : _a.forEach((modData) => {
             const recipe = this.actions.getObjectByID(modData.id);
             if (recipe === undefined)
                 throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
             recipe.applyDataModification(modData, this.game);
         }
         );
-        (_b = data.rooms) === null || _b === void 0 ? void 0 : _b.forEach((modData)=>{
+        (_b = data.rooms) === null || _b === void 0 ? void 0 : _b.forEach((modData) => {
             const room = this.actions.getObjectByID(modData.id);
             if (room === undefined)
                 throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
             room.applyDataModification(modData, this.game);
         }
         );
-        (_c = data.fixture) === null || _c === void 0 ? void 0 : _c.forEach((modData)=>{
+        (_c = data.fixture) === null || _c === void 0 ? void 0 : _c.forEach((modData) => {
             const fixture = this.actions.getObjectByID(modData.id);
             if (fixture === undefined)
                 throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
             fixture.applyDataModification(modData, this.game);
         }
         );
-        (_d = data.fixtureRecipes) === null || _d === void 0 ? void 0 : _d.forEach((modData)=>{
+        (_d = data.fixtureRecipes) === null || _d === void 0 ? void 0 : _d.forEach((modData) => {
             const fixtureRecipe = this.actions.getObjectByID(modData.id);
             if (fixtureRecipe === undefined)
                 throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
             fixtureRecipe.applyDataModification(modData, this.game);
         }
         );
-        this.fixtures.forEach((fixture)=> {
+        this.fixtures.forEach((fixture) => {
             fixture.finaliseTiers();
         });
     }
     postDataRegistration() {
         super.postDataRegistration();
         this.sortedMasteryActions = sortRecipesByCategoryAndLevel(this.actions.allObjects, this.categories.allObjects);
-        this.actions.forEach((action)=>{
+        this.actions.forEach((action) => {
             if (action.abyssalLevel > 0)
                 this.abyssalMilestones.push(action);
             else
@@ -158,12 +162,12 @@ export class Construction extends ArtisanSkill {
         super.recordCostConsumptionStats(costs);
         costs.recordBulkItemStat(this.game.stats.Construction, ConstructionStats.ItemsUsed);
     }
-    preAction() {}
+    preAction() { }
     get actionRewards() {
         const rewards = new Rewards(this.game);
         const recipe = this.activeRecipe;
         rewards.setActionInterval(this.actionInterval);
-        const actionEvent = new ConstructionActionEvent(this,recipe);
+        const actionEvent = new ConstructionActionEvent(this, recipe);
         const item = recipe.product;
         const qtyToAdd = this.modifyPrimaryProductQuantity(item, this.unmodifiedActionQuantity, recipe);
         rewards.addItem(item, qtyToAdd);
@@ -186,12 +190,12 @@ export class Construction extends ArtisanSkill {
 
     getRegistry(type) {
         switch (type) {
-        case ScopeSourceType.Category:
-            return this.categories;
-        case ScopeSourceType.Action:
-            return this.actions;
-        case ScopeSourceType.Subcategory:
-            return this.subcategories;
+            case ScopeSourceType.Category:
+                return this.categories;
+            case ScopeSourceType.Action:
+                return this.actions;
+            case ScopeSourceType.Subcategory:
+                return this.subcategories;
         }
     }
 
@@ -202,7 +206,7 @@ export class Construction extends ArtisanSkill {
         this.selectRealm(this.currentRealm);
         onCharacterLoaded(async () => {
             const hrData = characterStorage.getItem('HiddenRooms');
-            if (hrData !== undefined){
+            if (hrData !== undefined) {
                 hrData.forEach(roomID => {
                     const room = this.rooms.getObjectByID(roomID)
                     if (room !== undefined)
@@ -210,7 +214,7 @@ export class Construction extends ArtisanSkill {
                 });
             }
         });
-        onInterfaceReady(async() => {
+        onInterfaceReady(async () => {
             this.ui.renderVisibleRooms();
             this.render();
         });
@@ -241,8 +245,11 @@ class ConstructionCategory extends SkillCategory {
         try {
             this.type = data.type;
         } catch (e) {
-            throw new DataModificationError(ConstructionCategory.name,e,this.id);
+            throw new DataModificationError(ConstructionCategory.name, e, this.id);
         }
+    }
+    get name() {
+        return getLangString(`RIELK_SKILL_CATEGORY_ ${this.skill.localID}_ ${this.localID}`);
     }
 }
 
@@ -251,14 +258,14 @@ class ConstructionRecipe extends SingleProductArtisanSkillRecipe {
         super(namespace, data, game, skill);
         try {
         } catch (e) {
-            throw new DataConstructionError(ConstructionRecipe.name,e,this.id);
+            throw new DataConstructionError(ConstructionRecipe.name, e, this.id);
         }
     }
     applyDataModification(data, game) {
         super.applyDataModification(data, game);
         try {
         } catch (e) {
-            throw new DataModificationError(ConstructionRecipe.name,e,this.id);
+            throw new DataModificationError(ConstructionRecipe.name, e, this.id);
         }
     }
 }
@@ -267,10 +274,11 @@ class ConstructionRoom extends RealmedObject {
     constructor(namespace, data, game, construction) {
         super(namespace, data, game);
         try {
+            this._name = data.name;
             if (data.fixtures == undefined)
                 throw new Error('No fixtures specified in data.')
             this.fixtures = construction.fixtures.getArrayFromIds(data.fixtures);
-            this.fixtures.forEach((fixture)=>{
+            this.fixtures.forEach((fixture) => {
                 if (fixture.room !== undefined)
                     throw new Error(`ConstructionFixture with id: ${fixture.id} is already assigned to a ConstructionRoom.`);
                 fixture.room = this;
@@ -283,8 +291,11 @@ class ConstructionRoom extends RealmedObject {
         super.applyDataModification(data, game);
         try {
         } catch (e) {
-            throw new DataModificationError(ConstructionRecipe.name,e,this.id);
+            throw new DataModificationError(ConstructionRecipe.name, e, this.id);
         }
+    }
+    get name() {
+        return getLangString(`RIELK_CONSTRUCTION_ROOM_NAME_ ${this.localID}`);
     }
 }
 
@@ -297,7 +308,7 @@ class ConstructionFixture extends RealmedObject {
                 throw new Error('No tiers specified in data.')
             var i = 0;
             this.recipes = construction.fixtureRecipes.getArrayFromIds(data.recipes);
-            this.recipes.forEach((recipe)=>{
+            this.recipes.forEach((recipe) => {
                 i += 1;
                 if (recipe.fixture !== undefined)
                     throw new Error(`ConstructionFixtureRecipes with id: ${recipe.id} is already set to a ConstructionFixture.`);
@@ -313,7 +324,7 @@ class ConstructionFixture extends RealmedObject {
         try {
             this._media_folder = data.media;
         } catch (e) {
-            throw new DataModificationError(ConstructionFixture.name,e,this.id);
+            throw new DataModificationError(ConstructionFixture.name, e, this.id);
         }
     }
     get media() {
@@ -323,11 +334,11 @@ class ConstructionFixture extends RealmedObject {
         return this.getMediaURL(`${this._media_folder}/${tier}.png`);
     }
     getRecipe(tier) {
-        return this.recipes[tier-1];
+        return this.recipes[tier - 1];
     }
 }
 
-class ConstructionFixtureRecipes extends ArtisanSkillRecipe { 
+class ConstructionFixtureRecipes extends ArtisanSkillRecipe {
     constructor(namespace, data, game) {
         super(namespace, data, game);
         try {
