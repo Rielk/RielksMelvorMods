@@ -2,6 +2,7 @@ const { loadModule, characterStorage, onCharacterLoaded, onInterfaceReady } = mo
 
 const { ConstructionActionEvent } = await loadModule('src/construction/gameEvents.mjs');
 const { ConstructionStats } = await loadModule('src/construction/statistics.mjs');
+const { getRielkLangString } = await loadModule('src/language/translationManager.mjs');
 
 export class Construction extends ArtisanSkill {
     constructor(namespace, game) {
@@ -17,7 +18,7 @@ export class Construction extends ArtisanSkill {
     }
 
     get name() {
-        return getLangString('SKILL_NAME_RielkConstruction');
+        return getRielkLangString('SKILL_NAME_Construction');
     }
 
     get renderQueue() {
@@ -249,7 +250,7 @@ class ConstructionCategory extends SkillCategory {
         }
     }
     get name() {
-        return getLangString(`RIELK_SKILL_CATEGORY_ ${this.skill.localID}_ ${this.localID}`);
+        return getRielkLangString(`SKILL_CATEGORY_ ${this.skill.localID}_ ${this.localID}`);
     }
 }
 
@@ -295,7 +296,7 @@ class ConstructionRoom extends RealmedObject {
         }
     }
     get name() {
-        return getLangString(`RIELK_CONSTRUCTION_ROOM_NAME_ ${this.localID}`);
+        return getRielkLangString(`CONSTRUCTION_ROOM_NAME_ ${this.localID}`);
     }
 }
 
