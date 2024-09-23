@@ -2,6 +2,15 @@ body.darkMode .bg-rielk-construction,.bg-rielk-construction {
     background-color: #925da3!important
 }
 
+.bg-rielk-construction-50 {
+    background-color: #925da33d!important
+}
+
+.border-rielk-construction {
+    border-color: #925da3!important;
+}
+
+
 body.darkMode.superDark .bg-rielk-construction
 {
     background-color: #000!important

@@ -33,6 +33,7 @@ export class ConstructionInterface {
             this.constructionSelectionTabs.set(category, tab);
         });
         this.constructionHouseElement = document.getElementById('rielk-construction-house-element');
+        this.constructionArtisanElement = document.getElementById('rielk-construction-artisan-element');
         this.constructionHouseMenu = new ConstructionHouseMenu(this.constructionHouseElement, construction);
     }
 
@@ -41,11 +42,11 @@ export class ConstructionInterface {
             switch (category.type) {
                 case 'House':
                     showElement(ui.constructionHouseElement);
-                    hideElement(ui.constructionArtisanMenu);
+                    hideElement(ui.constructionArtisanElement);
                     switchToCategory(ui.constructionSelectionTabs)(category)
                     break;
                 case 'Artisan':
-                    showElement(ui.constructionArtisanMenu);
+                    showElement(ui.constructionArtisanElement);
                     hideElement(ui.constructionHouseElement);
                     switchToCategory(ui.constructionSelectionTabs)(category)
                     break;
