@@ -345,28 +345,42 @@
           "rooms": [
             {
               "id": "Bedroom",
-              "name": "Bedroom"
+              "name": "Bedroom",
+              "fixtures": [
+                "rielkConstruction:Storage_Chest"
+              ]
             },
             {
               "id": "Kitchen",
-              "name": "Kitchen"
+              "name": "Kitchen",
+              "fixtures": [
+                "rielkConstruction:Sink"
+              ]
             }
           ],
           "fixtures": [
             {
               "id": "Storage_Chest",
               "name": "Storage Chest",
-              "media": "assets/categories/storage_chest/icon.png",
-              "room": "rielkConstruction:Bedroom"
+              "media_folder": "assets/categories/storage_chest",
+              "recipes": [
+                "rielkConstruction:Storage_Chest1",
+                "rielkConstruction:Storage_Chest2"
+              ]
+            },
+            {
+              "id": "Sink",
+              "name": "Sink",
+              "media_folder": "assets/categories/sink",
+              "recipes": [
+                "rielkConstruction:Sink1"
+              ]
             }
           ],
           "fixtureRecipes": [
             {
               "id": "Storage_Chest1",
-              "tier": 1,
               "level": 1,
-              "media": "assets/categories/storage_chest/1.png",
-              "fixtureID": "rielkConstruction:Storage_Chest",
               "baseExperience": 5,
               "baseActionCost": 100,
               "itemCosts": [
@@ -383,10 +397,7 @@
             },
             {
               "id": "Storage_Chest2",
-              "tier": 2,
               "level": 5,
-              "media": "assets/categories/storage_chest/2.png",
-              "fixtureID": "rielkConstruction:Storage_Chest",
               "baseExperience": 50,
               "baseActionCost": 200,
               "itemCosts": [
@@ -397,6 +408,19 @@
                 {
                   "id": "melvorD:Oak_Logs",
                   "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Sink1",
+              "level": 10,
+              "baseExperience": 100,
+              "baseActionCost": 2000,
+              "itemCosts": [
+                {
+                  "id": "melvorD:Iron_Bar",
+                  "quantity": 5
                 }
               ],
               "currencyCosts": []

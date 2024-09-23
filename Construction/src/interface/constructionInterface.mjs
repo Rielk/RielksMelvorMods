@@ -5,6 +5,8 @@ const { ConstructionHouseMenu } = await loadModule('src/interface/constructionHo
 export class ConstructionInterface {
     constructor(ctx, construction) {
         this.ctx = ctx;
+        this.renderQueue = new ConstructionRenderQueue();
+        this.construction = construction;
 
         this.constructionSelectionTabs = new Map();
 
@@ -55,6 +57,122 @@ export class ConstructionInterface {
                     break;
             }
         };
+    }    
+
+    render() {
+        this.renderMenu();
+        this.renderProgressBar();
+        this.renderStopButton();
+        this.renderFixtureUnlock();
+        this.renderRoomRealmVisibility();
+    }
+    
+    renderFixtureUnlock() {
+        if (!this.renderQueue.fictureUnlock)
+            return;
+        if (this.constructionHouseMenu == undefined)
+            return;
+        this.constructionHouseMenu.updateFixturesForLevel(this);
+        this.renderQueue.fictureUnlock = false;
+    }
+    renderRoomRealmVisibility() {
+        if (!this.renderQueue.roomRealmVisibility)
+            return;
+        if (this.constructionHouseMenu == undefined)
+            return;
+        this.construction.rooms.forEach((room)=>{
+            room.realm === this.construction.currentRealm ? this.constructionHouseMenu.showRoom(room) : this.constructionHouseMenu.hideRoom(room);
+        }
+        );
+        this.renderQueue.roomRealmVisibility = false;
+    }
+    renderMenu() {
+        if (this.constructionHouseMenu == undefined)
+            return;
+        if (this.renderQueue.menu) {
+            this.constructionHouseMenu.updateAllRoomPanels(this);
+            this.constructionHouseMenu.updateFixtureButtons(this.game);
+        }
+        this.renderQueue.menu = false;
+    }
+    renderStopButton() {
+        if (this.renderQueue.stopButton) {
+            if (this.isActive && this.currentRoom !== undefined)
+                this.constructionHouseMenu.setStopButton(this, this.currentRoom);
+            else
+                this.constructionHouseMenu.removeStopButton(this);
+        }
+        this.renderQueue.stopButton = false;
+    }
+    renderProgressBar() {
+        var _a;
+        if (!this.renderQueue.progressBar)
+            return;
+        if (this.lastActiveRoomProgressBar !== undefined) {
+            (_a = this.constructionHouseMenu.getProgressBar(this.lastActiveRoomProgressBar)) === null || _a === void 0 ? void 0 : _a.stopAnimation();
+            this.lastActiveRoomProgressBar = undefined;
+        }
+        if (this.currentRoom === undefined)
+            return;
+        const progressBar = this.constructionHouseMenu.getProgressBar(this.currentRoom);
+        if (progressBar !== undefined) {
+            if (this.isActive) {
+                if (this.stunState === 1) {
+                    progressBar.setStyle('bg-danger');
+                    progressBar.animateProgressFromTimer(this.stunTimer);
+                } else {
+                    progressBar.setStyle('bg-info');
+                    progressBar.animateProgressFromTimer(this.actionTimer);
+                }
+                this.lastActiveRoomProgressBar = this.currentRoom;
+            } else {
+                progressBar.stopAnimation();
+                this.lastActiveRoomProgressBar = undefined;
+            }
+        }
+        this.renderQueue.progressBar = false;
+    }
+    renderVisibleRooms() {
+        this.construction.rooms.forEach((room)=>{
+            if (this.construction.hiddenRooms.has(room)) {
+                this.hideRoomPanel(room);
+            } else {
+                this.showRoomPanel(room);
+            }
+        }
+        );
+    }
+    onRoomHeaderClick(room) {
+        if (this.construction.hiddenRooms.has(room)) {
+            this.construction.hiddenRooms.delete(room);
+            this.showRoomPanel(room);
+        } else {
+            this.construction.hiddenRooms.add(room);
+            this.hideRoomPanel(room);
+        }
+    }
+    onFixturePanelSelection(fixture, room) {
+        if (this.construction.isActive && room === this.construction.currentRoom && fixture !== this.construction.currentFixture) {
+            return this.construction.stop();
+        } else {
+            return true;
+        }
+    }
+    hideRoomPanel(room) {
+        return this.constructionHouseMenu.hideRoomPanel(room)
+    }
+    showRoomPanel(room) {
+        return this.constructionHouseMenu.showRoomPanel(room)
+    }
+}
+
+class ConstructionRenderQueue extends ArtisanSkillRenderQueue {
+    constructor() {
+        super(...arguments);
+        this.menu = false;
+        this.stopButton = false;
+        this.fixtureUnlock = false;
+        this.roomRealmVisibility = false;
     }
 }
 

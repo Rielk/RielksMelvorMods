@@ -1,6 +1,7 @@
 export class ConstructionHouseMenu {
     constructor(container, construction) {
         this.roomPanels = new Map();
+        this.activeRoom = undefined;
         construction.rooms.forEach((room)=>{
             const roomPanel = createElement('rielk-construction-room-panel', {
                 className: 'col-12 col-xl-6',
@@ -22,6 +23,62 @@ export class ConstructionHouseMenu {
         if (panel === undefined)
             return;
         panel.show();
+    }
+    hideRoom(room) {
+        const panel = this.roomPanels.get(room);
+        if (panel === undefined)
+            return;
+        hideElement(panel);
+    }
+    showRoom(room) {
+        const panel = this.roomPanels.get(room);
+        if (panel === undefined)
+            return;
+        showElement(panel);
+    }
+    updateFixturesForLevel(construction) {
+        this.roomPanels.forEach((panel,room)=>{
+            panel.updateFixturesForLevel(construction, room);
+        }
+        );
+    }
+    updateFixtureButtons(game) {
+        this.roomPanels.forEach((panel)=>{
+            panel.updateFixtureButtons(game);
+        }
+        );
+    }
+    selectFixture(fixture, room, construction) {
+        const panel = this.roomPanels.get(room);
+        if (panel === undefined)
+            return;
+        panel.selectFixture(room, fixture, construction);
+    }
+    updateAllRoomPanels(construction) {
+        this.roomPanels.forEach((panel,room)=>{
+            panel.updateRoomInfo(construction);
+        }
+        );
+    }
+    setStopButton(construction, room) {
+        const panel = this.roomPanels.get(room);
+        this.removeStopButton(construction);
+        if (panel === undefined)
+            return;
+        this.activeRoom = room;
+        panel.setStopButton(construction);
+    }
+    removeStopButton(construction) {
+        var _a;
+        const room = this.activeRoom;
+        if (room !== undefined) {
+            (_a = this.roomPanels.get(room)) === null || _a === void 0 ? void 0 : _a.removeStopButton(construction, room);
+        }
+        this.activeRoom = undefined;
+    }
+    getProgressBar(room) {
+        var _a;
+        return (_a = this.roomPanels.get(room)) === null || _a === void 0 ? void 0 : _a.progressBar;
     }
 }
 
@@ -51,7 +108,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
     setRoom(room, construction) {
         this.infoSkillName.textContent = construction.name;
         this.roomName.textContent = room.name;
-        this.header.onclick = ()=>construction.onRoomHeaderClick(room);
+        this.header.onclick = ()=>construction.ui.onRoomHeaderClick(room);
         room.fixtures.forEach((fixture)=>{
             const fixtureNav = createElement('rielk-construction-fixture-nav', {
                 parent: this.targetContainer
@@ -61,7 +118,6 @@ class ConstructionRoomPanelElement extends HTMLElement {
         }
         );
     }
-
     hide() {
         hideElement(this.targetContainer);
         hideElement(this.infoContainer);
@@ -91,7 +147,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
         );
     }
     selectFixture(room, fixture, construction) {
-        if (!construction.onNPCPanelSelection(fixture, room))
+        if (!construction.ui.onFixturePanelSelection(fixture, room))
             return;
         this.selectedFixture = fixture;
         this.updateRoomInfo(construction);
@@ -146,9 +202,6 @@ class ConstructionFixtureNavElement extends HTMLElement {
         this.fixtureImage = getElementFromFragment(this._content, 'fixture-image', 'img');
         this.fixtureName = getElementFromFragment(this._content, 'fixture-name', 'span');
         this.masteryDisplay = getElementFromFragment(this._content, 'mastery-display', 'compact-mastery-display');
-        this.perception = getElementFromFragment(this._content, 'perception', 'span');
-        this.success = getElementFromFragment(this._content, 'success', 'span');
-        this.maxHit = getElementFromFragment(this._content, 'max-hit', 'span');
         this.unlock = getElementFromFragment(this._content, 'unlock', 'div');
         this.level = getElementFromFragment(this._content, 'level', 'span');
         this.abyssalLevel = getElementFromFragment(this._content, 'abyssal-level', 'span');
@@ -160,9 +213,6 @@ class ConstructionFixtureNavElement extends HTMLElement {
         this.fixtureImage.src = fixture.media;
         this.fixtureName.textContent = fixture.name;
         this.masteryDisplay.setMastery(construction, fixture);
-        this.perception.textContent = templateLangString('MENU_TEXT_PERCEPTION', {
-            value: `${fixture.perception}`
-        });
         this.level.textContent = '';
         this.level.append(...templateLangStringWithNodes('MENU_TEXT_UNLOCKED_AT', {
             skillImage: createElement('img', {
@@ -188,16 +238,6 @@ class ConstructionFixtureNavElement extends HTMLElement {
         }
     }
     updateFixture(fixture, game) {
-        this.success.textContent = templateLangString('MENU_TEXT_SUCCESS_RATE', {
-            value: `${formatPercent(game.thieving.getNPCSuccessRate(fixture), 2)}`,
-        });
-        let maxHit = numberMultiplier * fixture.maxHit;
-        if (fixture.realm === game.defaultRealm) {
-            maxHit = Math.floor(maxHit * (1 - game.combat.player.stats.getResistance(game.normalDamage) / 100));
-        }
-        this.maxHit.textContent = templateLangString('MENU_TEXT_MAX_HIT', {
-            value: `${maxHit}`
-        });
     }
     setLocked(fixture, construction) {
         hideElement(this.buttonContent);
@@ -220,12 +260,8 @@ class ConstructionInfoBoxElement extends HTMLElement {
         super();
         this._content = new DocumentFragment();
         this._content.append(getTemplateNode('rielk-construction-info-box-template'));
-        this.stealth = getElementFromFragment(this._content, 'stealth', 'stealth-icon');
-        this.double = getElementFromFragment(this._content, 'double', 'doubling-icon');
         this.xp = getElementFromFragment(this._content, 'xp', 'xp-icon');
         this.abyssalXP = getElementFromFragment(this._content, 'abyssal-xp', 'abyssal-xp-icon');
-        this.masteryXP = getElementFromFragment(this._content, 'mastery-xp', 'mastery-xp-icon');
-        this.poolXP = getElementFromFragment(this._content, 'pool-xp', 'mastery-pool-icon');
         this.interval = getElementFromFragment(this._content, 'interval', 'interval-icon');
     }
     connectedCallback() {
@@ -234,17 +270,8 @@ class ConstructionInfoBoxElement extends HTMLElement {
     setFixture(construction, fixture) {
         this.xp.setXP(Math.floor(construction.modifyXP(fixture.baseExperience)), fixture.baseExperience);
         this.xp.setSources(construction.getXPSources(fixture));
-        const interval = construction.getNPCInterval(fixture);
+        const interval = construction.getFixtureInterval(fixture);
         this.interval.setInterval(interval, construction.getIntervalSources(fixture));
-        this.stealth.setFixture(fixture, construction);
-        this.stealth.setSources(construction.getStealthSources(fixture));
-        const mXP = construction.getMasteryXPToAddForAction(fixture, interval);
-        const baseMXP = construction.getBaseMasteryXPToAddForAction(fixture, interval);
-        this.masteryXP.setXP(mXP, baseMXP);
-        this.masteryXP.setSources(construction.getMasteryXPSources(fixture));
-        this.poolXP.setXP(construction.getMasteryXPToAddToPool(mXP));
-        this.poolXP.setRealm(fixture.realm);
-        this.double.setChance(construction.getDoublingChance(fixture), construction.getDoublingSources(fixture));
         this.abyssalXP.setXP(Math.floor(construction.modifyAbyssalXP(fixture.baseAbyssalExperience)), fixture.baseAbyssalExperience);
         this.abyssalXP.setSources(construction.getAbyssalXPSources(fixture));
         if (fixture.baseAbyssalExperience > 0)
