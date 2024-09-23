@@ -1,3 +1,7 @@
+const { loadModule } = mod.getContext(import.meta);
+
+const { getRielkLangString } = await loadModule('src/language/translationManager.mjs');
+
 export class ConstructionHouseMenu {
     constructor(container, construction) {
         this.roomPanels = new Map();
@@ -131,7 +135,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.eyeIcon.classList.add('fa-eye');
     }
     updateFixturesForLevel(construction, room) {
-        this.fixtureNavs.forEach((fixtureNav,fixture)=>{
+        this.fixtureNavs.forEach((fixtureNav,fixture)=>{ //Fixtures don't have a .level
             if (construction.level >= fixture.level && construction.abyssalLevel >= fixture.abyssalLevel) {
                 fixtureNav.setUnlocked(()=>this.selectFixture(room, fixture, construction));
             } else {
@@ -177,13 +181,13 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.infoBox.setFixture(construction, fixture);
     }
     setStopButton(construction) {
-        this.startButton.textContent = getLangString('MENU_TEXT_STOP_RIELK_CONSTRUCTION');
+        this.startButton.textContent = getRielkLangString('MENU_TEXT_STOP_RIELK_CONSTRUCTION');
         this.startButton.classList.remove('btn-success');
         this.startButton.classList.add('btn-danger');
         this.startButton.onclick = ()=>construction.stop();
     }
     removeStopButton(construction, room) {
-        this.startButton.textContent = getLangString('MENU_TEXT_PICKPOCKET');
+        this.startButton.textContent = getRielkLangString('MENU_TEXT_PICKPOCKET');
         this.startButton.classList.remove('btn-danger');
         this.startButton.classList.add('btn-success');
         const fixture = this.selectedFixture;

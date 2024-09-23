@@ -1,6 +1,7 @@
 const { loadModule } = mod.getContext(import.meta);
 
 const { ConstructionHouseMenu } = await loadModule('src/interface/constructionHouseMenu.mjs');
+const { getRielkLangString } = await loadModule('src/language/translationManager.mjs');
 
 export class ConstructionInterface {
     constructor(ctx, construction) {
@@ -21,7 +22,7 @@ export class ConstructionInterface {
         });
 
         this.ctx.onCharacterLoaded(async () => {
-            this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this.switchConstructionCategory(this));
+            this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this.switchConstructionCategory(this));
             this.constructionArtisanMenu.init(construction);
             const constructionCategoryContainer = document.getElementById('rielk-construction-category-container');
             construction.categories.forEach((category) => {

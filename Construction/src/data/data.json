@@ -20,6 +20,7 @@
       {
         "itemType": "Item",
         "id": "Iron_Nails",
+        "name": "Iron Nails",
         "category": "Construction",
         "type": "Nails",
         "media": "assets/items/nails_iron.png",
@@ -31,6 +32,7 @@
       {
         "itemType": "Equipment",
         "id": "Construction_Skillcape",
+        "name": "Construction Skillcape",
         "category": "Combat",
         "type": "Armour",
         "media": "assets/items/skillcape_construction.png",
@@ -77,6 +79,7 @@
     "shopPurchases": [
       {
         "id": "Construction_Skillcape",
+        "customName": "Construction Skillcape",
         "media": "assets/items/skillcape_construction.png",
         "category": "melvorD:Skillcapes",
         "contains": {
@@ -306,16 +309,19 @@
           "categories": [
             {
               "id": "Nails",
+              "name": "Nails",
               "media": "assets/categories/nails.png",
               "type": "Artisan"
             },
             {
               "id": "Planks",
+              "name": "Planks",
               "media": "assets/categories/planks.png",
               "type": "Artisan"
             },
             {
               "id": "House",
+              "name": "House",
               "media": "assets/categories/house.png",
               "type": "House"
             }
