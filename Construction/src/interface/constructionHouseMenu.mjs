@@ -12,7 +12,7 @@ export class ConstructionHouseMenu {
         });
         construction.rooms.forEach((room)=>{
             const roomPanel = createElement('rielk-construction-room-panel', {
-                className: 'col-12 col-lg-6 col-xl-4',
+                className: 'col-12 col-xl-6',
                 parent: container
             });
             roomPanel.setRoom(room, construction);
