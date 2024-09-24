@@ -19,8 +19,8 @@ export class Construction extends ArtisanSkill {
     }
 
     initMenus() {
-        super.initMenus(...arguments);
         this.ui = new ConstructionInterface(this);
+        super.initMenus(...arguments);
     }
 
     get name() {
@@ -342,6 +342,12 @@ class ConstructionFixture extends RealmedObject {
     }
     getRecipe(tier) {
         return this.recipes[tier - 1];
+    }
+    get level() {
+        return this.recipes[0].level;
+    }
+    get abyssalLevel() {
+        return this.recipes[0].abyssalLevel;
     }
 }
 
