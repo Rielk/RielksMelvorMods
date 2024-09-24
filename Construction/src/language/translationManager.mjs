@@ -12,8 +12,15 @@ class TranslationManager {
         if (this.setLang === 'lemon' || this.setLang === 'carrot') {
             this.setLang = 'en';
         }
-        const { language } = await loadModule(languages[this.setLang]);
-        this.loadedLangJson = language;
+        const loadPath = languages[this.setLang];
+        if (loadPath == undefined){
+            console.error(`No language file specified for language: '${this.setLang}'`)
+            this.loadedLangJson = {};
+        }
+        else {
+            const { language } = await loadModule(loadPath);
+            this.loadedLangJson = language;
+        }
     }
 }
 
@@ -26,12 +33,29 @@ export function getRielkLangString(identifier) {
         if (DEBUGENABLED) {
             console.warn(`Tried to get unknown language string: ${identifier}`);
         }
-        return `UNDEFINED TRANSLATION: :${identifier}`;
+        return `UNDEFINED TRANSLATION: (RIELK) :${identifier}`;
     }
     return translation;
 }
 
 export function patchTranslations(ctx) {
+    const superSetLanguage = setLanguage;
+    setLanguage = (...args) => {
+        superSetLanguage(...args);
+        tm.syncLang();
+    }
+
+    const superUpdateUIForLanguageChange = updateUIForLanguageChange;
+    updateUIForLanguageChange = (...args) => {
+        superUpdateUIForLanguageChange(...args);
+        if (window.customElements.get('rielk-lang-string')) {
+            const langStrings = document.getElementsByTagName('rielk-lang-string');
+            for (let i = 0; i < langStrings.length; i++) {
+                langStrings[i].updateTranslation();
+            }
+        }
+    }
+
     ctx.patch(Item, 'name').get(function (patch) {
         if (this.namespace === 'rielkConstruction') 
             return getRielkLangString(`ITEM_NAME_${this.localID}`);

@@ -67,7 +67,7 @@ export class ConstructionInterface {
             return;
         if (this.constructionHouseMenu == undefined)
             return;
-        this.constructionHouseMenu.updateFixturesForLevel(this);
+        this.constructionHouseMenu.updateFixturesForLevel(this.construction);
         this.renderQueue.fictureUnlock = false;
     }
     renderRoomRealmVisibility() {
@@ -85,7 +85,7 @@ export class ConstructionInterface {
         if (this.constructionHouseMenu == undefined)
             return;
         if (this.renderQueue.menu) {
-            this.constructionHouseMenu.updateAllRoomPanels(this);
+            this.constructionHouseMenu.updateAllRoomPanels(this.construction);
             this.constructionHouseMenu.updateFixtureButtons(this.game);
         }
         this.renderQueue.menu = false;
@@ -93,9 +93,9 @@ export class ConstructionInterface {
     renderStopButton() {
         if (this.renderQueue.stopButton) {
             if (this.isActive && this.currentRoom !== undefined)
-                this.constructionHouseMenu.setStopButton(this, this.currentRoom);
+                this.constructionHouseMenu.setStopButton(this.construction, this.currentRoom);
             else
-                this.constructionHouseMenu.removeStopButton(this);
+                this.constructionHouseMenu.removeStopButton(this.construction);
         }
         this.renderQueue.stopButton = false;
     }
