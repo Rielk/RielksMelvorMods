@@ -1,9 +1,10 @@
-const { loadModule, characterStorage, onCharacterLoaded, onInterfaceReady } = mod.getContext(import.meta);
+const { loadModule, onInterfaceReady } = mod.getContext(import.meta);
 
 const { ConstructionActionEvent } = await loadModule('src/construction/gameEvents.mjs');
 const { ConstructionStats } = await loadModule('src/construction/statistics.mjs');
 const { getRielkLangString } = await loadModule('src/language/translationManager.mjs');
 const { ConstructionInterface } = await loadModule('src/interface/constructionInterface.mjs');
+const { Encoder } = await loadModule('src/construction/encoder.mjs');
 
 export class Construction extends ArtisanSkill {
     constructor(namespace, game) {
@@ -16,6 +17,9 @@ export class Construction extends ArtisanSkill {
         this.fixtures = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionFixture');
         this.fixtureRecipes = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionFixtureRecipes');
         this.hiddenRooms = new Set();
+
+        this.stats = new StatTracker();
+        game.stats.Construction = this.stats;
     }
 
     initMenus() {
@@ -163,11 +167,11 @@ export class Construction extends ArtisanSkill {
     }
     recordCostPreservationStats(costs) {
         super.recordCostPreservationStats(costs);
-        costs.recordBulkItemStat(this.game.stats.Construction, ConstructionStats.ItemsPreserved);
+        costs.recordBulkItemStat(this.stats, ConstructionStats.ItemsPreserved);
     }
     recordCostConsumptionStats(costs) {
         super.recordCostConsumptionStats(costs);
-        costs.recordBulkItemStat(this.game.stats.Construction, ConstructionStats.ItemsUsed);
+        costs.recordBulkItemStat(this.stats, ConstructionStats.ItemsUsed);
     }
     preAction() { }
     get actionRewards() {
@@ -180,7 +184,7 @@ export class Construction extends ArtisanSkill {
         rewards.addItem(item, qtyToAdd);
         this.addCurrencyFromPrimaryProductGain(rewards, item, qtyToAdd, recipe);
         actionEvent.productQuantity = qtyToAdd;
-        this.game.stats.Construction.add(ConstructionStats.ItemsProduced, qtyToAdd);
+        this.stats.add(ConstructionStats.ItemsProduced, qtyToAdd);
         rewards.addXP(this, this.actionXP, recipe);
         rewards.addAbyssalXP(this, this.actionAbyssalXP, recipe);
         this.addCommonRewards(rewards, recipe);
@@ -189,8 +193,8 @@ export class Construction extends ArtisanSkill {
         return rewards;
     }
     postAction() {
-        this.game.stats.Construction.inc(ConstructionStats.Actions);
-        this.game.stats.Construction.add(ConstructionStats.TimeSpent, this.currentActionInterval);
+        this.stats.inc(ConstructionStats.Actions);
+        this.stats.add(ConstructionStats.TimeSpent, this.currentActionInterval);
         this.renderQueue.recipeInfo = true;
         this.renderQueue.quantities = true;
     }
@@ -211,16 +215,6 @@ export class Construction extends ArtisanSkill {
         this.renderQueue.menu = true;
         this.renderQueue.fictureUnlock = true;
         this.selectRealm(this.currentRealm);
-        onCharacterLoaded(async () => {
-            const hrData = characterStorage.getItem('HiddenRooms');
-            if (hrData !== undefined) {
-                hrData.forEach(roomID => {
-                    const room = this.rooms.getObjectByID(roomID)
-                    if (room !== undefined)
-                        this.hiddenRooms.add(room);
-                });
-            }
-        });
         onInterfaceReady(async () => {
             this.ui.renderVisibleRooms();
             this.render();
@@ -229,12 +223,13 @@ export class Construction extends ArtisanSkill {
     }
     encode(writer) {
         super.encode(writer);
-        if (this.hiddenRooms.size > 0) {
-            const hrData = Array.from(Array.from(this.hiddenRooms).map(r => r.id));
-            characterStorage.setItem('HiddenRooms', hrData);
-        }
-        else
-            characterStorage.removeItem('HiddenRooms');
+        Encoder.encode(this, writer);
+        return writer;
+    }
+
+    decode(reader, saveVersion) {
+        super.decode(reader, saveVersion);
+        Encoder.decode(this, reader);
     }
 }
 
