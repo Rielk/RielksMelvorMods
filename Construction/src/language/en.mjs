@@ -7,5 +7,7 @@ export const language = {
     'SKILL_CATEGORY_ Construction_ House': 'House',
 
     'CONSTRUCTION_ROOM_NAME_ Bedroom': 'Bedroom',
-    'CONSTRUCTION_ROOM_NAME_ Kitchen': 'Kitchen'
+    'CONSTRUCTION_ROOM_NAME_ Kitchen': 'Kitchen',
+
+    'CONSTRUCTION_FIXTURE_NAME_ Storage_Chest': 'Storage Chest'
 }

@@ -7,7 +7,6 @@ class ConstructionFixtureNavElement extends HTMLElement {
         this.buttonContent = getElementFromFragment(this._content, 'button-content', 'div');
         this.fixtureImage = getElementFromFragment(this._content, 'fixture-image', 'img');
         this.fixtureName = getElementFromFragment(this._content, 'fixture-name', 'span');
-        this.masteryDisplay = getElementFromFragment(this._content, 'mastery-display', 'compact-mastery-display');
         this.unlock = getElementFromFragment(this._content, 'unlock', 'div');
         this.level = getElementFromFragment(this._content, 'level', 'span');
         this.abyssalLevel = getElementFromFragment(this._content, 'abyssal-level', 'span');
@@ -18,7 +17,6 @@ class ConstructionFixtureNavElement extends HTMLElement {
     setFixture(fixture, construction) {
         this.fixtureImage.src = fixture.media;
         this.fixtureName.textContent = fixture.name;
-        this.masteryDisplay.setMastery(construction, fixture);
         this.level.textContent = '';
         this.level.append(...templateLangStringWithNodes('MENU_TEXT_UNLOCKED_AT', {
             skillImage: createElement('img', {
