@@ -337,6 +337,9 @@ class ConstructionFixture extends RealmedObject {
     get media() {
         return this.mediaForTier('icon');
     }
+    get name() {
+        return getRielkLangString(`CONSTRUCTION_FIXTURE_NAME_ ${this.localID}`);
+    }
     mediaForTier(tier) {
         return this.getMediaURL(`${this._media_folder}/${tier}.png`);
     }
