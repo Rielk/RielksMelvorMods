@@ -1,9 +1,8 @@
-const { loadModule, loadTemplates, loadStylesheet } = mod.getContext(import.meta);
+const { loadModule, loadTemplates, loadStylesheet, characterStorage, onCharacterLoaded } = mod.getContext(import.meta);
 
 const { Construction } = await loadModule('src/construction/construction.mjs');
 const { patchTranslations } = await loadModule('src/language/translationManager.mjs');
 const { patchGameEventSystem } = await loadModule('src/construction/gameEvents.mjs');
-const { patchStatistics } = await loadModule('src/construction/statistics.mjs');
 
 export async function setup(ctx) {
     setup = new Setup(ctx);
@@ -34,7 +33,6 @@ class Setup {
 
     async applyPatches() {
         patchGameEventSystem(this.ctx);
-        patchStatistics(this.ctx);
         patchTranslations(this.ctx);
     }
 
