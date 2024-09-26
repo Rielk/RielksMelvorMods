@@ -25,7 +25,6 @@ class Setup {
         await loadTemplates('src/interface/templates/construction.html');
 
         await loadModule('src/interface/elements/constructionFixtureNavElement.mjs');
-        await loadModule('src/interface/elements/constructionInfoBoxElement.mjs');
         await loadModule('src/interface/elements/constructionRecipeOptionElement.mjs');
         await loadModule('src/interface/elements/constructionRoomPanelElement.mjs');
         await loadModule('src/interface/elements/rielkLangStringElement.mjs');

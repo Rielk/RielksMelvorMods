@@ -62,9 +62,9 @@ export class ConstructionHouseMenu {
             return;
         panel.selectFixture(room, fixture, construction);
     }
-    updateAllRoomPanels(construction) {
+    updateAllRoomPanels(construction, game) {
         this.roomPanels.forEach((panel,room)=>{
-            panel.updateRoomInfo(construction);
+            panel.updateRoomInfo(construction, game);
         }
         );
     }

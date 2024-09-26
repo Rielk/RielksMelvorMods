@@ -68,7 +68,7 @@ export class Construction extends ArtisanSkill {
     }
 
     getFixtureInterval(fixture) {
-        return this.actionInterval;
+        return 3000;
     }
 
     registerData(namespace, data) {
@@ -205,8 +205,6 @@ export class Construction extends ArtisanSkill {
                 return this.categories;
             case ScopeSourceType.Action:
                 return this.actions;
-            case ScopeSourceType.Subcategory:
-                return this.subcategories;
         }
     }
 
@@ -304,6 +302,8 @@ class ConstructionRoom extends RealmedObject {
 class ConstructionFixture extends RealmedObject {
     constructor(namespace, data, game, construction) {
         super(namespace, data, game);
+        this.currentTier = 0;
+        this.progress = 0;
         try {
             this._media_folder = data.media_folder;
             if (data.recipes == undefined)
@@ -341,6 +341,20 @@ class ConstructionFixture extends RealmedObject {
     getRecipe(tier) {
         return this.recipes[tier - 1];
     }
+    get currentRecipe() {
+        if (this.currentTier >= this.maxTier)
+            return;
+        return this.getRecipe(this.currentTier + 1);
+    }
+    get maxTier() {
+        return this.recipes.length;
+    }
+    get percentProgress() {
+        const recipe = this.currentRecipe;
+        if (recipe == undefined)
+            return;
+        return (this.progress / recipe.actionCost) * 100;
+    }
     get level() {
         return this.recipes[0].level;
     }
@@ -353,7 +367,7 @@ class ConstructionFixtureRecipes extends ArtisanSkillRecipe {
     constructor(namespace, data, game) {
         super(namespace, data, game);
         try {
-            this.baseActionCost = data.baseActionCost;
+            this._baseActionCost = data.baseActionCost;
         } catch (e) {
             throw new DataConstructionError(ConstructionFixtureRecipes.name, e, this.id);
         }
@@ -361,7 +375,7 @@ class ConstructionFixtureRecipes extends ArtisanSkillRecipe {
     applyDataModification(data, game) {
         super.applyDataModification(data, game);
         try {
-            this.baseActionCost = data.baseActionCost;
+            this._baseActionCost = data.baseActionCost;
         }
         catch (e) {
             throw new DataModificationError(ConstructionFixtureRecipes.name, e, this.id);
@@ -369,5 +383,8 @@ class ConstructionFixtureRecipes extends ArtisanSkillRecipe {
     }
     get media() {
         return this.fixture.mediaForTier(this.tier);
+    }
+    get actionCost() {
+        return this._baseActionCost;
     }
 }

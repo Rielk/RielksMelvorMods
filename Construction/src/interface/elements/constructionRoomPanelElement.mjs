@@ -5,28 +5,39 @@ const { getRielkLangString } = await loadModule('src/language/translationManager
 class ConstructionRoomPanelElement extends HTMLElement {
     constructor() {
         super();
+        this.noneSelected = true;
         this.fixtureNavs = new Map();
         this._content = new DocumentFragment();
         this._content.append(getTemplateNode('rielk-construction-room-panel-template'));
         this.header = getElementFromFragment(this._content, 'header', 'div');
         this.eyeIcon = getElementFromFragment(this._content, 'eye-icon', 'i');
+        this.imageContainer= getElementFromFragment(this._content, 'image-container', 'div');
+        this.ingredientsContainer= getElementFromFragment(this._content, 'ingredients-container', 'div');
+        this.grantsContainer= getElementFromFragment(this._content, 'grants-container', 'div');
+        this.detailsContainer= getElementFromFragment(this._content, 'details-container', 'div');
+        this.extraDetailsContainer= getElementFromFragment(this._content, 'extra-details-container', 'div');
         this.roomName = getElementFromFragment(this._content, 'room-name', 'span');
         this.targetContainer = getElementFromFragment(this._content, 'target-container', 'div');
+        this.productPreservation = getElementFromFragment(this._content, 'product-preservation', 'preservation-icon');
         this.infoContainer = getElementFromFragment(this._content, 'info-container', 'div');
-        this.infoSkillName = getElementFromFragment(this._content, 'info-skill-name', 'small');
-        this.infoBoxName = getElementFromFragment(this._content, 'info-box-name', 'span');
-        this.infoBoxImage = getElementFromFragment(this._content, 'info-box-image', 'img');
-        this.infoBox = getElementFromFragment(this._content, 'info-box', 'rielk-construction-info-box');
+        this.infoBoxName = getElementFromFragment(this._content, 'product-name', 'span');
+        this.infoBoxImage = getElementFromFragment(this._content, 'product-image', 'img');
         this.startButton = getElementFromFragment(this._content, 'start-button', 'button');
         this.dropsButton = getElementFromFragment(this._content, 'drops-button', 'button');
+        this.requires = getElementFromFragment(this._content, 'requires', 'requires-box');
+        this.haves = getElementFromFragment(this._content, 'haves', 'haves-box');
+        this.grants = getElementFromFragment(this._content, 'grants', 'grants-box');
         this.progressBar = getElementFromFragment(this._content, 'progress-bar', 'progress-bar');
+        this.buildContainer = getElementFromFragment(this._content, 'build-container', 'div');
+        this.interval = getElementFromFragment(this._content, 'interval', 'interval-icon');
     }
     connectedCallback() {
         this.appendChild(this._content);
+        this.noneSelected ? this.grants.setUnselected() : this.grants.setSelected();
+        this.grants.hideMastery();
     }
 
     setRoom(room, construction) {
-        this.infoSkillName.textContent = construction.name;
         this.roomName.textContent = room.name;
         this.header.onclick = ()=>construction.ui.onRoomHeaderClick(room);
         room.fixtures.forEach((fixture)=>{
@@ -51,7 +62,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.eyeIcon.classList.add('fa-eye');
     }
     updateFixturesForLevel(construction, room) {
-        this.fixtureNavs.forEach((fixtureNav,fixture)=>{ //Fixtures don't have a .level
+        this.fixtureNavs.forEach((fixtureNav,fixture)=>{
             if (construction.level >= fixture.level && construction.abyssalLevel >= fixture.abyssalLevel) {
                 fixtureNav.setUnlocked(()=>this.selectFixture(room, fixture, construction));
             } else {
@@ -73,28 +84,48 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.updateRoomInfo(construction);
         this.startButton.onclick = ()=>construction.startThieving(room, fixture);
         this.dropsButton.onclick = ()=>construction.fireFixtureDropsModal(room, fixture);
+        
+        const interval = construction.getFixtureInterval(fixture);
+        this.interval.setInterval(interval, construction.getIntervalSources(fixture));
     }
     updateRoomInfo(construction) {
         if (this.selectedFixture !== undefined) {
-            showElement(this.infoBox);
-            this.infoBox.classList.add('d-flex');
-            showElement(this.startButton);
-            showElement(this.dropsButton);
-            showElement(this.infoBoxImage);
+            showElement(this.imageContainer);
+            showElement(this.ingredientsContainer);
+            showElement(this.grantsContainer);
+            showElement(this.buildContainer);
+            showElement(this.extraDetailsContainer);
+            this.detailsContainer.classList.remove('col-12');
+            this.detailsContainer.classList.remove('text-center');
+            this.detailsContainer.classList.add('col-8');
             this.updateFixtureInfo(construction, this.selectedFixture);
         } else {
             this.infoBoxName.textContent = '-';
-            hideElement(this.infoBox);
-            this.infoBox.classList.remove('d-flex');
-            hideElement(this.startButton);
-            hideElement(this.dropsButton);
-            hideElement(this.infoBoxImage);
+            hideElement(this.imageContainer);
+            hideElement(this.ingredientsContainer);
+            hideElement(this.grantsContainer);
+            hideElement(this.buildContainer);
+            hideElement(this.extraDetailsContainer);
+            this.detailsContainer.classList.remove('col-8');
+            this.detailsContainer.classList.add('col-12');
+            this.detailsContainer.classList.add('text-center');
         }
     }
     updateFixtureInfo(construction, fixture) {
+        this.noneSelected = false;
+
         this.infoBoxName.textContent = fixture.name;
         this.infoBoxImage.src = fixture.media;
-        this.infoBox.setFixture(construction, fixture);
+    
+        const fixtureRecipe = fixture.currentRecipe;
+        this.requires.setItemsFromRecipe(fixtureRecipe);
+        this.haves.setItemsFromRecipe(fixtureRecipe, construction.game);
+        this.grants.setSelected();
+        this.grants.updateGrants(Math.floor(construction.modifyXP(fixtureRecipe.baseExperience)), fixtureRecipe.baseExperience);
+        this.grants.updateAbyssalGrants(Math.floor(construction.modifyAbyssalXP(fixtureRecipe.baseAbyssalExperience)), fixtureRecipe.baseAbyssalExperience);
+        this.grants.setSources(construction, fixtureRecipe);
+        this.grants.hideMastery();
+        this.productPreservation.setChance(construction.getPreservationChance(fixtureRecipe), construction.getPreservationCap(fixtureRecipe), construction.getPreservationSources(fixtureRecipe));
     }
     setStopButton(construction) {
         this.startButton.textContent = getRielkLangString('MENU_TEXT_STOP_RIELK_CONSTRUCTION');
