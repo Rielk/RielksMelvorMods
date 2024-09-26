@@ -1,3 +1,8 @@
+const { loadModule } = mod.getContext(import.meta);
+
+const { templateRielkLangString } = await loadModule('src/language/translationManager.mjs');
+
+
 class ConstructionFixtureNavElement extends HTMLElement {
     constructor() {
         super();
@@ -7,6 +12,7 @@ class ConstructionFixtureNavElement extends HTMLElement {
         this.buttonContent = getElementFromFragment(this._content, 'button-content', 'div');
         this.fixtureImage = getElementFromFragment(this._content, 'fixture-image', 'img');
         this.fixtureName = getElementFromFragment(this._content, 'fixture-name', 'span');
+        this.constructionProgress = getElementFromFragment(this._content, 'construction-progress', 'small');
         this.unlock = getElementFromFragment(this._content, 'unlock', 'div');
         this.level = getElementFromFragment(this._content, 'level', 'span');
         this.abyssalLevel = getElementFromFragment(this._content, 'abyssal-level', 'span');
@@ -42,6 +48,12 @@ class ConstructionFixtureNavElement extends HTMLElement {
         }
     }
     updateFixture(fixture, game) {
+        const progress = fixture.percentProgress;
+        this.constructionProgress.textContent = templateRielkLangString('MENU_TEXT_BUILT', {
+            currentValue: `${formatNumber(fixture.currentTier)}`,
+            maxValue: `${formatNumber(fixture.maxTier)}`,
+            percent: progress == undefined ? '' : `(${formatPercent(progress, 2)})`,
+        });
     }
     setLocked(fixture, construction) {
         hideElement(this.buttonContent);

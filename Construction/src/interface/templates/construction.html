@@ -1,93 +1,123 @@
 <template id="rielk-construction-template">
-    <!-- CONSTRUCTION Content -->
-    <div class="content d-none" id="rielk-construction-container">
-        <div class="skill-info">
-            <skill-header data-skill-id="rielkConstruction:Construction"></skill-header>
-        </div>
-        <div class="row row-deck">
-          <realmed-category-menu class="col-12" id="rielk-construction-category-menu"></realmed-category-menu>
-            <div class="col-12">
-                <div class="block block-rounded block-link-pop border-top border-rielk-construction border-4x">
-                    <div class="row no-gutters" id="rielk-construction-category-container">
-                        <div class="col-12 col-md-4" id="rielk-construction-artisan-element">
-                            <artisan-menu id="rielk-construction-artisan-menu"></artisan-menu>
-                        </div>
-                        <div class="col-12 d-none" id="rielk-construction-house-element"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- CONSTRUCTION Content -->
+  <div class="content d-none" id="rielk-construction-container">
+    <div class="skill-info">
+      <skill-header data-skill-id="rielkConstruction:Construction"></skill-header>
     </div>
-    <!-- END CONSTRUCTION Content -->
+    <div class="row row-deck">
+      <realmed-category-menu class="col-12" id="rielk-construction-category-menu"></realmed-category-menu>
+      <div class="col-12">
+        <div class="block block-rounded block-link-pop border-top border-rielk-construction border-4x">
+          <div class="row no-gutters" id="rielk-construction-category-container">
+            <div class="col-12 col-md-4" id="rielk-construction-artisan-element">
+              <artisan-menu id="rielk-construction-artisan-menu"></artisan-menu>
+            </div>
+            <div class="col-12 d-none" id="rielk-construction-house-element"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END CONSTRUCTION Content -->
 </template>
 
 <template id="rielk-construction-room-panel-template">
-    <div class="block block-rounded border-top border-rielk-construction border-4x">
-        <div class="row no-gutters">
-            <div class="col-12 pointer-enabled" id="header">
-                <div class="block-content text-center">
-                    <i class="fa fa-eye text-muted mr-2 font-w300" id="eye-icon"></i>
-                    <span class="h5 font-w600" id="room-name"></span>
-                </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="block-content block-content-full text-center" id="target-container"></div>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="block-content block-content-full text-center" id="info-container">
-                    <div class="font-size-sm font-w600 text-center text-muted">
-                        <small id="info-skill-name"></small><br>
-                        <span id="info-box-name">-</span><br>
-                        <img class="fishing-img m-2" id="info-box-image">
-                    </div>
-                    <div class="justify-vertical-center">
-                        <rielk-construction-info-box id="info-box"></rielk-construction-info-box>
-                    </div>
-                    <button class="btn btn-sm btn-success m-1 mt-3" role="button" id="start-button">
-                        <rielk-lang-string lang-id="MENU_TEXT_BUILD"></rielk-lang-string>
-                    </button>
-                    <button class="btn btn-sm btn-info m-1 mt-3" role="button" id="drops-button">
-                        <rielk-lang-string lang-id="MENU_TEXT_SHOW_TIERS"></rielk-lang-string>
-                    </button>
-                    <progress-bar class="mt-3 progress-height-5" id="progress-bar"></progress-bar>
-                </div>
-            </div>
+  <div class="block block-rounded border-top border-rielk-construction border-4x">
+    <div class="row no-gutters">
+      <div class="col-12 pointer-enabled" id="header">
+        <div class="block-content text-center">
+          <i class="fa fa-eye text-muted mr-2 font-w300" id="eye-icon"></i>
+          <span class="h5 font-w600" id="room-name"></span>
         </div>
-    </div>
-</template>
-<template id="rielk-construction-info-box-template">
-    <div class="media-body">
-      <div class="row justify-content-center icon-size-48">
-        <xp-icon id="xp"></xp-icon>
-        <abyssal-xp-icon id="abyssal-xp"></abyssal-xp-icon>
-        <interval-icon id="interval"></interval-icon>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="block-content block-content-full text-center" id="target-container"></div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="block-content block-content-full" id="info-container">
+          <div class="row gutters-tiny">
+            <div class="col-12">
+              <div class="row row-deck gutters-tiny">
+                <div class="col-4" id="image-container">
+                  <div class="block block-rounded-double bg-combat-inner-dark text-center p-3">
+                    <img class="bank-img-detail" id="product-image">
+                  </div>
+                </div>
+                <div class="col-8" id="details-container">
+                  <div class="block block-rounded-double bg-combat-inner-dark pt-2 pl-2 pr-2 pb-1">
+                    <h5 class="font-size-sm font-w600 text-muted m-1">
+                      <small>
+                        <rielk-lang-string lang-id="MENU_TEXT_CONSTRUCT"></rielk-lang-string>
+                      </small>
+                    </h5>
+                    <h5 class="font-w700 text-combat-smoke m-1">
+                      <span id="product-name">-</span>
+                    </h5>
+                    <div class="col-12">
+                      <div class="row icon-size-48" id="extra-details-container">
+                        <preservation-icon id="product-preservation"></preservation-icon>
+                        <button class="btn btn-sm btn-info m-1 mt-3" role="button" id="drops-button">
+                          <rielk-lang-string lang-id="MENU_TEXT_SHOW_UNLOCKS"></rielk-lang-string>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 block block-rounded-double bg-combat-inner-dark pt-2 pb-1 text-center" id="ingredients-container">
+                <div class="row no-gutters">
+                  <requires-box class="col-12 col-sm-6 pb-2 icon-size-48" id="requires"></requires-box>
+                  <haves-box class="col-12 col-sm-6 pb-2 icon-size-48" id="haves"></haves-box>
+                </div>
+              </div>
+              <div class="col-12 block block-rounded-double bg-combat-inner-dark pt-2 pb-1 text-center" id="grants-container">
+                <div class="row justify-content-center icon-size-48">
+                  <grants-box id="grants"></grants-box>
+                </div>
+              </div>
+              <div class="col-12 block block-rounded-double bg-combat-inner-dark p-3 text-center" id="build-container">
+                <div class="row justify-content-center icon-size-48">
+                  <button class="btn btn-success m-2 p-2" type="button" style="min-height: 48px;" id="start-button">
+                    <rielk-lang-string lang-id="MENU_TEXT_BUILD"></lang-string>
+                  </button>
+                  <interval-icon id="interval"></interval-icon>
+                  <div class="col-12">
+                    <progress-bar class="progress-height-5" id="progress-bar"></progress-bar>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </template>
-  <template id="rielk-construction-fixture-nav-template">
-    <ul class="nav nav-pills nav-justified">
-      <li class="nav-item mr-1">
-        <a class="block block-link-pop nav-link border pointer-enabled font-w600 p-1" id="button">
-          <div class="media d-flex align-items-center" id="button-content">
-            <div class="m-1">
-              <img class="skill-icon-md mr-1" id="fixture-image">
+  </div>
+</template>
+
+<template id="rielk-construction-fixture-nav-template">
+  <ul class="nav nav-pills nav-justified">
+    <li class="nav-item mr-1">
+      <a class="block block-link-pop nav-link border pointer-enabled font-w600 p-1" id="button">
+        <div class="media d-flex align-items-center" id="button-content">
+          <div class="m-1">
+            <img class="skill-icon-md mr-1" id="fixture-image">
+          </div>
+          <div class="media-body">
+            <div class="text-center">
+              <h5 class="font-w700 text-combat-smoke mb-1 d-flex flex-wrap justify-content-center">
+                <span id="fixture-name"></span>
+              </h5>
+              <small id="construction-progress"></small>
             </div>
-            <div class="media-body">
-              <div class="text-center">
-                <h5 class="font-w700 text-combat-smoke mb-1 d-flex flex-wrap justify-content-center">
-                  <span id="fixture-name"></span>
-                </h5>
-                <div>TODO: Tier and Progress</div>
-              </div>
-              <div class="font-w400 font-size-xs mb-2">
-              </div>
+            <div class="font-w400 font-size-xs mb-2">
             </div>
           </div>
-          <div class="justify-vertical-center" id="unlock">
-            <span class="text-danger" id="level"></span>
-            <span class="text-danger" id="abyssal-level"></span>
-          </div>
-        </a>
-      </li>
-    </ul>
-  </template>
+        </div>
+        <div class="justify-vertical-center" id="unlock">
+          <span class="text-danger" id="level"></span>
+          <span class="text-danger" id="abyssal-level"></span>
+        </div>
+      </a>
+    </li>
+  </ul>
+</template>

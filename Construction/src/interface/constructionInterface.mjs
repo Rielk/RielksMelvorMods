@@ -147,6 +147,7 @@ export class ConstructionInterface {
         }
     }
     onFixturePanelSelection(fixture, room) {
+        this.renderQueue.buildInfo = true;
         if (this.construction.isActive && room === this.construction.currentRoom && fixture !== this.construction.currentFixture) {
             return this.construction.stop();
         } else {

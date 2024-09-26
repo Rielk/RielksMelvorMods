@@ -1,30 +1,26 @@
 export class Encoder {
     static encode(construction, writer) {
-        const _constructionVersion = 2;
+        const _constructionVersion = 0;
         writer.writeUint32(_constructionVersion);
         writer.writeSet(construction.hiddenRooms, writeNamespaced);
-        //End of version 1
         construction.stats.encode(writer);
+        writer.writeArray(construction.fixtures.allObjects, (fixture, writer) => {
+            writer.writeNamespacedObject(fixture);
+            writer.writeUint32(fixture.currentTier);
+            writer.writeUint32(fixture.progress);
+        });
     }
 
     static decode(construction, reader) {
-        const _constructionVersion = this.getVersion(reader);
-        if (_constructionVersion <= 0)  //This was before the encode/decode was used.
-            return;
+        const _constructionVersion = reader.getUint32();
         
         construction.hiddenRooms = reader.getSet(readNamespacedReject(construction.rooms));
-        
-        if (_constructionVersion <= 1) 
-            return;
-
         construction.stats.decode(reader);
-    }
-
-    static getVersion(reader) {
-        try {
-            return reader.getUint32();
-        } catch {
-            return 0;
-        }
+        const readFixture = readNamespacedReject(construction.fixtures);
+        reader.getArray((reader) => {
+            const fixture = readFixture(reader) ?? {};
+            fixture.currentTier = reader.getUint32();
+            fixture.progress = reader.getUint32();
+        });
     }
 }

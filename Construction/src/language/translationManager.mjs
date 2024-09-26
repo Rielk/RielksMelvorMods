@@ -38,6 +38,10 @@ export function getRielkLangString(identifier) {
     return translation;
 }
 
+export function templateRielkLangString(identifier, templateData) {
+    return templateString(getRielkLangString(identifier), templateData);
+}
+
 export function patchTranslations(ctx) {
     const superSetLanguage = setLanguage;
     setLanguage = (...args) => {
