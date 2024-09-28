@@ -1,6 +1,6 @@
 const { loadModule } = mod.getContext(import.meta);
 
-const { getRielkLangString } = await loadModule('src/language/translationManager.mjs');
+const { templateRielkLangString } = await loadModule('src/language/translationManager.mjs');
 
 class ConstructionRoomPanelElement extends HTMLElement {
     constructor() {
@@ -12,6 +12,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.header = getElementFromFragment(this._content, 'header', 'div');
         this.eyeIcon = getElementFromFragment(this._content, 'eye-icon', 'i');
         this.imageContainer= getElementFromFragment(this._content, 'image-container', 'div');
+        this.builtProgressContainer= getElementFromFragment(this._content, 'built-progress-container', 'div');
         this.ingredientsContainer= getElementFromFragment(this._content, 'ingredients-container', 'div');
         this.grantsContainer= getElementFromFragment(this._content, 'grants-container', 'div');
         this.detailsContainer= getElementFromFragment(this._content, 'details-container', 'div');
@@ -24,6 +25,8 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.infoBoxImage = getElementFromFragment(this._content, 'product-image', 'img');
         this.startButton = getElementFromFragment(this._content, 'start-button', 'button');
         this.dropsButton = getElementFromFragment(this._content, 'drops-button', 'button');
+        this.builtProgressText = getElementFromFragment(this._content, 'built-progress-text', 'small');
+        this.builtProgressBar = getElementFromFragment(this._content, 'built-progress-bar', 'progress-bar');
         this.requires = getElementFromFragment(this._content, 'requires', 'requires-box');
         this.haves = getElementFromFragment(this._content, 'haves', 'haves-box');
         this.grants = getElementFromFragment(this._content, 'grants', 'grants-box');
@@ -82,7 +85,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
             return;
         this.selectedFixture = fixture;
         this.updateRoomInfo(construction);
-        this.startButton.onclick = ()=>construction.startThieving(room, fixture);
+        this.startButton.onclick = ()=>construction.toggleBuilding(room, fixture);
         this.dropsButton.onclick = ()=>construction.fireFixtureDropsModal(room, fixture);
         
         const interval = construction.getFixtureInterval(fixture);
@@ -91,6 +94,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
     updateRoomInfo(construction) {
         if (this.selectedFixture !== undefined) {
             showElement(this.imageContainer);
+            showElement(this.builtProgressContainer);
             showElement(this.ingredientsContainer);
             showElement(this.grantsContainer);
             showElement(this.buildContainer);
@@ -102,6 +106,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
         } else {
             this.infoBoxName.textContent = '-';
             hideElement(this.imageContainer);
+            hideElement(this.builtProgressContainer);
             hideElement(this.ingredientsContainer);
             hideElement(this.grantsContainer);
             hideElement(this.buildContainer);
@@ -118,6 +123,23 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.infoBoxImage.src = fixture.media;
     
         const fixtureRecipe = fixture.currentRecipe;
+        if (fixtureRecipe == undefined || fixtureRecipe.level > construction.level){
+            hideElement(this.builtProgressContainer);
+            hideElement(this.ingredientsContainer);
+            hideElement(this.grantsContainer);
+            hideElement(this.buildContainer);
+            hideElement(this.productPreservation);
+            return;
+        }
+        
+        showElement(this.productPreservation);
+        const progress = fixture.percentProgress;
+        this.builtProgressText.textContent = templateRielkLangString('MENU_TEXT_PARTIAL_BUILT_PROGRESS', {
+            currentValue: `${formatNumber(fixture.progress)}`,
+            maxValue: `${formatNumber(fixtureRecipe.actionCost)}`,
+            percent: progress == undefined ? '' : `(${formatPercent(progress, 2)})`,
+        });
+        this.builtProgressBar.setFixedPosition(progress == undefined ? 0 : progress);
         this.requires.setItemsFromRecipe(fixtureRecipe);
         this.haves.setItemsFromRecipe(fixtureRecipe, construction.game);
         this.grants.setSelected();
@@ -126,20 +148,6 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.grants.setSources(construction, fixtureRecipe);
         this.grants.hideMastery();
         this.productPreservation.setChance(construction.getPreservationChance(fixtureRecipe), construction.getPreservationCap(fixtureRecipe), construction.getPreservationSources(fixtureRecipe));
-    }
-    setStopButton(construction) {
-        this.startButton.textContent = getRielkLangString('MENU_TEXT_STOP_RIELK_CONSTRUCTION');
-        this.startButton.classList.remove('btn-success');
-        this.startButton.classList.add('btn-danger');
-        this.startButton.onclick = ()=>construction.stop();
-    }
-    removeStopButton(construction, room) {
-        this.startButton.textContent = getRielkLangString('MENU_TEXT_PICKPOCKET');
-        this.startButton.classList.remove('btn-danger');
-        this.startButton.classList.add('btn-success');
-        const fixture = this.selectedFixture;
-        if (fixture !== undefined)
-            this.startButton.onclick = ()=>construction.startThieving(room, fixture);
     }
 }
 window.customElements.define('rielk-construction-room-panel', ConstructionRoomPanelElement);

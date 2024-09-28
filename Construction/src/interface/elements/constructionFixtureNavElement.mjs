@@ -49,10 +49,9 @@ class ConstructionFixtureNavElement extends HTMLElement {
     }
     updateFixture(fixture, game) {
         const progress = fixture.percentProgress;
-        this.constructionProgress.textContent = templateRielkLangString('MENU_TEXT_BUILT', {
+        this.constructionProgress.textContent = templateRielkLangString('MENU_TEXT_BUILT_PROGRESS', {
             currentValue: `${formatNumber(fixture.currentTier)}`,
-            maxValue: `${formatNumber(fixture.maxTier)}`,
-            percent: progress == undefined ? '' : `(${formatPercent(progress, 2)})`,
+            maxValue: `${formatNumber(fixture.maxTier)}`
         });
     }
     setLocked(fixture, construction) {

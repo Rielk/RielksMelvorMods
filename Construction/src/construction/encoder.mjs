@@ -9,11 +9,17 @@ export class Encoder {
             writer.writeUint32(fixture.currentTier);
             writer.writeUint32(fixture.progress);
         });
+        writer.writeUint8(construction._actionMode);
+        if (construction._actionMode == 1) {
+            writer.writeNamespacedObject(construction.selectedRoom);
+            writer.writeNamespacedObject(construction.selectedFixture);
+            writer.writeNamespacedObject(construction.selectedFixtureRecipe);
+        }
     }
 
     static decode(construction, reader) {
         const _constructionVersion = reader.getUint32();
-        
+
         construction.hiddenRooms = reader.getSet(readNamespacedReject(construction.rooms));
         construction.stats.decode(reader);
         const readFixture = readNamespacedReject(construction.fixtures);
@@ -22,5 +28,26 @@ export class Encoder {
             fixture.currentTier = reader.getUint32();
             fixture.progress = reader.getUint32();
         });
+        construction._actionMode = reader.getUint8();
+        if (construction._actionMode == 1) {
+            const room = reader.getNamespacedObject(construction.rooms);
+            if (typeof room === 'string')
+                construction.shouldResetAction = true;
+            else
+                construction.selectedRoom = room;
+            const fixture = reader.getNamespacedObject(construction.fixtures);
+            if (typeof fixture === 'string')
+                construction.shouldResetAction = true;
+            else
+                construction.selectedFixture = fixture;
+            const fixtureRecipe = reader.getNamespacedObject(construction.actions);
+            if (typeof fixtureRecipe === 'string')
+                construction.shouldResetAction = true;
+            else
+                construction.selectedFixtureRecipe = fixtureRecipe;
+        }
+
+        if (construction.shouldResetAction)
+            construction.resetActionState();
     }
 }

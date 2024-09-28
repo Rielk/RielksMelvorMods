@@ -5,5 +5,6 @@ export var ConstructionStats;
     ConstructionStats[ConstructionStats["ItemsUsed"] = 2] = "ItemsUsed";
     ConstructionStats[ConstructionStats["ItemsPreserved"] = 3] = "ItemsPreserved";
     ConstructionStats[ConstructionStats["Actions"] = 4] = "Actions";
+    ConstructionStats[ConstructionStats["FixtureProgressBuilt"] = 5] = "FixtureProgressBuilt";
 }
 )(ConstructionStats || (ConstructionStats = {}));

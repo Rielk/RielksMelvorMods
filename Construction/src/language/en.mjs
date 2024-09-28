@@ -4,8 +4,11 @@ export const language = {
     'MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY': 'Select Construction Category',
     'MENU_TEXT_CONSTRUCT': 'Construct',
     'MENU_TEXT_BUILD': 'Build',
-    'MENU_TEXT_BUILT': 'Built: ${currentValue}/${maxValue} ${percent}',
+    'MENU_TEXT_BUILT_PROGRESS': 'Upgrade: ${currentValue}/${maxValue}',
+    'MENU_TEXT_PARTIAL_BUILT_PROGRESS': '${currentValue}/${maxValue} ${percent}',
     'MENU_TEXT_SHOW_UNLOCKS': 'Unlocks',
+
+    'TOASTS_MATERIALS_REQUIRED_TO_BUILD': 'You don\'t have the required materials to Build that.',
 
     'SKILL_CATEGORY_ Construction_ Nails': 'Nails',
     'SKILL_CATEGORY_ Construction_ Planks': 'Planks',
