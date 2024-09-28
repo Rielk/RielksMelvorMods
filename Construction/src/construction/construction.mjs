@@ -15,8 +15,9 @@ export class Construction extends ArtisanSkill {
         this.categories = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionCategory');
         this.rooms = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionRoom');
         this.fixtures = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionFixture');
-        this.fixtureRecipes = new NamespaceRegistry(game.registeredNamespaces, 'ConstructionFixtureRecipes');
         this.hiddenRooms = new Set();
+
+        this._actionMode = undefined;
 
         this.stats = new StatTracker();
         game.stats.Construction = this.stats;
@@ -52,8 +53,17 @@ export class Construction extends ArtisanSkill {
     get noCostsMessage() {
         return getLangString('TOASTS_MATERIALS_REQUIRED_TO_CRAFT');
     }
+    get noBuildCostsMessage() {
+        return getRielkLangString('TOASTS_MATERIALS_REQUIRED_TO_BUILD');
+    }
     get actionItem() {
         return this.activeRecipe.product;
+    }
+    get masteryAction() {
+        return this.activeRecipe;
+    }
+    get masteryBuildAction() {
+        return this.activeBuildRecipe;
     }
     get unmodifiedActionQuantity() {
         return this.activeRecipe.baseQuantity;
@@ -63,12 +73,37 @@ export class Construction extends ArtisanSkill {
             throw new Error('Tried to get active crafting recipe, but none is selected.');
         return this.selectedRecipe;
     }
+    get activeBuildRecipe() {
+        if (this.selectedFixtureRecipe === undefined)
+            throw new Error('Tried to get active building recipe, but none is selected.');
+        return this.selectedFixtureRecipe;
+    }
+    getCurrentBuildRecipeCosts() {
+        return this.getRecipeCosts(this.activeBuildRecipe);
+    }
+    get buildActionXP() {
+        return this.activeBuildRecipe.baseExperience;
+    }
+    get buildActionAbyssalXP() {
+        return this.activeBuildRecipe.baseAbyssalExperience;
+    }
+
     get masteryModifiedInterval() {
         return 1700;
     }
 
     getFixtureInterval(fixture) {
-        return 3000;
+        return this.modifyInterval(this.baseInterval, fixture);
+    }
+
+    createButtonOnClick() {
+        if (this.isActive && this._actionMode != 0) {
+            this.stop();
+        }
+        this._actionMode = 0;
+        super.createButtonOnClick();
+        if (!this.isActive)
+            this._actionMode = undefined;
     }
 
     registerData(namespace, data) {
@@ -82,7 +117,7 @@ export class Construction extends ArtisanSkill {
         }
         );
         (_c = data.fixtureRecipes) === null || _c === void 0 ? void 0 : _c.forEach((fixtureRecipeData) => {
-            this.fixtureRecipes.registerObject(new ConstructionFixtureRecipes(namespace, fixtureRecipeData, this.game));
+            this.actions.registerObject(new ConstructionFixtureRecipes(namespace, fixtureRecipeData, this.game, this));
         }
         );
         (_d = data.fixtures) === null || _d === void 0 ? void 0 : _d.forEach((fixtureData) => {
@@ -96,27 +131,13 @@ export class Construction extends ArtisanSkill {
         super.registerData(namespace, data);
     }
     modifyData(data) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         super.modifyData(data);
         (_a = data.recipes) === null || _a === void 0 ? void 0 : _a.forEach((modData) => {
             const recipe = this.actions.getObjectByID(modData.id);
             if (recipe === undefined)
                 throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
             recipe.applyDataModification(modData, this.game);
-        }
-        );
-        (_b = data.rooms) === null || _b === void 0 ? void 0 : _b.forEach((modData) => {
-            const room = this.actions.getObjectByID(modData.id);
-            if (room === undefined)
-                throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
-            room.applyDataModification(modData, this.game);
-        }
-        );
-        (_c = data.fixture) === null || _c === void 0 ? void 0 : _c.forEach((modData) => {
-            const fixture = this.actions.getObjectByID(modData.id);
-            if (fixture === undefined)
-                throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
-            fixture.applyDataModification(modData, this.game);
         }
         );
         (_d = data.fixtureRecipes) === null || _d === void 0 ? void 0 : _d.forEach((modData) => {
@@ -126,13 +147,24 @@ export class Construction extends ArtisanSkill {
             fixtureRecipe.applyDataModification(modData, this.game);
         }
         );
-        this.fixtures.forEach((fixture) => {
-            fixture.finaliseTiers();
-        });
+        (_c = data.fixture) === null || _c === void 0 ? void 0 : _c.forEach((modData) => {
+            const fixture = this.fixtures.getObjectByID(modData.id);
+            if (fixture === undefined)
+                throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
+            fixture.applyDataModification(modData, this.game);
+        }
+        );
+        (_d = data.rooms) === null || _d === void 0 ? void 0 : _d.forEach((modData) => {
+            const room = this.rooms.getObjectByID(modData.id);
+            if (room === undefined)
+                throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
+            room.applyDataModification(modData, this.game);
+        }
+        );
     }
     postDataRegistration() {
         super.postDataRegistration();
-        this.sortedMasteryActions = sortRecipesByCategoryAndLevel(this.actions.allObjects, this.categories.allObjects);
+        this.sortedMasteryActions = sortRecipesByCategoryAndLevel(this.actions.allObjects.filter(act => act.category.type === 'Artisan'), this.categories.allObjects);
         this.actions.forEach((action) => {
             if (action.abyssalLevel > 0)
                 this.abyssalMilestones.push(action);
@@ -151,6 +183,9 @@ export class Construction extends ArtisanSkill {
     render() {
         super.render();
         this.ui.render();
+    }
+    renderProgressBar() {
+        //handled by ui.render();
     }
     getActionModifierQueryParams(action) {
         const scope = super.getActionModifierQueryParams(action);
@@ -173,20 +208,39 @@ export class Construction extends ArtisanSkill {
         super.recordCostConsumptionStats(costs);
         costs.recordBulkItemStat(this.stats, ConstructionStats.ItemsUsed);
     }
+    onStop() {
+        super.onStop();
+        this._actionMode = undefined;
+    }
     preAction() { }
     get actionRewards() {
         const rewards = new Rewards(this.game);
-        const recipe = this.activeRecipe;
+        var recipe;
         rewards.setActionInterval(this.actionInterval);
-        const actionEvent = new ConstructionActionEvent(this, recipe);
-        const item = recipe.product;
-        const qtyToAdd = this.modifyPrimaryProductQuantity(item, this.unmodifiedActionQuantity, recipe);
-        rewards.addItem(item, qtyToAdd);
-        this.addCurrencyFromPrimaryProductGain(rewards, item, qtyToAdd, recipe);
-        actionEvent.productQuantity = qtyToAdd;
-        this.stats.add(ConstructionStats.ItemsProduced, qtyToAdd);
-        rewards.addXP(this, this.actionXP, recipe);
-        rewards.addAbyssalXP(this, this.actionAbyssalXP, recipe);
+        var actionEvent;
+        switch (this._actionMode) {
+            case 0: {
+                recipe = this.activeRecipe;
+                actionEvent = new ConstructionActionEvent(this, recipe);
+                const item = recipe.product;
+                const qtyToAdd = this.modifyPrimaryProductQuantity(item, this.unmodifiedActionQuantity, recipe);
+                rewards.addItem(item, qtyToAdd);
+                this.addCurrencyFromPrimaryProductGain(rewards, item, qtyToAdd, recipe);
+                actionEvent.productQuantity = qtyToAdd;
+                this.stats.add(ConstructionStats.ItemsProduced, qtyToAdd);
+                rewards.addXP(this, this.actionXP, recipe);
+                rewards.addAbyssalXP(this, this.actionAbyssalXP, recipe);
+                break;
+            }
+            case 1: {
+                recipe = this.activeBuildRecipe;
+                actionEvent = new ConstructionActionEvent(this, recipe);
+                this.stats.add(ConstructionStats.FixtureProgressBuilt, 1);
+                rewards.addXP(this, this.buildActionXP, recipe);
+                rewards.addAbyssalXP(this, this.buildActionAbyssalXP, recipe);
+                break;
+            }
+        }
         this.addCommonRewards(rewards, recipe);
         actionEvent.interval = this.currentActionInterval;
         this._events.emit('action', actionEvent);
@@ -198,7 +252,79 @@ export class Construction extends ArtisanSkill {
         this.renderQueue.recipeInfo = true;
         this.renderQueue.quantities = true;
     }
+    action() {
+        switch (this._actionMode) {
+            case 0:
+                super.action();
+                break;
+            case 1:
+                this.buildAction();
+                break;
+            case undefined():
+                break;
+        }
+    }
 
+    buildAction() {
+        const recipeCosts = this.getCurrentBuildRecipeCosts();
+        if (!recipeCosts.checkIfOwned()) {
+            this.game.combat.notifications.add({
+                type: 'Player',
+                args: [this, this.noCostsMessage, 'danger']
+            });
+            this.stop();
+            return;
+        }
+        this.preAction();
+        const preserve = rollPercentage(this.getPreservationChance(this.masteryBuildAction));
+        if (preserve) {
+            this.game.combat.notifications.add({
+                type: 'Preserve',
+                args: [this]
+            });
+            this.recordCostPreservationStats(recipeCosts);
+        } else {
+            recipeCosts.consumeCosts();
+            this.recordCostConsumptionStats(recipeCosts);
+        }
+        const continueSkill1 = this.addActionRewards();
+        const continueSkill2 = this.selectedFixtureRecipe.makeProgress();
+        this.postAction();
+        const nextCosts = this.getCurrentBuildRecipeCosts();
+        if (continueSkill1 && continueSkill2 && nextCosts.checkIfOwned()) {
+            this.startActionTimer();
+        } else {
+            if (!nextCosts.checkIfOwned())
+                this.game.combat.notifications.add({
+                    type: 'Player',
+                    args: [this, this.noCostsMessage, 'danger']
+                });
+            this.stop();
+        }
+    }
+
+    toggleBuilding(room, fixture){
+        if (this.isActive) {
+            if (this._actionMode == 1) {
+                this.stop();
+                return;
+            } else if (!this.stop())
+                return;
+        }
+        if (room == undefined || fixture == undefined)
+            return;
+        this._actionMode = 1;
+        this.selectedRoom = room;
+        this.selectedFixture = fixture;
+        this.selectedFixtureRecipe = fixture.currentRecipe;
+        if (this.getCurrentRecipeCosts().checkIfOwned()) {
+            this.start();
+        } else {
+            this._actionMode = undefined;
+            notifyPlayer(this, this.noBuildCostsMessage, 'danger');
+        }
+        
+    }
     getRegistry(type) {
         switch (type) {
             case ScopeSourceType.Category:
@@ -207,7 +333,11 @@ export class Construction extends ArtisanSkill {
                 return this.actions;
         }
     }
-
+    onAnyLevelUp() {
+        super.onAnyLevelUp();
+        this.renderQueue.fictureUnlock = true;
+        this.renderQueue.menu = true;
+    }
     onLoad() {
         super.onLoad();
         this.renderQueue.menu = true;
@@ -217,7 +347,19 @@ export class Construction extends ArtisanSkill {
             this.ui.renderVisibleRooms();
             this.render();
         });
+        if (this._actionMode == 1) {
+            var recipe = this.activeBuildRecipe;
+            this.ui.switchConstructionCategory(recipe.category)
+            this.ui.selectFixture(recipe.fixture, recipe.fixture.room, this);
+        }
         this.render();
+    }
+    resetActionState() {
+        super.resetActionState();
+        this._actionMode = undefined;
+        this.selectedRoom = undefined;
+        this.selectedFixture = undefined;
+        this.selectedFixtureRecipe = undefined;
     }
     encode(writer) {
         super.encode(writer);
@@ -309,7 +451,7 @@ class ConstructionFixture extends RealmedObject {
             if (data.recipes == undefined)
                 throw new Error('No tiers specified in data.')
             var i = 0;
-            this.recipes = construction.fixtureRecipes.getArrayFromIds(data.recipes);
+            this.recipes = construction.actions.getArrayFromIds(data.recipes);
             this.recipes.forEach((recipe) => {
                 i += 1;
                 if (recipe.fixture !== undefined)
@@ -361,11 +503,15 @@ class ConstructionFixture extends RealmedObject {
     get abyssalLevel() {
         return this.recipes[0].abyssalLevel;
     }
+    upgrade() {
+        this.currentTier++;
+        this.progress = 0;
+    }
 }
 
-class ConstructionFixtureRecipes extends ArtisanSkillRecipe {
-    constructor(namespace, data, game) {
-        super(namespace, data, game);
+class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
+    constructor(namespace, data, game, skill) {
+        super(namespace, data, game, skill);
         try {
             this._baseActionCost = data.baseActionCost;
         } catch (e) {
@@ -386,5 +532,15 @@ class ConstructionFixtureRecipes extends ArtisanSkillRecipe {
     }
     get actionCost() {
         return this._baseActionCost;
+    }
+
+    makeProgress() {
+        this.fixture.progress++;
+        this.skill.renderQueue.menu = true;
+        if (this.fixture.progress >= this.actionCost) {
+            this.fixture.upgrade();
+            return false;
+        }
+        return true;
     }
 }

@@ -68,22 +68,6 @@ export class ConstructionHouseMenu {
         }
         );
     }
-    setStopButton(construction, room) {
-        const panel = this.roomPanels.get(room);
-        this.removeStopButton(construction);
-        if (panel === undefined)
-            return;
-        this.activeRoom = room;
-        panel.setStopButton(construction);
-    }
-    removeStopButton(construction) {
-        var _a;
-        const room = this.activeRoom;
-        if (room !== undefined) {
-            (_a = this.roomPanels.get(room)) === null || _a === void 0 ? void 0 : _a.removeStopButton(construction, room);
-        }
-        this.activeRoom = undefined;
-    }
     getProgressBar(room) {
         var _a;
         return (_a = this.roomPanels.get(room)) === null || _a === void 0 ? void 0 : _a.progressBar;

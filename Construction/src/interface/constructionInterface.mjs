@@ -16,7 +16,7 @@ export class ConstructionInterface {
         this.constructionCategoryMenu = document.getElementById('rielk-construction-category-menu');
         this.constructionArtisanMenu = document.getElementById('rielk-construction-artisan-menu',);
 
-        this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this.switchConstructionCategory(this));
+        this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this.createSwitchConstructionCategory());
         this.constructionArtisanMenu.init(construction);
         const constructionCategoryContainer = document.getElementById('rielk-construction-category-container');
         construction.categories.forEach((category) => {
@@ -37,7 +37,11 @@ export class ConstructionInterface {
         this.constructionHouseMenu = new ConstructionHouseMenu(this.constructionHouseElement, construction);
     }
 
-    switchConstructionCategory(ui) {
+    switchConstructionCategory(category) {
+        return this.createSwitchConstructionCategory(this)(category);
+    } 
+    createSwitchConstructionCategory() {
+        const ui = this;
         return (category) => {
             switch (category.type) {
                 case 'House':
@@ -57,7 +61,6 @@ export class ConstructionInterface {
     render() {
         this.renderMenu();
         this.renderProgressBar();
-        this.renderStopButton();
         this.renderFixtureUnlock();
         this.renderRoomRealmVisibility();
     }
@@ -90,39 +93,31 @@ export class ConstructionInterface {
         }
         this.renderQueue.menu = false;
     }
-    renderStopButton() {
-        if (this.renderQueue.stopButton) {
-            if (this.isActive && this.currentRoom !== undefined)
-                this.constructionHouseMenu.setStopButton(this.construction, this.currentRoom);
-            else
-                this.constructionHouseMenu.removeStopButton(this.construction);
-        }
-        this.renderQueue.stopButton = false;
-    }
     renderProgressBar() {
-        var _a;
         if (!this.renderQueue.progressBar)
             return;
-        if (this.lastActiveRoomProgressBar !== undefined) {
-            (_a = this.constructionHouseMenu.getProgressBar(this.lastActiveRoomProgressBar)) === null || _a === void 0 ? void 0 : _a.stopAnimation();
-            this.lastActiveRoomProgressBar = undefined;
+
+        if (this.stopLastActiveProgressBar != undefined) {
+            this.stopLastActiveProgressBar();
+            this.stopLastActiveProgressBar = undefined;
         }
-        if (this.currentRoom === undefined)
-            return;
-        const progressBar = this.constructionHouseMenu.getProgressBar(this.currentRoom);
-        if (progressBar !== undefined) {
-            if (this.isActive) {
-                if (this.stunState === 1) {
-                    progressBar.setStyle('bg-danger');
-                    progressBar.animateProgressFromTimer(this.stunTimer);
-                } else {
-                    progressBar.setStyle('bg-info');
-                    progressBar.animateProgressFromTimer(this.actionTimer);
-                }
-                this.lastActiveRoomProgressBar = this.currentRoom;
-            } else {
-                progressBar.stopAnimation();
-                this.lastActiveRoomProgressBar = undefined;
+        if (this.construction.isActive) {
+            switch (this.construction._actionMode) {
+                case 0:
+                    this.construction.menu.animateProgressFromTimer(this.construction.actionTimer);
+                    this.stopLastActiveProgressBar = () => this.construction.menu.stopProgressBar();
+                    break;
+                case 1:
+                    if (this.construction.selectedRoom === undefined)
+                        return;
+                    const progressBar = this.constructionHouseMenu.getProgressBar(this.construction.selectedRoom);
+                    if (progressBar !== undefined) {
+                        progressBar.animateProgressFromTimer(this.construction.actionTimer);
+                        this.stopLastActiveProgressBar = () => progressBar.stopAnimation();
+                    }
+                    break;
+                case undefined:
+                    break;
             }
         }
         this.renderQueue.progressBar = false;
@@ -146,9 +141,11 @@ export class ConstructionInterface {
             this.hideRoomPanel(room);
         }
     }
+    selectFixture(fixture, room, construction) {
+        this.constructionHouseMenu.selectFixture(fixture, room, construction)
+    }
     onFixturePanelSelection(fixture, room) {
-        this.renderQueue.buildInfo = true;
-        if (this.construction.isActive && room === this.construction.currentRoom && fixture !== this.construction.currentFixture) {
+        if (this.construction.isActive && room === this.construction.selectedRoom && fixture !== this.construction.selectedFixture) {
             return this.construction.stop();
         } else {
             return true;
@@ -166,7 +163,6 @@ class ConstructionRenderQueue extends ArtisanSkillRenderQueue {
     constructor() {
         super(...arguments);
         this.menu = false;
-        this.stopButton = false;
         this.fixtureUnlock = false;
         this.roomRealmVisibility = false;
     }
