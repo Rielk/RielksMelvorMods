@@ -16,7 +16,7 @@ export class ConstructionInterface {
         this.constructionCategoryMenu = document.getElementById('rielk-construction-category-menu');
         this.constructionArtisanMenu = document.getElementById('rielk-construction-artisan-menu',);
 
-        this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this.createSwitchConstructionCategory());
+        this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this._createSwitchConstructionCategory());
         this.constructionArtisanMenu.init(construction);
         const constructionCategoryContainer = document.getElementById('rielk-construction-category-container');
         construction.categories.forEach((category) => {
@@ -38,9 +38,9 @@ export class ConstructionInterface {
     }
 
     switchConstructionCategory(category) {
-        return this.createSwitchConstructionCategory(this)(category);
+        return this._createSwitchConstructionCategory(this)(category);
     } 
-    createSwitchConstructionCategory() {
+    _createSwitchConstructionCategory() {
         const ui = this;
         return (category) => {
             switch (category.type) {
@@ -143,6 +143,12 @@ export class ConstructionInterface {
     }
     selectFixture(fixture, room, construction) {
         this.constructionHouseMenu.selectFixture(fixture, room, construction)
+    }
+    showFixtureUnlocks(room, fixture, construction){
+        this.constructionHouseMenu.showFixtureUnlocks(room, fixture, construction);
+    }
+    hideFixtureUnlocks(room, fixture, construction){
+        this.constructionHouseMenu.hideFixtureUnlocks(room, fixture, construction);
     }
     onFixturePanelSelection(fixture, room) {
         if (this.construction.isActive && room === this.construction.selectedRoom && fixture !== this.construction.selectedFixture) {

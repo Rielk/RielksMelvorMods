@@ -55,8 +55,8 @@
                     </h5>
                     <div class="col-12">
                       <div class="row icon-size-48" id="extra-details-container">
-                        <button class="btn btn-sm btn-info m-1 mt-3" role="button" id="drops-button">
-                          <rielk-lang-string lang-id="MENU_TEXT_SHOW_UNLOCKS"></rielk-lang-string>
+                        <button class="btn btn-sm btn-info m-1 mt-3" role="button" id="upgrades-button">
+                          <rielk-lang-string lang-id="MENU_TEXT_SHOW_UPGRADES"></rielk-lang-string>
                         </button>
                         <preservation-icon id="product-preservation"></preservation-icon>
                       </div>
@@ -139,4 +139,31 @@
       </a>
     </li>
   </ul>
+</template>
+
+<template id="rielk-construction-upgrades-panel-template">
+  <div class="block block-rounded border-top border-rielk-construction border-4x">
+    <div class="row no-gutters">
+      <div class="col-12">
+        <div class="row no-gutters" id="upgrades-container"><div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<template id="rielk-construction-modifier-display-template">
+  <div class="media d-flex align-items-center push m-0">
+    <div class="m-1 font-w600">
+      <img class="skill-icon-sm mr-2" id="fixture-image">
+    </div>
+    <div class="media-body">
+      <div class="block block-rounded border-top border-rielk-construction border-4x text-left" id="modifier-container">
+        <h5 class="font-w700 font-size-sm m-1" id="modifier-text"></h5>
+      </div>
+      <div class="justify-vertical-center" id="unlock-container">
+        <span class="text-danger" id="level"></span>
+        <span class="text-danger" id="abyssal-level"></span>
+      </div>
+    </div>
+  </div>
 </template>
