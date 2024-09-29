@@ -6,7 +6,8 @@ export const language = {
     'MENU_TEXT_BUILD': 'Build',
     'MENU_TEXT_BUILT_PROGRESS': 'Upgrade: ${currentValue}/${maxValue}',
     'MENU_TEXT_PARTIAL_BUILT_PROGRESS': '${currentValue}/${maxValue} ${percent}',
-    'MENU_TEXT_SHOW_UNLOCKS': 'Unlocks',
+    'MENU_TEXT_SHOW_UPGRADES': 'Upgrades',
+    'MENU_TEXT_SHOW_GO_BACK': 'Go Back',
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': 'You don\'t have the required materials to Build that.',
 

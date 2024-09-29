@@ -17,8 +17,11 @@ export class ConstructionHouseMenu {
             });
             roomPanel.setRoom(room, construction);
             this.roomPanels.set(room, roomPanel);
-        }
-        );
+        });
+        this.roomUnlocksPanel = createElement('rielk-construction-upgrades-panel', {
+            className: 'col-12 col-xl-6 d-none',
+            parent: container
+        })
     }
     hideRoomPanel(room) {
         const panel = this.roomPanels.get(room);
@@ -49,6 +52,7 @@ export class ConstructionHouseMenu {
             panel.updateFixturesForLevel(construction, room);
         }
         );
+        this.roomUnlocksPanel.updateFixturesForLevel(construction);
     }
     updateFixtureButtons(game) {
         this.roomPanels.forEach((panel)=>{
@@ -61,6 +65,24 @@ export class ConstructionHouseMenu {
         if (panel === undefined)
             return;
         panel.selectFixture(room, fixture, construction);
+    }
+    showFixtureUnlocks(room, fixture, construction){
+        this.roomPanels.forEach((panel,roomOfPanel)=>{
+            if (roomOfPanel == room){
+                panel.showFixtureUnlocks(room, fixture, construction);
+                this.roomUnlocksPanel.setFixture(fixture, construction);
+                showElement(this.roomUnlocksPanel);
+            } else {
+                hideElement(panel);
+            }
+        });
+    }
+    hideFixtureUnlocks(room, fixture, construction){
+        this.roomPanels.forEach((panel,room)=>{
+            panel.hideFixtureUnlocks(room, fixture, construction);
+            showElement(panel);
+        });
+        hideElement(this.roomUnlocksPanel);
     }
     updateAllRoomPanels(construction, game) {
         this.roomPanels.forEach((panel,room)=>{

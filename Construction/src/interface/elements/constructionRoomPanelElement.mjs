@@ -1,6 +1,6 @@
 const { loadModule } = mod.getContext(import.meta);
 
-const { templateRielkLangString } = await loadModule('src/language/translationManager.mjs');
+const { getRielkLangString, templateRielkLangString } = await loadModule('src/language/translationManager.mjs');
 
 class ConstructionRoomPanelElement extends HTMLElement {
     constructor() {
@@ -24,7 +24,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.infoBoxName = getElementFromFragment(this._content, 'product-name', 'span');
         this.infoBoxImage = getElementFromFragment(this._content, 'product-image', 'img');
         this.startButton = getElementFromFragment(this._content, 'start-button', 'button');
-        this.dropsButton = getElementFromFragment(this._content, 'drops-button', 'button');
+        this.upgradesButton = getElementFromFragment(this._content, 'upgrades-button', 'button');
         this.builtProgressText = getElementFromFragment(this._content, 'built-progress-text', 'small');
         this.builtProgressBar = getElementFromFragment(this._content, 'built-progress-bar', 'progress-bar');
         this.requires = getElementFromFragment(this._content, 'requires', 'requires-box');
@@ -86,10 +86,18 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.selectedFixture = fixture;
         this.updateRoomInfo(construction);
         this.startButton.onclick = ()=>construction.toggleBuilding(room, fixture);
-        this.dropsButton.onclick = ()=>construction.fireFixtureDropsModal(room, fixture);
+        this.upgradesButton.onclick = ()=>construction.ui.showFixtureUnlocks(room, fixture, construction);
         
         const interval = construction.getFixtureInterval(fixture);
         this.interval.setInterval(interval, construction.getIntervalSources(fixture));
+    }
+    showFixtureUnlocks(room, fixture, construction){
+        this.upgradesButton.textContent = getRielkLangString('MENU_TEXT_SHOW_GO_BACK');
+        this.upgradesButton.onclick = ()=>construction.ui.hideFixtureUnlocks(room, fixture, construction);
+    }
+    hideFixtureUnlocks(room, fixture, construction){
+        this.upgradesButton.textContent = getRielkLangString('MENU_TEXT_SHOW_UPGRADES');
+        this.upgradesButton.onclick = ()=>construction.ui.showFixtureUnlocks(room, fixture, construction);
     }
     updateRoomInfo(construction) {
         if (this.selectedFixture !== undefined) {
