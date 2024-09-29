@@ -5,11 +5,14 @@ class ConstructionUpgradesPanelElement extends HTMLElement {
         this._content = new DocumentFragment();
         this._content.append(getTemplateNode('rielk-construction-upgrades-panel-template'));
         this.upgradesContainer = getElementFromFragment(this._content, 'upgrades-container', 'div');
+        this.fixtureName = getElementFromFragment(this._content, 'fixture-name', 'span');
     }
     connectedCallback() {
         this.appendChild(this._content);
     }
     setFixture(fixture, construction) {
+        this.fixtureName.textContent = fixture.name;
+        
         while (this.upgradePanels.length > fixture.recipes.length) {
             const panel = this.upgradePanels.pop();
             this.upgradesContainer.removeChild(panel);
@@ -29,6 +32,11 @@ class ConstructionUpgradesPanelElement extends HTMLElement {
     updateFixturesForLevel(construction) {
         this.upgradePanels.forEach((panel) => {
             panel.updatePanelForLevel(construction);
+        });
+    }
+    updateModifierInfo() {
+        this.upgradePanels.forEach((panel) => {
+            panel.updateModifierInfo();
         });
     }
 }

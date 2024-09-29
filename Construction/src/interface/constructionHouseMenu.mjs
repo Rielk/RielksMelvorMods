@@ -70,12 +70,11 @@ export class ConstructionHouseMenu {
         this.roomPanels.forEach((panel,roomOfPanel)=>{
             if (roomOfPanel == room){
                 panel.showFixtureUnlocks(room, fixture, construction);
-                this.roomUnlocksPanel.setFixture(fixture, construction);
-                showElement(this.roomUnlocksPanel);
             } else {
                 hideElement(panel);
             }
         });
+        showElement(this.roomUnlocksPanel);
     }
     hideFixtureUnlocks(room, fixture, construction){
         this.roomPanels.forEach((panel,room)=>{
@@ -89,6 +88,9 @@ export class ConstructionHouseMenu {
             panel.updateRoomInfo(construction, game);
         }
         );
+    }
+    updateUnlocksPanel() {
+        this.roomUnlocksPanel.updateModifierInfo();
     }
     getProgressBar(room) {
         var _a;

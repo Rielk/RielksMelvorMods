@@ -28,6 +28,9 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
     get actionCost() {
         return this._baseActionCost;
     }
+    get isUnlocked() {
+        return this.fixture.currentTier >= this.tier;
+    }
     get stats() {
         return this.modifiers._stats;
     }

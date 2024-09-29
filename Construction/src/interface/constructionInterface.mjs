@@ -90,6 +90,7 @@ export class ConstructionInterface {
         if (this.renderQueue.menu) {
             this.constructionHouseMenu.updateAllRoomPanels(this.construction);
             this.constructionHouseMenu.updateFixtureButtons(this.game);
+            this.constructionHouseMenu.updateUnlocksPanel();
         }
         this.renderQueue.menu = false;
     }
@@ -132,12 +133,12 @@ export class ConstructionInterface {
         }
         );
     }
-    onRoomHeaderClick(room) {
-        if (this.construction.hiddenRooms.has(room)) {
-            this.construction.hiddenRooms.delete(room);
+    onRoomHeaderClick(room, construction) {
+        if (construction.hiddenRooms.has(room)) {
+            construction.hiddenRooms.delete(room);
             this.showRoomPanel(room);
         } else {
-            this.construction.hiddenRooms.add(room);
+            construction.hiddenRooms.add(room);
             this.hideRoomPanel(room);
         }
     }
@@ -150,8 +151,9 @@ export class ConstructionInterface {
     hideFixtureUnlocks(room, fixture, construction){
         this.constructionHouseMenu.hideFixtureUnlocks(room, fixture, construction);
     }
-    onFixturePanelSelection(fixture, room) {
-        if (this.construction.isActive && room === this.construction.selectedRoom && fixture !== this.construction.selectedFixture) {
+    onFixturePanelSelection(fixture, room, construction) {
+        this.constructionHouseMenu.roomUnlocksPanel.setFixture(fixture, construction);
+        if (construction.isActive && room === construction.selectedRoom && fixture !== construction.selectedFixture) {
             return this.construction.stop();
         } else {
             return true;
