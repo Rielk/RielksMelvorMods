@@ -477,11 +477,11 @@
                   "skillItemDoublingChance": [
                     {
                       "value": 1,
-                      "skillID": "melvorD:Woodcutting"
+                      "skillID": "melvorD:Smithing"
                     },
                     {
                       "value": 1,
-                      "skillID": "melvorD:Farming"
+                      "skillID": "melvorD:Mining"
                     }
                   ],
                   "skillXP": [

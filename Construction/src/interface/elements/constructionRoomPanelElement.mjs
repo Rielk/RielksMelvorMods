@@ -42,7 +42,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
 
     setRoom(room, construction) {
         this.roomName.textContent = room.name;
-        this.header.onclick = ()=>construction.ui.onRoomHeaderClick(room);
+        this.header.onclick = ()=>construction.ui.onRoomHeaderClick(room, construction);
         room.fixtures.forEach((fixture)=>{
             const fixtureNav = createElement('rielk-construction-fixture-nav', {
                 parent: this.targetContainer
@@ -81,7 +81,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
         );
     }
     selectFixture(room, fixture, construction) {
-        if (!construction.ui.onFixturePanelSelection(fixture, room))
+        if (!construction.ui.onFixturePanelSelection(fixture, room, construction))
             return;
         this.selectedFixture = fixture;
         this.updateRoomInfo(construction);

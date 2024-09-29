@@ -16,8 +16,7 @@ class ConstructionModifierDisplayElement extends HTMLElement {
     setFixtureRecipe(recipe, construction) {
         this.recipe = recipe;
         this.fixtureImage.src = recipe.media;
-        this.modifierText.textContent = '';
-        this.modifierText.append(...StatObject.formatDescriptions(recipe.stats, getElementDescriptionFormatter('div', 'mb-1')));
+        this.updateModifierInfo();
         this.level.textContent = '';
         this.level.append(...templateLangStringWithNodes('MENU_TEXT_UNLOCKED_AT', {
             skillImage: createElement('img', {
@@ -51,6 +50,10 @@ class ConstructionModifierDisplayElement extends HTMLElement {
         } else {
             this.setLocked(this.recipe, construction);
         }
+    }
+    updateModifierInfo() {
+        this.modifierText.textContent = '';
+        this.modifierText.append(...StatObject.formatDescriptions(this.recipe.stats, getElementDescriptionFormatter('div', this.recipe.isUnlocked ? 'mb-1' : 'mb-1 text-warning')));
     }
     setLocked(recipe, construction) {
         hideElement(this.fixtureImage);
