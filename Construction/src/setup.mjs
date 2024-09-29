@@ -1,4 +1,4 @@
-const { loadModule, loadTemplates, loadStylesheet, characterStorage, onCharacterLoaded } = mod.getContext(import.meta);
+const { loadModule, loadTemplates, loadStylesheet } = mod.getContext(import.meta);
 
 const { Construction } = await loadModule('src/construction/construction.mjs');
 const { patchTranslations } = await loadModule('src/language/translationManager.mjs');
