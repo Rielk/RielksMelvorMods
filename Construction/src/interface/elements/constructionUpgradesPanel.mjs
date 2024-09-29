@@ -16,7 +16,7 @@ class ConstructionUpgradesPanelElement extends HTMLElement {
         }
         while (this.upgradePanels.length < fixture.recipes.length) {
             const panel = createElement('rielk-construction-modifier-display', {
-                className: 'col-12 p-2',
+                className: 'col-12',
                 parent: this.upgradesContainer,
             });
             this.upgradePanels.push(panel);
