@@ -16,6 +16,8 @@ class ConstructionModifierDisplayElement extends HTMLElement {
     setFixtureRecipe(recipe, construction) {
         this.recipe = recipe;
         this.fixtureImage.src = recipe.media;
+        this.modifierText.textContent = '';
+        this.modifierText.append(...StatObject.formatDescriptions(recipe.stats, getElementDescriptionFormatter('div', 'mb-1')));
         this.level.textContent = '';
         this.level.append(...templateLangStringWithNodes('MENU_TEXT_UNLOCKED_AT', {
             skillImage: createElement('img', {

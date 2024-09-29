@@ -348,7 +348,8 @@
               "id": "Bedroom",
               "name": "Bedroom",
               "fixtures": [
-                "rielkConstruction:Storage_Chest"
+                "rielkConstruction:Storage_Chest",
+                "rielkConstruction:Wardrobe"
               ]
             },
             {
@@ -367,6 +368,14 @@
               "recipes": [
                 "rielkConstruction:Storage_Chest1",
                 "rielkConstruction:Storage_Chest2"
+              ]
+            },
+            {
+              "id": "Wardrobe",
+              "name": "Wardrobe",
+              "media_folder": "assets/fixtures/wardrobe",
+              "recipes": [
+                "rielkConstruction:Wardrobe1"
               ]
             },
             {
@@ -395,7 +404,30 @@
                   "quantity": 1
                 }
               ],
-              "currencyCosts": []
+              "currencyCosts": [],
+              "modifiers":
+                {
+                  "skillItemDoublingChance": [
+                    {
+                      "value": 1,
+                      "skillID": "melvorD:Woodcutting"
+                    },
+                    {
+                      "value": 1,
+                      "skillID": "melvorD:Farming"
+                    }
+                  ],
+                  "skillXP": [
+                    {
+                      "value": 1,
+                      "skillID": "melvorD:Woodcutting"
+                    },
+                    {
+                      "value": 1,
+                      "skillID": "melvorD:Farming"
+                    }
+                  ]
+                }
             },
             {
               "id": "Storage_Chest2",
@@ -413,7 +445,56 @@
                   "quantity": 1
                 }
               ],
-              "currencyCosts": []
+              "currencyCosts": [],
+              "modifiers": {
+                    "basePrimaryProductQuantity": [
+                      {
+                        "skillID": "melvorD:Farming",
+                        "value": 1
+                      }
+                    ]
+                  }
+            },
+            {
+              "id": "Wardrobe1",
+              "level": 1,
+              "baseExperience": 5,
+              "baseActionCost": 4,
+              "categoryID": "rielkConstruction:House",
+              "itemCosts": [
+                {
+                  "id": "rielkConstruction:Iron_Nails",
+                  "quantity": 1
+                },
+                {
+                  "id": "melvorD:Normal_Logs",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": [],
+              "modifiers":
+                {
+                  "skillItemDoublingChance": [
+                    {
+                      "value": 1,
+                      "skillID": "melvorD:Woodcutting"
+                    },
+                    {
+                      "value": 1,
+                      "skillID": "melvorD:Farming"
+                    }
+                  ],
+                  "skillXP": [
+                    {
+                      "value": 1,
+                      "skillID": "melvorD:Woodcutting"
+                    },
+                    {
+                      "value": 1,
+                      "skillID": "melvorD:Farming"
+                    }
+                  ]
+                }
             },
             {
               "id": "Sink1",
@@ -427,7 +508,15 @@
                   "quantity": 5
                 }
               ],
-              "currencyCosts": []
+              "currencyCosts": [],
+              "modifiers": {
+                    "skillItemDoublingChance": [
+                      {
+                        "value": 1,
+                        "skillID": "melvorD:Smithing"
+                      }
+                    ]
+                  }
             }
           ]
         }
