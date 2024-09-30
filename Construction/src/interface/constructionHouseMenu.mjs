@@ -10,7 +10,22 @@ export class ConstructionHouseMenu {
             className: 'row',
             parent: container
         });
-        construction.rooms.forEach((room)=>{
+        var buttonContainer = createElement('div', {
+            className: 'col-12 text-center mb-3',
+            parent: container
+        });
+        var viewAllModifiersButton = createElement('button', {
+            className: 'btn btn-sm btn-secondary',
+            parent: buttonContainer
+        })
+        viewAllModifiersButton.role = 'button';
+        viewAllModifiersButton.onclick = () => construction.viewAllModifiersOnClick();
+        var langString = createElement('lang-string', {
+            parent: viewAllModifiersButton
+        })
+        langString.setAttribute('lang-id','ASTROLOGY_BTN_6');
+
+        construction.rooms.forEach((room) => {
             const roomPanel = createElement('rielk-construction-room-panel', {
                 className: 'col-12 col-xl-6',
                 parent: container

@@ -39,7 +39,7 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
         this.fixture.progress++;
         this.skill.renderQueue.menu = true;
         if (this.fixture.progress >= this.actionCost) {
-            this.fixture.upgrade();
+            this.fixture.upgrade(this.skill);
             return false;
         }
         return true;

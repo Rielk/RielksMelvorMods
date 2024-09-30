@@ -64,8 +64,15 @@ export class ConstructionFixture extends RealmedObject {
     get abyssalLevel() {
         return this.recipes[0].abyssalLevel;
     }
-    upgrade() {
+    upgrade(construction) {
         this.currentTier++;
         this.progress = 0;
+        construction.computeProvidedStats(true);
+    }
+    get providedStats() {
+        return this.recipes.filter(r => r.tier <= this.currentTier).map(r => r.stats);
+    }
+    addProvidedStatsTo(statProvider) {
+        this.providedStats.forEach((stat) => statProvider.addStatObject(this, stat));
     }
 }
