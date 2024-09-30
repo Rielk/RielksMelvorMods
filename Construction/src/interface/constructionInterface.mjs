@@ -12,13 +12,16 @@ export class ConstructionInterface {
 
         const frag = new DocumentFragment();
         frag.append(getTemplateNode('rielk-construction-template'));
+        this.constructionCategoryMenu = getElementFromFragment(frag, 'rielk-construction-category-menu', 'realmed-category-menu', true);
+        this.constructionArtisanMenu = getElementFromFragment(frag, 'rielk-construction-artisan-menu', 'artisan-menu', true);
+        const constructionCategoryContainer = getElementFromFragment(frag, 'rielk-construction-category-container', 'div', true);
+        this.constructionHouseElement = getElementFromFragment(frag, 'rielk-construction-house-element', 'div');
+        this.constructionArtisanElement = getElementFromFragment(frag, 'rielk-construction-artisan-element', 'div');
         document.getElementById('main-container').append(...frag.children);
-        this.constructionCategoryMenu = document.getElementById('rielk-construction-category-menu');
-        this.constructionArtisanMenu = document.getElementById('rielk-construction-artisan-menu',);
 
         this.constructionCategoryMenu.addOptions(construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this._createSwitchConstructionCategory());
         this.constructionArtisanMenu.init(construction);
-        const constructionCategoryContainer = document.getElementById('rielk-construction-category-container');
+        
         construction.categories.forEach((category) => {
             if (category.type !== 'Artisan')
                 return;
@@ -32,8 +35,6 @@ export class ConstructionInterface {
             tab.setRecipes(recipes, construction);
             this.constructionSelectionTabs.set(category, tab);
         });
-        this.constructionHouseElement = document.getElementById('rielk-construction-house-element');
-        this.constructionArtisanElement = document.getElementById('rielk-construction-artisan-element');
         this.constructionHouseMenu = new ConstructionHouseMenu(this.constructionHouseElement, construction);
     }
 
@@ -141,7 +142,7 @@ export class ConstructionInterface {
             construction.hiddenRooms.add(room);
             this.hideRoomPanel(room);
         }
-    }
+    }    
     selectFixture(fixture, room, construction) {
         this.constructionHouseMenu.selectFixture(fixture, room, construction)
     }
