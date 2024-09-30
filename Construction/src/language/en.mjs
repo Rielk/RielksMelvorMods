@@ -18,5 +18,7 @@ export const language = {
     'CONSTRUCTION_ROOM_NAME_ Bedroom': 'Bedroom',
     'CONSTRUCTION_ROOM_NAME_ Kitchen': 'Kitchen',
 
+    'CONSTRUCTION_FIXTURE_OF_TIER': '${fixtureName}: Tier ${tier}',
+
     'CONSTRUCTION_FIXTURE_NAME_ Storage_Chest': 'Storage Chest'
 }

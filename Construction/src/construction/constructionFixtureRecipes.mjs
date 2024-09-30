@@ -1,6 +1,7 @@
 const { loadModule } = mod.getContext(import.meta);
 
 const { ConstructionModifiers } = await loadModule('src/construction/constructionModifier.mjs');
+const { templateRielkLangString } = await loadModule('src/language/translationManager.mjs');
 
 export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
     constructor(namespace, data, game, skill) {
@@ -24,6 +25,12 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
     }
     get media() {
         return this.fixture.mediaForTier(this.tier);
+    }
+    get name() {
+        return templateRielkLangString('CONSTRUCTION_FIXTURE_OF_TIER', {
+            fixtureName: this.fixture.name,
+            tier: this.tier
+        });
     }
     get actionCost() {
         return this._baseActionCost;
