@@ -27,7 +27,115 @@
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
+        "sellsFor": 2
+      },
+      {
+        "itemType": "Item",
+        "id": "Steel_Nails",
+        "name": "Steel Nails",
+        "category": "Construction",
+        "type": "Nails",
+        "media": "assets/items/nails_steel.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 5
+      },
+      {
+        "itemType": "Item",
+        "id": "Mithril_Nails",
+        "name": "Mithril Nails",
+        "category": "Construction",
+        "type": "Nails",
+        "media": "assets/items/nails_mithril.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 20
+      },
+      {
+        "itemType": "Item",
+        "id": "Adamantite_Nails",
+        "name": "Adamantite Nails",
+        "category": "Construction",
+        "type": "Nails",
+        "media": "assets/items/nails_adamantite.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 30
+      },
+      {
+        "itemType": "Item",
+        "id": "Dragonite_Nails",
+        "name": "Dragonite Nails",
+        "category": "Construction",
+        "type": "Nails",
+        "media": "assets/items/nails_dragonite.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 100
+      },
+      {
+        "itemType": "Item",
+        "id": "Normal_Planks",
+        "name": "Normal Planks",
+        "category": "Construction",
+        "type": "Planks",
+        "media": "assets/items/planks_normal.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
         "sellsFor": 1
+      },
+      {
+        "itemType": "Item",
+        "id": "Oak_Planks",
+        "name": "Oak Planks",
+        "category": "Construction",
+        "type": "Planks",
+        "media": "assets/items/planks_oaks.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 2
+      },
+      {
+        "itemType": "Item",
+        "id": "Teak_Planks",
+        "name": "Teak Planks",
+        "category": "Construction",
+        "type": "Planks",
+        "media": "assets/items/planks_teak.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 8
+      },
+      {
+        "itemType": "Item",
+        "id": "Mahogany_Planks",
+        "name": "Mahogany Planks",
+        "category": "Construction",
+        "type": "Planks",
+        "media": "assets/items/planks_mahogany.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 22
+      },
+      {
+        "itemType": "Item",
+        "id": "Magic_Planks",
+        "name": "Magic Planks",
+        "category": "Construction",
+        "type": "Planks",
+        "media": "assets/items/planks_magic.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 188
       },
       {
         "itemType": "Equipment",
@@ -308,15 +416,9 @@
           ],
           "categories": [
             {
-              "id": "Nails",
-              "name": "Nails",
-              "media": "assets/categories/nails.png",
-              "type": "Artisan"
-            },
-            {
-              "id": "Planks",
-              "name": "Planks",
-              "media": "assets/categories/planks.png",
+              "id": "Materials",
+              "name": "Materials",
+              "media": "assets/categories/materials.png",
               "type": "Artisan"
             },
             {
@@ -332,11 +434,146 @@
               "level": 1,
               "productID": "rielkConstruction:Iron_Nails",
               "baseQuantity": 5,
-              "baseExperience": 5000,
-              "categoryID": "rielkConstruction:Nails",
+              "baseExperience": 10,
+              "categoryID": "rielkConstruction:Materials",
               "itemCosts": [
                 {
                   "id": "melvorD:Iron_Bar",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Steel_Nails",
+              "level": 10,
+              "productID": "rielkConstruction:Steel_Nails",
+              "baseQuantity": 5,
+              "baseExperience": 20,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Steel_Bar",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Mithril_Nails",
+              "level": 30,
+              "productID": "rielkConstruction:Mithril_Nails",
+              "baseQuantity": 5,
+              "baseExperience": 50,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Mithril_Bar",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Adamantite_Nails",
+              "level": 50,
+              "productID": "rielkConstruction:Adamantite_Nails",
+              "baseQuantity": 5,
+              "baseExperience": 60,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Adamantite_Bar",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Dragonite_Nails",
+              "level": 70,
+              "productID": "rielkConstruction:Dragonite_Nails",
+              "baseQuantity": 5,
+              "baseExperience": 100,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Dragonite_Bar",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Normal_Planks",
+              "level": 1,
+              "productID": "rielkConstruction:Normal_Planks",
+              "baseQuantity": 2,
+              "baseExperience": 100,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Normal_Logs",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Oak_Planks",
+              "level": 15,
+              "productID": "rielkConstruction:Oak_Planks",
+              "baseQuantity": 2,
+              "baseExperience": 100,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Oak_Logs",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Teak_Planks",
+              "level": 40,
+              "productID": "rielkConstruction:Teak_Planks",
+              "baseQuantity": 2,
+              "baseExperience": 100,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Teak_Logs",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Mahogany_Planks",
+              "level": 55,
+              "productID": "rielkConstruction:Mahogany_Planks",
+              "baseQuantity": 2,
+              "baseExperience": 100,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Mahogany_Logs",
+                  "quantity": 1
+                }
+              ],
+              "currencyCosts": []
+            },
+            {
+              "id": "Magic_Planks",
+              "level": 80,
+              "productID": "rielkConstruction:Magic_Planks",
+              "baseQuantity": 2,
+              "baseExperience": 100,
+              "categoryID": "rielkConstruction:Materials",
+              "itemCosts": [
+                {
+                  "id": "melvorD:Magic_Logs",
                   "quantity": 1
                 }
               ],
@@ -709,10 +946,10 @@
           ],
           "fixtureRecipes": [
             {
-              "id": "Storage_Chest1",
-              "level": 1,
+              "id": "Apparatus1",
+              "level": 20,
               "baseExperience": 5,
-              "baseActionCost": 4,
+              "baseActionCost": 200,
               "categoryID": "rielkConstruction:House",
               "itemCosts": [
                 {
@@ -748,95 +985,6 @@
                     }
                   ]
                 }
-            },
-            {
-              "id": "Storage_Chest2",
-              "level": 5,
-              "baseExperience": 50,
-              "baseActionCost": 4,
-              "categoryID": "rielkConstruction:House",
-              "itemCosts": [
-                {
-                  "id": "rielkConstruction:Iron_Nails",
-                  "quantity": 1
-                },
-                {
-                  "id": "melvorD:Oak_Logs",
-                  "quantity": 1
-                }
-              ],
-              "currencyCosts": [],
-              "modifiers": {
-                    "basePrimaryProductQuantity": [
-                      {
-                        "skillID": "melvorD:Farming",
-                        "value": 1
-                      }
-                    ]
-                  }
-            },
-            {
-              "id": "Wardrobe1",
-              "level": 1,
-              "baseExperience": 5,
-              "baseActionCost": 4,
-              "categoryID": "rielkConstruction:House",
-              "itemCosts": [
-                {
-                  "id": "rielkConstruction:Iron_Nails",
-                  "quantity": 1
-                },
-                {
-                  "id": "melvorD:Normal_Logs",
-                  "quantity": 1
-                }
-              ],
-              "currencyCosts": [],
-              "modifiers":
-                {
-                  "skillItemDoublingChance": [
-                    {
-                      "value": 1,
-                      "skillID": "melvorD:Smithing"
-                    },
-                    {
-                      "value": 1,
-                      "skillID": "melvorD:Mining"
-                    }
-                  ],
-                  "skillXP": [
-                    {
-                      "value": 1,
-                      "skillID": "melvorD:Woodcutting"
-                    },
-                    {
-                      "value": 1,
-                      "skillID": "melvorD:Farming"
-                    }
-                  ]
-                }
-            },
-            {
-              "id": "Sink1",
-              "level": 10,
-              "baseExperience": 100,
-              "baseActionCost": 2000,
-              "categoryID": "rielkConstruction:House",
-              "itemCosts": [
-                {
-                  "id": "melvorD:Iron_Bar",
-                  "quantity": 5
-                }
-              ],
-              "currencyCosts": [],
-              "modifiers": {
-                    "skillItemDoublingChance": [
-                      {
-                        "value": 1,
-                        "skillID": "melvorD:Smithing"
-                      }
-                    ]
-                  }
             }
           ]
         }
