@@ -348,42 +348,362 @@
               "id": "Bedroom",
               "name": "Bedroom",
               "fixtures": [
+                "rielkConstruction:Desk",
                 "rielkConstruction:Storage_Chest",
                 "rielkConstruction:Wardrobe"
+              ]
+            },
+            {
+              "id": "Garden",
+              "name": "Garden",
+              "fixtures": [
+                "rielkConstruction:Flower_Pots",
+                "rielkConstruction:Lake",
+                "rielkConstruction:Orchard"
               ]
             },
             {
               "id": "Kitchen",
               "name": "Kitchen",
               "fixtures": [
-                "rielkConstruction:Sink"
+                "rielkConstruction:Fire_Pit",
+                "rielkConstruction:Fridge",
+                "rielkConstruction:Oven"
+              ]
+            },
+            {
+              "id": "Laboratory",
+              "name": "Laboratory",
+              "fixtures": [
+                "rielkConstruction:Apparatus",
+                "rielkConstruction:Spell_Library",
+                "rielkConstruction:Telescope"
+              ]
+            },
+            {
+              "id": "Outpost",
+              "name": "Outpost",
+              "fixtures": [
+                "rielkConstruction:Black_Market",
+                "rielkConstruction:Mines",
+                "rielkConstruction:Trapping_Hut"
+              ]
+            },
+            {
+              "id": "Refectory",
+              "name": "Refectory",
+              "fixtures": [
+                "rielkConstruction:Dragon_Statue",
+                "rielkConstruction:Prayer_Altar",
+                "rielkConstruction:Rune_Altar"
+              ]
+            },
+            {
+              "id": "Training_Room",
+              "name": "Training Room",
+              "fixtures": [
+                "rielkConstruction:Archery_Range",
+                "rielkConstruction:Jungle_Gym",
+                "rielkConstruction:Training_Dummy"
+              ]
+            },
+            {
+              "id": "Workshop",
+              "name": "Workshop",
+              "fixtures": [
+                "rielkConstruction:Forge",
+                "rielkConstruction:Tool_Rack",
+                "rielkConstruction:Worktable"
               ]
             }
           ],
           "fixtures": [
             {
+              "id": "Apparatus",
+              "name": "Apparatus",
+              "media_folder": "assets/fixtures/Apparatus",
+              "recipes": [
+                "rielkConstruction:Apparatus1",
+                "rielkConstruction:Apparatus2",
+                "rielkConstruction:Apparatus3",
+                "rielkConstruction:Apparatus4",
+                "rielkConstruction:Apparatus5"
+              ]
+            },
+            {
+              "id": "Archery_Range",
+              "name": "Archery Range",
+              "media_folder": "assets/fixtures/Archery_Range",
+              "recipes": [
+                "rielkConstruction:Archery_Range1",
+                "rielkConstruction:Archery_Range2",
+                "rielkConstruction:Archery_Range3",
+                "rielkConstruction:Archery_Range4",
+                "rielkConstruction:Archery_Range5"
+              ]
+            },
+            {
+              "id": "Black_Market",
+              "name": "Black Market",
+              "media_folder": "assets/fixtures/Black_Market",
+              "recipes": [
+                "rielkConstruction:Black_Market1",
+                "rielkConstruction:Black_Market2",
+                "rielkConstruction:Black_Market3",
+                "rielkConstruction:Black_Market4",
+                "rielkConstruction:Black_Market5"
+              ]
+            },
+            {
+              "id": "Desk",
+              "name": "Desk",
+              "media_folder": "assets/fixtures/Desk",
+              "recipes": [
+                "rielkConstruction:Desk1",
+                "rielkConstruction:Desk2",
+                "rielkConstruction:Desk3",
+                "rielkConstruction:Desk4",
+                "rielkConstruction:Desk5"
+              ]
+            },
+            {
+              "id": "Dragon_Statue",
+              "name": "Dragon Statue",
+              "media_folder": "assets/fixtures/Dragon_Statue",
+              "recipes": [
+                "rielkConstruction:Dragon_Statue1",
+                "rielkConstruction:Dragon_Statue2",
+                "rielkConstruction:Dragon_Statue3",
+                "rielkConstruction:Dragon_Statue4",
+                "rielkConstruction:Dragon_Statue5"
+              ]
+            },
+            {
+              "id": "Fire_Pit",
+              "name": "Fire Pit",
+              "media_folder": "assets/fixtures/Fire_Pit",
+              "recipes": [
+                "rielkConstruction:Fire_Pit1",
+                "rielkConstruction:Fire_Pit2",
+                "rielkConstruction:Fire_Pit3",
+                "rielkConstruction:Fire_Pit4",
+                "rielkConstruction:Fire_Pit5"
+              ]
+            },
+            {
+              "id": "Flower_Pots",
+              "name": "Flower Pots",
+              "media_folder": "assets/fixtures/Flower_Pots",
+              "recipes": [
+                "rielkConstruction:Flower_Pots1",
+                "rielkConstruction:Flower_Pots2",
+                "rielkConstruction:Flower_Pots3",
+                "rielkConstruction:Flower_Pots4",
+                "rielkConstruction:Flower_Pots5"
+              ]
+            },
+            {
+              "id": "Forge",
+              "name": "Forge",
+              "media_folder": "assets/fixtures/Forge",
+              "recipes": [
+                "rielkConstruction:Forge1",
+                "rielkConstruction:Forge2",
+                "rielkConstruction:Forge3",
+                "rielkConstruction:Forge4",
+                "rielkConstruction:Forge5"
+              ]
+            },
+            {
+              "id": "Fridge",
+              "name": "Fridge",
+              "media_folder": "assets/fixtures/Fridge",
+              "recipes": [
+                "rielkConstruction:Fridge1",
+                "rielkConstruction:Fridge2",
+                "rielkConstruction:Fridge3",
+                "rielkConstruction:Fridge4",
+                "rielkConstruction:Fridge5"
+              ]
+            },
+            {
+              "id": "Jungle_Gym",
+              "name": "Jungle Gym",
+              "media_folder": "assets/fixtures/Jungle_Gym",
+              "recipes": [
+                "rielkConstruction:Jungle_Gym1",
+                "rielkConstruction:Jungle_Gym2",
+                "rielkConstruction:Jungle_Gym3",
+                "rielkConstruction:Jungle_Gym4",
+                "rielkConstruction:Jungle_Gym5"
+              ]
+            },
+            {
+              "id": "Lake",
+              "name": "Lake",
+              "media_folder": "assets/fixtures/Lake",
+              "recipes": [
+                "rielkConstruction:Lake1",
+                "rielkConstruction:Lake2",
+                "rielkConstruction:Lake3",
+                "rielkConstruction:Lake4",
+                "rielkConstruction:Lake5"
+              ]
+            },
+            {
+              "id": "Mines",
+              "name": "Mines",
+              "media_folder": "assets/fixtures/Mines",
+              "recipes": [
+                "rielkConstruction:Mines1",
+                "rielkConstruction:Mines2",
+                "rielkConstruction:Mines3",
+                "rielkConstruction:Mines4",
+                "rielkConstruction:Mines5"
+              ]
+            },
+            {
+              "id": "Orchard",
+              "name": "Orchard",
+              "media_folder": "assets/fixtures/Orchard",
+              "recipes": [
+                "rielkConstruction:Orchard1",
+                "rielkConstruction:Orchard2",
+                "rielkConstruction:Orchard3",
+                "rielkConstruction:Orchard4",
+                "rielkConstruction:Orchard"
+              ]
+            },
+            {
+              "id": "Oven",
+              "name": "Oven",
+              "media_folder": "assets/fixtures/Oven",
+              "recipes": [
+                "rielkConstruction:Oven1",
+                "rielkConstruction:Oven2",
+                "rielkConstruction:Oven3",
+                "rielkConstruction:Oven4",
+                "rielkConstruction:Oven5"
+              ]
+            },
+            {
+              "id": "Prayer_Altar",
+              "name": "Prayer Altar",
+              "media_folder": "assets/fixtures/Prayer_Altar",
+              "recipes": [
+                "rielkConstruction:Prayer_Altar1",
+                "rielkConstruction:Prayer_Altar2",
+                "rielkConstruction:Prayer_Altar3",
+                "rielkConstruction:Prayer_Altar4",
+                "rielkConstruction:Prayer_Altar5"
+              ]
+            },
+            {
+              "id": "Rune_Altar",
+              "name": "Rune Altar",
+              "media_folder": "assets/fixtures/Rune_Altar",
+              "recipes": [
+                "rielkConstruction:Rune_Altar1",
+                "rielkConstruction:Rune_Altar2",
+                "rielkConstruction:Rune_Altar3",
+                "rielkConstruction:Rune_Altar4",
+                "rielkConstruction:Rune_Altar5"
+              ]
+            },
+            {
+              "id": "Spell_Library",
+              "name": "Spell Library",
+              "media_folder": "assets/fixtures/Spell_Library",
+              "recipes": [
+                "rielkConstruction:Spell_Library1",
+                "rielkConstruction:Spell_Library2",
+                "rielkConstruction:Spell_Library3",
+                "rielkConstruction:Spell_Library4",
+                "rielkConstruction:Spell_Library5"
+              ]
+            },
+            {
               "id": "Storage_Chest",
               "name": "Storage Chest",
-              "media_folder": "assets/fixtures/storage_chest",
+              "media_folder": "assets/fixtures/Storage_Chest",
               "recipes": [
                 "rielkConstruction:Storage_Chest1",
-                "rielkConstruction:Storage_Chest2"
+                "rielkConstruction:Storage_Chest2",
+                "rielkConstruction:Storage_Chest3",
+                "rielkConstruction:Storage_Chest4",
+                "rielkConstruction:Storage_Chest5"
+              ]
+            },
+            {
+              "id": "Telescope",
+              "name": "Telescope",
+              "media_folder": "assets/fixtures/Telescope",
+              "recipes": [
+                "rielkConstruction:Telescope1",
+                "rielkConstruction:Telescope2",
+                "rielkConstruction:Telescope3",
+                "rielkConstruction:Telescope4",
+                "rielkConstruction:Telescope5"
+              ]
+            },
+            {
+              "id": "Tool_Rack",
+              "name": "Tool Rack",
+              "media_folder": "assets/fixtures/Tool_Rack",
+              "recipes": [
+                "rielkConstruction:Tool_Rack1",
+                "rielkConstruction:Tool_Rack2",
+                "rielkConstruction:Tool_Rack3",
+                "rielkConstruction:Tool_Rack4",
+                "rielkConstruction:Tool_Rack5"
+              ]
+            },
+            {
+              "id": "Training_Dummy",
+              "name": "Training Dummy",
+              "media_folder": "assets/fixtures/Training_Dummy",
+              "recipes": [
+                "rielkConstruction:Training_Dummy1",
+                "rielkConstruction:Training_Dummy2",
+                "rielkConstruction:Training_Dummy3",
+                "rielkConstruction:Training_Dummy4",
+                "rielkConstruction:Training_Dummy5"
+              ]
+            },
+            {
+              "id": "Trapping_Hut",
+              "name": "Trapping Hut",
+              "media_folder": "assets/fixtures/Trapping_Hut",
+              "recipes": [
+                "rielkConstruction:Trapping_Hut1",
+                "rielkConstruction:Trapping_Hut2",
+                "rielkConstruction:Trapping_Hut3",
+                "rielkConstruction:Trapping_Hut4",
+                "rielkConstruction:Trapping_Hut5"
               ]
             },
             {
               "id": "Wardrobe",
               "name": "Wardrobe",
-              "media_folder": "assets/fixtures/wardrobe",
+              "media_folder": "assets/fixtures/Wardrobe",
               "recipes": [
-                "rielkConstruction:Wardrobe1"
+                "rielkConstruction:Wardrobe1",
+                "rielkConstruction:Wardrobe2",
+                "rielkConstruction:Wardrobe3",
+                "rielkConstruction:Wardrobe4",
+                "rielkConstruction:Wardrobe5"
               ]
             },
             {
-              "id": "Sink",
-              "name": "Sink",
-              "media_folder": "assets/fixtures/sink",
+              "id": "Worktable",
+              "name": "Worktable",
+              "media_folder": "assets/fixtures/Worktable",
               "recipes": [
-                "rielkConstruction:Sink1"
+                "rielkConstruction:Worktable1",
+                "rielkConstruction:Worktable2",
+                "rielkConstruction:Worktable3",
+                "rielkConstruction:Worktable4",
+                "rielkConstruction:Worktable5"
               ]
             }
           ],
