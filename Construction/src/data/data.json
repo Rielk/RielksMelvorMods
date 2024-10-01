@@ -953,7 +953,7 @@
               "level": 1,
               "productID": "rielkConstruction:Normal_Planks",
               "baseQuantity": 2,
-              "baseExperience": 100,
+              "baseExperience": 10,
               "categoryID": "rielkConstruction:Materials",
               "itemCosts": [
                 {
@@ -968,7 +968,7 @@
               "level": 15,
               "productID": "rielkConstruction:Oak_Planks",
               "baseQuantity": 2,
-              "baseExperience": 100,
+              "baseExperience": 20,
               "categoryID": "rielkConstruction:Materials",
               "itemCosts": [
                 {
@@ -983,7 +983,7 @@
               "level": 40,
               "productID": "rielkConstruction:Teak_Planks",
               "baseQuantity": 2,
-              "baseExperience": 100,
+              "baseExperience": 50,
               "categoryID": "rielkConstruction:Materials",
               "itemCosts": [
                 {
@@ -998,7 +998,7 @@
               "level": 55,
               "productID": "rielkConstruction:Mahogany_Planks",
               "baseQuantity": 2,
-              "baseExperience": 100,
+              "baseExperience": 60,
               "categoryID": "rielkConstruction:Materials",
               "itemCosts": [
                 {
