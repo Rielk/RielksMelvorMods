@@ -1,3 +1,7 @@
+const { loadModule, onInterfaceReady } = mod.getContext(import.meta);
+
+const { templateRielkLangStringWithNodes } = await loadModule('src/language/translationManager.mjs');
+
 class ConstructionModifierDisplayElement extends HTMLElement {
     constructor() {
         super();
@@ -53,7 +57,27 @@ class ConstructionModifierDisplayElement extends HTMLElement {
     }
     updateModifierInfo() {
         this.modifierText.textContent = '';
-        this.modifierText.append(...StatObject.formatDescriptions(this.recipe.stats, getElementDescriptionFormatter('div', this.recipe.isUnlocked ? 'mb-1' : 'mb-1 text-warning')));
+        const formatter = getElementDescriptionFormatter('div', this.recipe.isUnlocked ? 'mb-1' : 'mb-1 text-warning');
+        this.modifierText.append(...StatObject.formatDescriptions(this.recipe.stats, formatter));
+        if (this.recipe.doesGrantItems) {
+            this.recipe.grantItems.forEach(iq => {
+                var nodes = templateRielkLangStringWithNodes('DESCRIPTION_ADDS_ITEM', {
+                    itemImage: createElement('img', {
+                        className: 'skill-icon-xs',
+                        attributes: [['src', iq.item.media]]
+                    })
+                }, {
+                    itemQuantity: iq.quantity,
+                    itemName: iq.item.name,
+                });
+                nodes = nodes.map(n => {
+                    if (typeof n == 'string')
+                        return formatter({ text: n });
+                    return n;
+                })
+                this.modifierText.append(...nodes)
+            });
+        }
     }
     setLocked(recipe, construction) {
         hideElement(this.fixtureImage);

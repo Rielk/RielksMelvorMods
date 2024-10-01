@@ -9,6 +9,8 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
         try {
             this._baseActionCost = data.baseActionCost;
             this.modifiers = new ConstructionModifiers(data, game, `${this.id}`);
+            if (data.grantItem != undefined)
+                this.grantItems = game.items.getQuantities(data.grantItem);
         } catch (e) {
             throw new DataConstructionError(ConstructionFixtureRecipes.name, e, this.id);
         }
@@ -18,6 +20,8 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
         try {
             this._baseActionCost = data.baseActionCost;
             this.modifiers.applyDataModification(data, game);
+            if (data.grantItem != undefined)
+                this.grantItems = game.items.getQuantities(data.grantItem);
         }
         catch (e) {
             throw new DataModificationError(ConstructionFixtureRecipes.name, e, this.id);
@@ -41,12 +45,17 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
     get stats() {
         return this.modifiers._stats;
     }
+    get doesGrantItems() {
+        return this.grantItems != undefined && this.grantItems.length > 0;
+    }
 
     makeProgress() {
         this.fixture.progress++;
         this.skill.renderQueue.menu = true;
         if (this.fixture.progress >= this.actionCost) {
             this.fixture.upgrade(this.skill);
+            if (this.grantItems != undefined)
+                this.grantItems.forEach(iq => game.bank.add(iq.item, iq.quantity, true, true, true));
             return false;
         }
         return true;

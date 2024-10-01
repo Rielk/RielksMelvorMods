@@ -41,6 +41,9 @@ export function getRielkLangString(identifier) {
 export function templateRielkLangString(identifier, templateData) {
     return templateString(getRielkLangString(identifier), templateData);
 }
+export function templateRielkLangStringWithNodes(id, nodeData, textData, clone=true) {
+    return templateStringWithNodes(getRielkLangString(id), nodeData, textData, clone);
+}
 
 export function patchTranslations(ctx) {
     const superSetLanguage = setLanguage;
@@ -87,7 +90,17 @@ export function patchTranslations(ctx) {
     });
     ctx.patch(Pet, 'name').get(function (patch) {
         if (this.namespace === 'rielkConstruction')
-            return getLangString(`PET_NAME_${this.localID}`);
+            return getRielkLangString(`PET_NAME_${this.localID}`);
         return patch();
+    });
+    ctx.patch(ModifierDescription, 'template').get(function (patch) {
+        const ret = patch();
+        if (this._lang !== undefined && ret.startsWith('UNDEFINED TRANSLATION')){
+            const ret2 = getRielkLangString(this._lang);
+            if (ret2.startsWith('UNDEFINED TRANSLATION'))
+                return ret;
+            return ret2;
+        }
+        return ret;
     });
 }
