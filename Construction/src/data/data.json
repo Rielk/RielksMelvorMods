@@ -235,13 +235,140 @@
           }
         ],
         "modifiers": {
-          "skillInterval": [
+          "flatSkillInterval": [
             {
               "skillID": "rielkConstruction:Construction",
-              "value": -15
+              "value": -200
             }
           ]
         }
+      },
+      {
+        "itemType": "Equipment",
+        "id": "Builders_Hat",
+        "name": "Builders Hat",
+        "category": "Construction",
+        "type": "Equipment",
+        "media": "assets/items/skilling_outfit_hat_construction.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 2000,
+        "customDescription": "+2% Construction Skill XP<br><span class=\"text-warning\">With all four Builders Outfit equipped: +8% Construction Mastery XP</span>",
+        "tier": "none",
+        "validSlots": [
+          "Helmet"
+        ],
+        "occupiesSlots": [],
+        "equipRequirements": [],
+        "equipmentStats": [],
+        "modifiers": {
+          "skillXP": [
+            {
+              "skillID": "rielkConstruction:Construction",
+              "value": 2
+            }
+          ]
+        }
+      },
+      {
+        "itemType": "Equipment",
+        "id": "Builders_Body",
+        "name": "Builders Body",
+        "category": "Construction",
+        "type": "Equipment",
+        "media": "assets/media/bank/skilling_outfit_body_construction.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 2000,
+        "customDescription": "+2% Construction Skill XP<br><span class=\"text-warning\">With all four Builders Outfit equipped: +8% Construction Mastery XP</span>",
+        "tier": "none",
+        "validSlots": [
+          "Platebody"
+        ],
+        "occupiesSlots": [],
+        "equipRequirements": [],
+        "equipmentStats": [],
+        "modifiers": {
+          "skillXP": [
+            {
+              "skillID": "rielkConstruction:Construction",
+              "value": 2
+            }
+          ]
+        }
+      },
+      {
+        "itemType": "Equipment",
+        "id": "Builders_Leggings",
+        "name": "Builders Leggings",
+        "category": "Construction",
+        "type": "Equipment",
+        "media": "assets/media/bank/skilling_outfit_leggings_construction.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 2000,
+        "customDescription": "+2% Construction Skill XP<br><span class=\"text-warning\">With all four Builders Outfit equipped: +8% Construction Mastery XP</span>",
+        "tier": "none",
+        "validSlots": [
+          "Platelegs"
+        ],
+        "occupiesSlots": [],
+        "equipRequirements": [],
+        "equipmentStats": [],
+        "modifiers": {
+          "skillXP": [
+            {
+              "skillID": "rielkConstruction:Construction",
+              "value": 2
+            }
+          ]
+        }
+      },
+      {
+        "itemType": "Equipment",
+        "id": "Builders_Boots",
+        "name": "Builders Boots",
+        "category": "Construction",
+        "type": "Equipment",
+        "media": "assets/media/bank/skilling_outfit_boots_construction.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 2000,
+        "customDescription": "+2% Construction Skill XP<br><span class=\"text-warning\">With all four Builders Outfit equipped: +8% Construction Mastery XP</span>",
+        "tier": "none",
+        "validSlots": [
+          "Boots"
+        ],
+        "occupiesSlots": [],
+        "equipRequirements": [],
+        "equipmentStats": [],
+        "modifiers": {
+          "skillXP": [
+            {
+              "skillID": "rielkConstruction:Construction",
+              "value": 2
+            }
+          ]
+        }
+      },
+      {
+        "id": "Mastery_Token_Construction",
+        "name": "Mastery Token (Construction)",
+        "category": "Mastery",
+        "type": "Token",
+        "media": "assets/items/mastery_token_construction.png",
+        "ignoreCompletion": false,
+        "obtainFromItemLog": false,
+        "golbinRaidExclusive": false,
+        "sellsFor": 1500,
+        "itemType": "MasteryToken",
+        "skill": "rielkConstruction:Construction",
+        "realm": "melvorD:Melvor",
+        "percent": 0.1
       }
     ],
     "shopPurchases": [
@@ -280,6 +407,207 @@
         "defaultBuyLimit": 1,
         "buyLimitOverrides": [],
         "showBuyLimit": false
+      },
+      {
+        "id": "Builders_Hat",
+        "media": "assets/media/bank/skilling_outfit_hat_construction.png",
+        "category": "melvorF:Township",
+        "contains": {
+          "items": [
+            {
+              "id": "rielkConstruction:Builders_Hat",
+              "quantity": 1
+            }
+          ]
+        },
+        "cost": {
+          "items": [],
+          "currencies": [
+            {
+              "currency": "melvorD:GP",
+              "type": "Fixed",
+              "cost": 100000
+            }
+          ]
+        },
+        "allowQuantityPurchase": false,
+        "unlockRequirements": [],
+        "purchaseRequirements": [
+          {
+            "type": "SkillLevel",
+            "skillID": "melvorD:Township",
+            "level": 10
+          },
+          {
+            "type": "TownshipTask",
+            "count": 20
+          }
+        ],
+        "defaultBuyLimit": 0,
+        "buyLimitOverrides": [],
+        "showBuyLimit": false
+      },
+      {
+        "id": "Builders_Body",
+        "media": "assets/media/bank/skilling_outfit_body_construction.png",
+        "category": "melvorF:Township",
+        "contains": {
+          "items": [
+            {
+              "id": "rielkConstruction:Builders_Body",
+              "quantity": 1
+            }
+          ]
+        },
+        "cost": {
+          "items": [],
+          "currencies": [
+            {
+              "currency": "melvorD:GP",
+              "type": "Fixed",
+              "cost": 100000
+            }
+          ]
+        },
+        "allowQuantityPurchase": false,
+        "unlockRequirements": [],
+        "purchaseRequirements": [
+          {
+            "type": "SkillLevel",
+            "skillID": "melvorD:Township",
+            "level": 20
+          },
+          {
+            "type": "TownshipTask",
+            "count": 40
+          }
+        ],
+        "defaultBuyLimit": 0,
+        "buyLimitOverrides": [],
+        "showBuyLimit": false
+      },
+      {
+        "id": "Builders_Leggings",
+        "media": "assets/media/bank/skilling_outfit_leggings_construction.png",
+        "category": "melvorF:Township",
+        "contains": {
+          "items": [
+            {
+              "id": "rielkConstruction:Builders_Leggings",
+              "quantity": 1
+            }
+          ]
+        },
+        "cost": {
+          "items": [],
+          "currencies": [
+            {
+              "currency": "melvorD:GP",
+              "type": "Fixed",
+              "cost": 100000
+            }
+          ]
+        },
+        "allowQuantityPurchase": false,
+        "unlockRequirements": [],
+        "purchaseRequirements": [
+          {
+            "type": "SkillLevel",
+            "skillID": "melvorD:Township",
+            "level": 40
+          },
+          {
+            "type": "TownshipTask",
+            "count": 60
+          }
+        ],
+        "defaultBuyLimit": 0,
+        "buyLimitOverrides": [],
+        "showBuyLimit": false
+      },
+      {
+        "id": "Builders_Boots",
+        "media": "assets/media/bank/skilling_outfit_boots_construction.png",
+        "category": "melvorF:Township",
+        "contains": {
+          "items": [
+            {
+              "id": "rielkConstruction:Builders_Boots",
+              "quantity": 1
+            }
+          ]
+        },
+        "cost": {
+          "items": [],
+          "currencies": [
+            {
+              "currency": "melvorD:GP",
+              "type": "Fixed",
+              "cost": 100000
+            }
+          ]
+        },
+        "allowQuantityPurchase": false,
+        "unlockRequirements": [],
+        "purchaseRequirements": [
+          {
+            "type": "SkillLevel",
+            "skillID": "melvorD:Township",
+            "level": 60
+          },
+          {
+            "type": "TownshipTask",
+            "count": 80
+          }
+        ],
+        "defaultBuyLimit": 0,
+        "buyLimitOverrides": [],
+        "showBuyLimit": false
+      }
+    ],
+    "shopDisplayOrder": [
+      {
+        "insertAt": "After",
+        "afterID": "melvorF:Astrology_Skillcape",
+        "ids": [
+          "rielkConstruction:Construction_Skillcape"
+        ]
+      },
+      {
+        "insertAt": "After",
+        "afterID": "melvorF:Star_Gazing_Boots",
+        "ids": [
+          "rielkConstruction:Builders_Hat",
+          "rielkConstruction:Builders_Body",
+          "rielkConstruction:Builders_Leggings",
+          "rielkConstruction:Builders_Boots"
+        ]
+      }
+    ],
+    "bankSortOrder": [
+      {
+        "insertAt": "After",
+        "afterID": "melvorF:Astrology_Skillcape",
+        "ids": [
+          "rielkConstruction:Construction_Skillcape"
+        ]
+      },
+      {
+        "insertAt": "After",
+        "afterID": "melvorF:Star_Gazing_Boots",
+        "ids": [
+          "rielkConstruction:Builders_Hat",
+          "rielkConstruction:Builders_Body",
+          "rielkConstruction:Builders_Leggings",
+          "rielkConstruction:Builders_Boots"
+        ]
+      },
+      {
+        "insertAt": "After",
+        "afterID": "melvorF:Mastery_Token_Astrology",
+        "ids": [
+          "rielkConstruction:Mastery_Token_Construction"
+        ]
       }
     ],
     "pets": [
@@ -299,6 +627,24 @@
         "activeInRaid": false,
         "scaleChanceWithMasteryPool": true,
         "skillID": "rielkConstruction:Construction"
+      }
+    ],
+    "itemSynergies": [
+      {
+        "itemIDs": [
+          "rielkConstruction:Builders_Hat",
+          "rielkConstruction:Builders_Body",
+          "rielkConstruction:Builders_Leggings",
+          "rielkConstruction:Builders_Boots"
+        ],
+        "playerModifiers": {
+          "masteryXP": [
+            {
+              "skillID": "rielkConstruction:Construction",
+              "value": 8
+            }
+          ]
+        }
       }
     ],
     "skillData": [
@@ -3354,14 +3700,14 @@
                   {
                     "value": 1,
                     "skillID": "melvorD:Magic"
-                    }
-                  ],
-                  "skillXP": [
-                    {
-                      "value": 1,
-                      "skillID": "melvorD:Magic"
-                    }
-                  ]
+                  }
+                ],
+                "skillXP": [
+                  {
+                    "value": 1,
+                    "skillID": "melvorD:Magic"
+                  }
+                ]
               }
             },
             {
@@ -4018,7 +4364,8 @@
                   {
                     "value": 2,
                     "skillID": "melvorD:Attack"
-                  }, {
+                  },
+                  {
                     "value": 2,
                     "skillID": "melvorD:Strength"
                   }
@@ -4210,11 +4557,11 @@
                   }
                 ],
                 "skillXP": [
-                    {
-                      "value": 4,
-                      "skillID": "melvorD:Summoning"
-                    }
-                  ]
+                  {
+                    "value": 4,
+                    "skillID": "melvorD:Summoning"
+                  }
+                ]
               }
             },
             {
@@ -4233,7 +4580,6 @@
                   "quantity": 2
                 }
               ],
-              
               "currencyCosts": [
                 {
                   "id": "melvorD:SlayerCoins",
@@ -4657,6 +5003,120 @@
             ]
           }
         ]
+      }
+    ]
+  },
+  "modifications": {
+    "items": [
+      {
+        "id": "melvorF:Max_Skillcape",
+        "equipRequirements": {
+          "add": [
+            {
+              "type": "SkillLevel",
+              "skillID": "rielkConstruction:Construction",
+              "level": 99
+            }
+          ]
+        },
+        "modifiers": {
+          "add": {
+            "flatSkillInterval": [
+              {
+                "skillID": "rielkConstruction:Construction",
+                "value": -200
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "melvorF:Cape_of_Completion",
+        "equipRequirements": {
+          "add": [
+            {
+              "type": "SkillLevel",
+              "skillID": "rielkConstruction:Construction",
+              "level": 99
+            }
+          ]
+        },
+        "modifiers": {
+          "add": {
+            "flatSkillInterval": [
+              {
+                "skillID": "rielkConstruction:Construction",
+                "value": -200
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "itemUpgrades": [
+      {
+        "id": "melvorF:Skillers_Hat",
+        "itemCosts": {
+          "add": [
+            {
+              "id": "rielkConstruction:Builders_Hat",
+              "quantity": 1
+            }
+          ]
+        },
+        "rootItemIDs": {
+          "add": [
+            "rielkConstruction:Builders_Hat"
+          ]
+        }
+      },
+      {
+        "id": "melvorF:Skillers_Body",
+        "itemCosts": {
+          "add": [
+            {
+              "id": "rielkConstruction:Builders_Body",
+              "quantity": 1
+            }
+          ]
+        },
+        "rootItemIDs": {
+          "add": [
+            "rielkConstruction:Builders_Body"
+          ]
+        }
+      },
+      {
+        "id": "melvorF:Skillers_Leggings",
+        "itemCosts": {
+          "add": [
+            {
+              "id": "rielkConstruction:Builders_Leggings",
+              "quantity": 1
+            }
+          ]
+        },
+        "rootItemIDs": {
+          "add": [
+            "rielkConstruction:Builders_Leggings"
+          ]
+        }
+      },
+      {
+        "id": "melvorF:Skillers_Boots",
+        "itemCosts": {
+          "add": [
+            {
+              "id": "rielkConstruction:Builders_Boots",
+              "quantity": 1
+            }
+          ]
+        },
+        "rootItemIDs": {
+          "add": [
+            "rielkConstruction:Builders_Boots"
+          ]
+        }
       }
     ]
   }
