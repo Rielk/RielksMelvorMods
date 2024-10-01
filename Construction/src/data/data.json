@@ -1768,7 +1768,7 @@
                     "skillID": "melvorD:Thieving"
                   }
                 ],
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 4,
                     "skillID": "melvorD:Thieving"
@@ -1842,7 +1842,7 @@
                     "skillID": "melvorD:Thieving"
                   }
                 ],
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 4,
                     "skillID": "melvorD:Thieving"
@@ -2496,7 +2496,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 8,
                     "skillID": "rielkConstruction:Construction"
@@ -2889,7 +2889,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 1,
                     "skillID": "melvorD:Fishing"
@@ -2921,7 +2921,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 2,
                     "skillID": "melvorD:Fishing"
@@ -2953,7 +2953,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 2,
                     "skillID": "melvorD:Fishing"
@@ -2985,7 +2985,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 5,
                     "skillID": "melvorD:Fishing"
@@ -3041,7 +3041,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 3,
                     "skillID": "melvorD:Mining"
@@ -3077,7 +3077,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 5,
                     "skillID": "melvorD:Mining"
@@ -3244,7 +3244,7 @@
                     "categoryID": "melvorD:Tree"
                   }
                 ],
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 8,
                     "skillID": "melvorD:Woodcutting"
@@ -4084,7 +4084,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 10,
                     "skillID": "melvorD:Astrology"
@@ -4884,7 +4884,7 @@
               ],
               "currencyCosts": [],
               "modifiers": {
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 5,
                     "skillID": "rielkConstruction:Construction"
@@ -4922,7 +4922,7 @@
                     "skillID": "rielkConstruction:Construction"
                   }
                 ],
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 5,
                     "skillID": "melvorD:Fletching"
@@ -4949,7 +4949,7 @@
               "currencyCosts": [],
               "modifiers": {
                 "rielkConstruction:constructionActionsToUpgrade": -10,
-                "doubleItemsSkill": [
+                "skillItemDoublingChance": [
                   {
                     "value": 5,
                     "skillID": "melvorD:Crafting"
