@@ -348,16 +348,15 @@ export class Construction extends ArtisanSkill {
         }
         if (room == undefined || fixture == undefined)
             return;
+        if (!this.getRecipeCosts(fixture.currentRecipe).checkIfOwned()) {
+            notifyPlayer(this, this.noBuildCostsMessage, 'danger');
+            return;
+        }
         this._actionMode = 1;
         this.selectedRoom = room;
         this.selectedFixture = fixture;
         this.selectedFixtureRecipe = fixture.currentRecipe;
-        if (this.getCurrentRecipeCosts().checkIfOwned()) {
-            this.start();
-        } else {
-            this._actionMode = undefined;
-            notifyPlayer(this, this.noBuildCostsMessage, 'danger');
-        }
+        this.start();
         
     }
     getRegistry(type) {
