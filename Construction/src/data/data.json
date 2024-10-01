@@ -4964,16 +4964,11 @@
     "modifiers": [
       {
         "id": "farmingTreeSeedReturn",
+        "allowNegative": false,
         "allowedScopes": [
           {
             "scopes": {},
             "descriptions": [
-              {
-                "text": "-${value}% chance to regain a Tree Seed in Farming when harvested",
-                "lang": "MODIFIER_DATA_farmingTreeSeedReturn",
-                "below": 0,
-                "includeSign": false
-              },
               {
                 "text": "+${value}% chance to regain a Tree Seed in Farming when harvested",
                 "lang": "MODIFIER_DATA_farmingTreeSeedReturn",
@@ -4992,13 +4987,13 @@
             "descriptions": [
               {
                 "text": "-${value}% actions required to upgrade in Construction",
-                "lang": "MODIFIER_DATA_constructionActionsToUpgrade",
+                "lang": "MODIFIER_DATA_decreaseConstructionActionsToUpgrade",
                 "below": 0,
                 "includeSign": false
               },
               {
                 "text": "+${value}% actions required to upgrade in Construction",
-                "lang": "MODIFIER_DATA_constructionActionsToUpgrade",
+                "lang": "MODIFIER_DATA_increaseConstructionActionsToUpgrade",
                 "above": 0,
                 "includeSign": false
               }
