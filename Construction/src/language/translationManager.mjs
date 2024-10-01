@@ -12,15 +12,13 @@ class TranslationManager {
         if (this.setLang === 'lemon' || this.setLang === 'carrot') {
             this.setLang = 'en';
         }
-        const loadPath = languages[this.setLang];
-        if (loadPath == undefined){
-            console.error(`No language file specified for language: '${this.setLang}'`)
-            this.loadedLangJson = {};
+        var loadPath = languages[this.setLang];
+        if (loadPath == undefined) {
+            console.error(`No rielk language file specified for language: '${this.setLang}'. Defaulted to English.`)
+            loadPath = languages['en'];
         }
-        else {
-            const { language } = await loadModule(loadPath);
-            this.loadedLangJson = language;
-        }
+        const { language } = await loadModule(loadPath);
+        this.loadedLangJson = language;
     }
 }
 
