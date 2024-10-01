@@ -38,6 +38,10 @@ export class Construction extends ArtisanSkill {
         return getRielkLangString('SKILL_NAME_Construction');
     }
 
+    get maxLevelCap() {
+        return 99;
+    }
+
     get renderQueue() {
         return this.ui.renderQueue;
     }
@@ -231,7 +235,7 @@ export class Construction extends ArtisanSkill {
         });
         const html = summary.getAllDescriptions().map(getElementHTMLDescriptionFormatter('h5', 'font-w400 font-size-sm mb-1', false)).join('');
         SwalLocale.fire({
-            title: getLangString('ASTROLOGY_MISC_6'),
+            title: getRielkLangString('MENU_TEXT_ALL_ACTIVE_CONSTRUCTION_MODIFIERS'),
             html,
         });
     }

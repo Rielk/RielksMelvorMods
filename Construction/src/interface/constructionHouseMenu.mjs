@@ -20,10 +20,10 @@ export class ConstructionHouseMenu {
         })
         viewAllModifiersButton.role = 'button';
         viewAllModifiersButton.onclick = () => construction.viewAllModifiersOnClick();
-        var langString = createElement('lang-string', {
+        var langString = createElement('rielk-lang-string', {
             parent: viewAllModifiersButton
         })
-        langString.setAttribute('lang-id','ASTROLOGY_BTN_6');
+        langString.setAttribute('lang-id','MENU_TEXT_SHOW_ALL_ACTIVE_MODIFIERS');
 
         construction.rooms.forEach((room) => {
             const roomPanel = createElement('rielk-construction-room-panel', {
