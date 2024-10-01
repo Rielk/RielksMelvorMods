@@ -15,6 +15,9 @@ export const language = {
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': 'You don\'t have the required materials to Build that.',
 
+    'MASTERY_BONUS_ Construction_ 0': 'Each level provides +0.2% chance to preserve resources.',
+    'MASTERY_BONUS_ Construction_ 1': '+5% chance to preserve resources.',
+
     'SKILL_CATEGORY_ Construction_ Nails': 'Nails',
     'SKILL_CATEGORY_ Construction_ Planks': 'Planks',
     'SKILL_CATEGORY_ Construction_ House': 'House',
@@ -24,5 +27,5 @@ export const language = {
 
     'CONSTRUCTION_FIXTURE_OF_TIER': '${fixtureName}: Tier ${tier}',
 
-    'CONSTRUCTION_FIXTURE_NAME_ Storage_Chest': 'Storage Chest'
+    'CONSTRUCTION_FIXTURE_NAME_ Storage_Chest': 'Storage Chest',
 }

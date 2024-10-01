@@ -423,59 +423,36 @@
           },
           "masteryLevelUnlocks": [
             {
-              "level": 50,
-              "descriptionID": 1,
-              "description": "15% base chance to obtain 2 items"
+              "level": 1,
+              "descriptionID": 0,
+              "description": "Each level provides +0.2% chance to preserve resources."
             },
             {
               "level": 99,
-              "descriptionID": 2,
-              "description": "30% base chance to preserve resources. +35% chance to obtain 2 items."
+              "descriptionID": 1,
+              "description": "+5% chance to preserve resources."
             }
           ],
           "masteryLevelBonuses": [
             {
               "modifiers": {
-                "skillItemDoublingChance": [
+                "skillPreservationChance": [
                   {
                     "skillID": "rielkConstruction:Construction",
-                    "actionID": "rielkConstruction:Iron_Nails",
-                    "value": 5
+                    "value": 0.2
                   }
                 ]
               },
-              "level": 10,
-              "levelScalingSlope": 20,
-              "levelScalingMax": 90
+              "level": 2,
+              "levelScalingSlope": 1,
+              "levelScalingMax": 99
             },
             {
               "modifiers": {
                 "skillPreservationChance": [
                   {
                     "skillID": "rielkConstruction:Construction",
-                    "actionID": "rielkConstruction:Iron_Nails",
                     "value": 5
-                  }
-                ]
-              },
-              "level": 20,
-              "levelScalingSlope": 20,
-              "levelScalingMax": 80
-            },
-            {
-              "modifiers": {
-                "skillItemDoublingChance": [
-                  {
-                    "skillID": "rielkConstruction:Construction",
-                    "actionID": "rielkConstruction:Iron_Nails",
-                    "value": 10
-                  }
-                ],
-                "skillPreservationChance": [
-                  {
-                    "skillID": "rielkConstruction:Construction",
-                    "actionID": "rielkConstruction:Iron_Nails",
-                    "value": 10
                   }
                 ]
               },
@@ -512,11 +489,10 @@
             {
               "realm": "melvorD:Melvor",
               "modifiers": {
-                "skillPreservationChance": [
+                "flatBasePrimaryProductQuantity": [
                   {
                     "skillID": "rielkConstruction:Construction",
-                    "realmID": "melvorD:Melvor",
-                    "value": 5
+                    "value": 1
                   }
                 ]
               },
@@ -525,11 +501,11 @@
             {
               "realm": "melvorD:Melvor",
               "modifiers": {
-                "skillItemDoublingChance": [
+                "flatSkillInterval": [
                   {
                     "skillID": "rielkConstruction:Construction",
                     "realmID": "melvorD:Melvor",
-                    "value": 10
+                    "value": -100
                   }
                 ]
               },
