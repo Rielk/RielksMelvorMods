@@ -25,7 +25,7 @@ export class ConstructionHouseMenu {
         })
         langString.setAttribute('lang-id','MENU_TEXT_SHOW_ALL_ACTIVE_MODIFIERS');
 
-        construction.rooms.forEach((room) => {
+        construction.sortedRooms.forEach((room) => {
             const roomPanel = createElement('rielk-construction-room-panel', {
                 className: 'col-12 col-xl-6',
                 parent: container
