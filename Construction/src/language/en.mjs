@@ -11,7 +11,40 @@ export const language = {
     'MENU_TEXT_SHOW_ALL_ACTIVE_MODIFIERS': 'View All Active Modifiers',
     'MENU_TEXT_ALL_ACTIVE_CONSTRUCTION_MODIFIERS': 'All Active Construction Modifiers',
 
-    'SHOP_NAME_ Construction_Skillcape': 'Construction_Skillcape',
+    'SHOP_NAME_Construction_Skillcape': 'Construction_Skillcape',
+
+    'Pet_NAME_ChuckTheBeaver': 'Chuck The Beaver',
+
+    'ITEM_NAME_Construction_Skillcape': 'Construction_Skillcape',
+    'ITEM_NAME_Builders_Hat': 'Builders Hat',
+    'ITEM_NAME_Builders_Body': 'Builders Body',
+    'ITEM_NAME_Builders_Leggings': 'Builders Leggings',
+    'ITEM_NAME_Builders_Boots': 'Builders Boots',
+
+    'ITEM_NAME_Iron_Nails': 'Iron Nails',
+    'ITEM_NAME_Steel_Nails': 'Steel Nails',
+    'ITEM_NAME_Mithril_Nails': 'Mithril Nails',
+    'ITEM_NAME_Adamantite_Nails': 'Adamantite Nails',
+    'ITEM_NAME_Dragonite_Nails': 'Dragonite Nails',
+
+    'ITEM_NAME_Normal_Planks': 'Normal Planks',
+    'ITEM_NAME_Oak_Planks': 'Oak Planks',
+    'ITEM_NAME_Teak_Planks': 'Teak Planks',
+    'ITEM_NAME_Mahogany_Planks': 'Mahogany Planks',
+    'ITEM_NAME_Magic_Planks': 'Magic Planks',
+
+    'ITEM_NAME_Allotment_Token_1': 'Allotment Token 1',
+    'ITEM_NAME_Allotment_Token_2': 'Allotment Token 2',
+    'ITEM_NAME_Herb_Token_1': 'Herb Token 1',
+    'ITEM_NAME_Herb_Token_2': 'Herb Token 2',
+    'ITEM_NAME_Tree_Token_1': 'Tree Token 1',
+
+    'ITEM_NAME_Mastery_Token_Construction': 'Mastery Token (Construction)',
+
+    'ITEM_DESCRIPTION_Builders_Hat': '+2% Construction Skill XP<br><span class=\"text-warning\">With all four Builders Outfit equipped: +8% Construction Mastery XP</span>',
+    'ITEM_DESCRIPTION_Builders_Body': '+2% Construction Skill XP<br><span class=\"text-warning\">With all four Builders Outfit equipped: +8% Construction Mastery XP</span>',
+    'ITEM_DESCRIPTION_Builders_Leggings': '+2% Construction Skill XP<br><span class=\"text-warning\">With all four Builders Outfit equipped: +8% Construction Mastery XP</span>',
+    'ITEM_DESCRIPTION_Builders_Boots': '+2% Construction Skill XP<br><span class=\"text-warning\">With all four Builders Outfit equipped: +8% Construction Mastery XP</span>',
 
     'MODIFIER_DATA_farmingTreeSeedReturn': '+${value}% chance to regain a Tree Seed in Farming when harvested',
     'MODIFIER_DATA_decreaseConstructionActionsToUpgrade': '-${value}% actions required to upgrade in Construction',
