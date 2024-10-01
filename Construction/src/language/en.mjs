@@ -11,11 +11,11 @@ export const language = {
     'MENU_TEXT_SHOW_ALL_ACTIVE_MODIFIERS': 'View All Active Modifiers',
     'MENU_TEXT_ALL_ACTIVE_CONSTRUCTION_MODIFIERS': 'All Active Construction Modifiers',
 
-    'SHOP_NAME_Construction_Skillcape': 'Construction_Skillcape',
+    'SHOP_NAME_Construction_Skillcape': 'Construction Skillcape',
 
     'PET_NAME_ChuckTheBeaver': 'Chuck the Beaver',
 
-    'ITEM_NAME_Construction_Skillcape': 'Construction_Skillcape',
+    'ITEM_NAME_Construction_Skillcape': 'Construction Skillcape',
     'ITEM_NAME_Builders_Hat': 'Builders Hat',
     'ITEM_NAME_Builders_Body': 'Builders Body',
     'ITEM_NAME_Builders_Leggings': 'Builders Leggings',
@@ -92,7 +92,7 @@ export const language = {
     'CONSTRUCTION_FIXTURE_NAME_ Telescope': 'Telescope',
     'CONSTRUCTION_FIXTURE_NAME_ Tool_Rack': 'Toolbox',
     'CONSTRUCTION_FIXTURE_NAME_ Training_Dummy': 'Training Dummy',
-    'CONSTRUCTION_FIXTURE_NAME_ Trapping_Hut': 'Trapping Hut',
+    'CONSTRUCTION_FIXTURE_NAME_ Trapping_Hut': 'Trapper\'s Hut',
     'CONSTRUCTION_FIXTURE_NAME_ Wardrobe': 'Wardrobe',
     'CONSTRUCTION_FIXTURE_NAME_ Worktable': 'Workbench'
 }    
