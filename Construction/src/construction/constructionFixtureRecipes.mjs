@@ -28,7 +28,7 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
         }
     }
     get media() {
-        return this.fixture.mediaForTier(this.tier);
+        return this.fixture.media;
     }
     get name() {
         return templateRielkLangString('CONSTRUCTION_FIXTURE_OF_TIER', {

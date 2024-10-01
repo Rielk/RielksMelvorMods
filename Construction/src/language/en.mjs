@@ -13,7 +13,7 @@ export const language = {
 
     'SHOP_NAME_Construction_Skillcape': 'Construction_Skillcape',
 
-    'Pet_NAME_ChuckTheBeaver': 'Chuck The Beaver',
+    'PET_NAME_ChuckTheBeaver': 'Chuck the Beaver',
 
     'ITEM_NAME_Construction_Skillcape': 'Construction_Skillcape',
     'ITEM_NAME_Builders_Hat': 'Builders Hat',
@@ -79,20 +79,20 @@ export const language = {
     'CONSTRUCTION_FIXTURE_NAME_ Fire_Pit': 'Fire Pit',
     'CONSTRUCTION_FIXTURE_NAME_ Flower_Pots': 'Flower Pots',
     'CONSTRUCTION_FIXTURE_NAME_ Forge': 'Forge',
-    'CONSTRUCTION_FIXTURE_NAME_ Fridge': 'Fridge',
+    'CONSTRUCTION_FIXTURE_NAME_ Fridge': 'Cold Box',
     'CONSTRUCTION_FIXTURE_NAME_ Jungle_Gym': 'Jungle Gym',
     'CONSTRUCTION_FIXTURE_NAME_ Lake': 'Lake',
-    'CONSTRUCTION_FIXTURE_NAME_ Mines': 'Mines',
-    'CONSTRUCTION_FIXTURE_NAME_ Orchard': 'Orchard',
+    'CONSTRUCTION_FIXTURE_NAME_ Mines': 'Mine',
+    'CONSTRUCTION_FIXTURE_NAME_ Orchard': 'Forest',
     'CONSTRUCTION_FIXTURE_NAME_ Oven': 'Oven',
     'CONSTRUCTION_FIXTURE_NAME_ Prayer_Altar': 'Prayer Altar',
     'CONSTRUCTION_FIXTURE_NAME_ Rune_Altar': 'Rune Altar',
     'CONSTRUCTION_FIXTURE_NAME_ Spell_Library': 'Spell Library',
     'CONSTRUCTION_FIXTURE_NAME_ Storage_Chest': 'Storage Chest',
     'CONSTRUCTION_FIXTURE_NAME_ Telescope': 'Telescope',
-    'CONSTRUCTION_FIXTURE_NAME_ Tool_Rack': 'Tool Rack',
+    'CONSTRUCTION_FIXTURE_NAME_ Tool_Rack': 'Toolbox',
     'CONSTRUCTION_FIXTURE_NAME_ Training_Dummy': 'Training Dummy',
     'CONSTRUCTION_FIXTURE_NAME_ Trapping_Hut': 'Trapping Hut',
     'CONSTRUCTION_FIXTURE_NAME_ Wardrobe': 'Wardrobe',
-    'CONSTRUCTION_FIXTURE_NAME_ Worktable': 'Worktable'
+    'CONSTRUCTION_FIXTURE_NAME_ Worktable': 'Workbench'
 }    

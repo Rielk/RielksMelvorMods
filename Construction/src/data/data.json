@@ -5,7 +5,7 @@
     "pages": [
       {
         "id": "Construction",
-        "media": "assets/construction_header.png",
+        "media": "assets/icon.png",
         "containerID": "rielk-construction-container",
         "headerBgClass": "bg-rielk-construction",
         "hasGameGuide": false,
@@ -143,7 +143,7 @@
         "name": "Allotment Token 1",
         "category": "Construction",
         "type": "Token",
-        "media": "assets/items/token_allotment.png",
+        "media": "assets/items/plot_token.png",
         "ignoreCompletion": true,
         "obtainFromItemLog": true,
         "golbinRaidExclusive": false,
@@ -155,7 +155,7 @@
         "name": "Allotment Token 2",
         "category": "Construction",
         "type": "Token",
-        "media": "assets/items/token_allotment.png",
+        "media": "assets/items/plot_token.png",
         "ignoreCompletion": true,
         "obtainFromItemLog": true,
         "golbinRaidExclusive": false,
@@ -167,7 +167,7 @@
         "name": "Herb Token 1",
         "category": "Construction",
         "type": "Token",
-        "media": "assets/items/token_herb.png",
+        "media": "assets/items/plot_token.png",
         "ignoreCompletion": true,
         "obtainFromItemLog": true,
         "golbinRaidExclusive": false,
@@ -179,7 +179,7 @@
         "name": "Herb Token 2",
         "category": "Construction",
         "type": "Token",
-        "media": "assets/items/token_herb.png",
+        "media": "assets/items/plot_token.png",
         "ignoreCompletion": true,
         "obtainFromItemLog": true,
         "golbinRaidExclusive": false,
@@ -191,7 +191,7 @@
         "name": "Tree Token 1",
         "category": "Construction",
         "type": "Token",
-        "media": "assets/items/token_tree.png",
+        "media": "assets/items/plot_token.png",
         "ignoreCompletion": true,
         "obtainFromItemLog": true,
         "golbinRaidExclusive": false,
@@ -277,7 +277,7 @@
         "name": "Builders Body",
         "category": "Construction",
         "type": "Equipment",
-        "media": "assets/media/bank/skilling_outfit_body_construction.png",
+        "media": "assets/items/skilling_outfit_body_construction.png",
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
@@ -305,7 +305,7 @@
         "name": "Builders Leggings",
         "category": "Construction",
         "type": "Equipment",
-        "media": "assets/media/bank/skilling_outfit_leggings_construction.png",
+        "media": "assets/items/skilling_outfit_leggings_construction.png",
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
@@ -333,7 +333,7 @@
         "name": "Builders Boots",
         "category": "Construction",
         "type": "Equipment",
-        "media": "assets/media/bank/skilling_outfit_boots_construction.png",
+        "media": "assets/items/skilling_outfit_boots_construction.png",
         "ignoreCompletion": false,
         "obtainFromItemLog": false,
         "golbinRaidExclusive": false,
@@ -410,7 +410,7 @@
       },
       {
         "id": "Builders_Hat",
-        "media": "assets/media/bank/skilling_outfit_hat_construction.png",
+        "media": "assets/items/skilling_outfit_hat_construction.png",
         "category": "melvorF:Township",
         "contains": {
           "items": [
@@ -449,7 +449,7 @@
       },
       {
         "id": "Builders_Body",
-        "media": "assets/media/bank/skilling_outfit_body_construction.png",
+        "media": "assets/items/skilling_outfit_body_construction.png",
         "category": "melvorF:Township",
         "contains": {
           "items": [
@@ -488,7 +488,7 @@
       },
       {
         "id": "Builders_Leggings",
-        "media": "assets/media/bank/skilling_outfit_leggings_construction.png",
+        "media": "assets/items/skilling_outfit_leggings_construction.png",
         "category": "melvorF:Township",
         "contains": {
           "items": [
@@ -527,7 +527,7 @@
       },
       {
         "id": "Builders_Boots",
-        "media": "assets/media/bank/skilling_outfit_boots_construction.png",
+        "media": "assets/items/skilling_outfit_boots_construction.png",
         "category": "melvorF:Township",
         "contains": {
           "items": [
@@ -864,13 +864,13 @@
             {
               "id": "Materials",
               "name": "Materials",
-              "media": "assets/categories/materials.png",
+              "media": "assets/items/normal_planks.png",
               "type": "Artisan"
             },
             {
               "id": "House",
               "name": "House",
-              "media": "assets/categories/house.png",
+              "media": "assets/house.png",
               "type": "House"
             }
           ],
@@ -1104,7 +1104,7 @@
             {
               "id": "Apparatus",
               "name": "Apparatus",
-              "media_folder": "assets/fixtures/Apparatus",
+              "media": "assets/fixtures/apparatus.png",
               "recipes": [
                 "rielkConstruction:Apparatus1",
                 "rielkConstruction:Apparatus2",
@@ -1116,7 +1116,7 @@
             {
               "id": "Archery_Range",
               "name": "Archery Range",
-              "media_folder": "assets/fixtures/Archery_Range",
+              "media": "assets/fixtures/archery_range.png",
               "recipes": [
                 "rielkConstruction:Archery_Range1",
                 "rielkConstruction:Archery_Range2",
@@ -1128,7 +1128,7 @@
             {
               "id": "Black_Market",
               "name": "Black Market",
-              "media_folder": "assets/fixtures/Black_Market",
+              "media": "assets/fixtures/black_market.png",
               "recipes": [
                 "rielkConstruction:Black_Market1",
                 "rielkConstruction:Black_Market2",
@@ -1140,7 +1140,7 @@
             {
               "id": "Desk",
               "name": "Desk",
-              "media_folder": "assets/fixtures/Desk",
+              "media": "assets/fixtures/desk.png",
               "recipes": [
                 "rielkConstruction:Desk1",
                 "rielkConstruction:Desk2",
@@ -1152,7 +1152,7 @@
             {
               "id": "Dragon_Statue",
               "name": "Dragon Statue",
-              "media_folder": "assets/fixtures/Dragon_Statue",
+              "media": "assets/fixtures/dragon_statue.png",
               "recipes": [
                 "rielkConstruction:Dragon_Statue1",
                 "rielkConstruction:Dragon_Statue2",
@@ -1164,7 +1164,7 @@
             {
               "id": "Fire_Pit",
               "name": "Fire Pit",
-              "media_folder": "assets/fixtures/Fire_Pit",
+              "media": "assets/fixtures/fire_pit.png",
               "recipes": [
                 "rielkConstruction:Fire_Pit1",
                 "rielkConstruction:Fire_Pit2",
@@ -1176,7 +1176,7 @@
             {
               "id": "Flower_Pots",
               "name": "Flower Pots",
-              "media_folder": "assets/fixtures/Flower_Pots",
+              "media": "assets/fixtures/flower_pots.png",
               "recipes": [
                 "rielkConstruction:Flower_Pots1",
                 "rielkConstruction:Flower_Pots2",
@@ -1188,7 +1188,7 @@
             {
               "id": "Forge",
               "name": "Forge",
-              "media_folder": "assets/fixtures/Forge",
+              "media": "assets/fixtures/forge.png",
               "recipes": [
                 "rielkConstruction:Forge1",
                 "rielkConstruction:Forge2",
@@ -1200,7 +1200,7 @@
             {
               "id": "Fridge",
               "name": "Fridge",
-              "media_folder": "assets/fixtures/Fridge",
+              "media": "assets/fixtures/fridge.png",
               "recipes": [
                 "rielkConstruction:Fridge1",
                 "rielkConstruction:Fridge2",
@@ -1212,7 +1212,7 @@
             {
               "id": "Jungle_Gym",
               "name": "Jungle Gym",
-              "media_folder": "assets/fixtures/Jungle_Gym",
+              "media": "assets/fixtures/jungle_gym.png",
               "recipes": [
                 "rielkConstruction:Jungle_Gym1",
                 "rielkConstruction:Jungle_Gym2",
@@ -1224,7 +1224,7 @@
             {
               "id": "Lake",
               "name": "Lake",
-              "media_folder": "assets/fixtures/Lake",
+              "media": "assets/fixtures/lake.png",
               "recipes": [
                 "rielkConstruction:Lake1",
                 "rielkConstruction:Lake2",
@@ -1236,7 +1236,7 @@
             {
               "id": "Mines",
               "name": "Mines",
-              "media_folder": "assets/fixtures/Mines",
+              "media": "assets/fixtures/mines.png",
               "recipes": [
                 "rielkConstruction:Mines1",
                 "rielkConstruction:Mines2",
@@ -1248,7 +1248,7 @@
             {
               "id": "Orchard",
               "name": "Orchard",
-              "media_folder": "assets/fixtures/Orchard",
+              "media": "assets/fixtures/orchard.png",
               "recipes": [
                 "rielkConstruction:Orchard1",
                 "rielkConstruction:Orchard2",
@@ -1260,7 +1260,7 @@
             {
               "id": "Oven",
               "name": "Oven",
-              "media_folder": "assets/fixtures/Oven",
+              "media": "assets/fixtures/oven.png",
               "recipes": [
                 "rielkConstruction:Oven1",
                 "rielkConstruction:Oven2",
@@ -1272,7 +1272,7 @@
             {
               "id": "Prayer_Altar",
               "name": "Prayer Altar",
-              "media_folder": "assets/fixtures/Prayer_Altar",
+              "media": "assets/fixtures/prayer_altar.png",
               "recipes": [
                 "rielkConstruction:Prayer_Altar1",
                 "rielkConstruction:Prayer_Altar2",
@@ -1284,7 +1284,7 @@
             {
               "id": "Rune_Altar",
               "name": "Rune Altar",
-              "media_folder": "assets/fixtures/Rune_Altar",
+              "media": "assets/fixtures/rune_altar.png",
               "recipes": [
                 "rielkConstruction:Rune_Altar1",
                 "rielkConstruction:Rune_Altar2",
@@ -1296,7 +1296,7 @@
             {
               "id": "Spell_Library",
               "name": "Spell Library",
-              "media_folder": "assets/fixtures/Spell_Library",
+              "media": "assets/fixtures/spell_library.png",
               "recipes": [
                 "rielkConstruction:Spell_Library1",
                 "rielkConstruction:Spell_Library2",
@@ -1308,7 +1308,7 @@
             {
               "id": "Storage_Chest",
               "name": "Storage Chest",
-              "media_folder": "assets/fixtures/Storage_Chest",
+              "media": "assets/fixtures/storage_chest.png",
               "recipes": [
                 "rielkConstruction:Storage_Chest1",
                 "rielkConstruction:Storage_Chest2",
@@ -1320,7 +1320,7 @@
             {
               "id": "Telescope",
               "name": "Telescope",
-              "media_folder": "assets/fixtures/Telescope",
+              "media": "assets/fixtures/telescope.png",
               "recipes": [
                 "rielkConstruction:Telescope1",
                 "rielkConstruction:Telescope2",
@@ -1332,7 +1332,7 @@
             {
               "id": "Tool_Rack",
               "name": "Tool Rack",
-              "media_folder": "assets/fixtures/Tool_Rack",
+              "media": "assets/fixtures/tool_rack.png",
               "recipes": [
                 "rielkConstruction:Tool_Rack1",
                 "rielkConstruction:Tool_Rack2",
@@ -1344,7 +1344,7 @@
             {
               "id": "Training_Dummy",
               "name": "Training Dummy",
-              "media_folder": "assets/fixtures/Training_Dummy",
+              "media": "assets/fixtures/training_dummy.png",
               "recipes": [
                 "rielkConstruction:Training_Dummy1",
                 "rielkConstruction:Training_Dummy2",
@@ -1356,7 +1356,7 @@
             {
               "id": "Trapping_Hut",
               "name": "Trapping Hut",
-              "media_folder": "assets/fixtures/Trapping_Hut",
+              "media": "assets/fixtures/trapping_hut.png",
               "recipes": [
                 "rielkConstruction:Trapping_Hut1",
                 "rielkConstruction:Trapping_Hut2",
@@ -1368,7 +1368,7 @@
             {
               "id": "Wardrobe",
               "name": "Wardrobe",
-              "media_folder": "assets/fixtures/Wardrobe",
+              "media": "assets/fixtures/wardrobe.png",
               "recipes": [
                 "rielkConstruction:Wardrobe1",
                 "rielkConstruction:Wardrobe2",
@@ -1380,7 +1380,7 @@
             {
               "id": "Worktable",
               "name": "Worktable",
-              "media_folder": "assets/fixtures/Worktable",
+              "media": "assets/fixtures/worktable.png",
               "recipes": [
                 "rielkConstruction:Worktable1",
                 "rielkConstruction:Worktable2",

@@ -8,7 +8,7 @@ export class ConstructionFixture extends RealmedObject {
         this.currentTier = 0;
         this.progress = 0;
         try {
-            this._media_folder = data.media_folder;
+            this._media = data.media;
             if (data.recipes == undefined)
                 throw new Error('No tiers specified in data.');
             var i = 0;
@@ -33,13 +33,10 @@ export class ConstructionFixture extends RealmedObject {
         }
     }
     get media() {
-        return this.mediaForTier('icon');
+        return this.getMediaURL(this._media);
     }
     get name() {
         return getRielkLangString(`CONSTRUCTION_FIXTURE_NAME_ ${this.localID}`);
-    }
-    mediaForTier(tier) {
-        return this.getMediaURL(`${this._media_folder}/${tier}.png`);
     }
     getRecipe(tier) {
         return this.recipes[tier - 1];
