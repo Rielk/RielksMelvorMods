@@ -54,6 +54,13 @@ export class Construction extends ArtisanSkill {
         return this.ui.constructionSelectionTabs;
     }
 
+    get sortedRooms() {
+        const ret = [];
+        this.rooms.forEach(r => ret.push(r));
+        ret.sort((a, b) => a.level - b.level);
+        return ret;
+    }
+
     get menu() {
         return this.ui.constructionArtisanMenu;
     }
@@ -175,6 +182,7 @@ export class Construction extends ArtisanSkill {
     postDataRegistration() {
         super.postDataRegistration();
         this.sortedMasteryActions = sortRecipesByCategoryAndLevel(this.actions.allObjects.filter(act => act.category.type === 'Artisan'), this.categories.allObjects);
+        this.rooms.forEach(room => room.sortFixtures());
         this.actions.forEach((action) => {
             if (action.abyssalLevel > 0)
                 this.abyssalMilestones.push(action);

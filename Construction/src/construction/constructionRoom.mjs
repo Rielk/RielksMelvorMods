@@ -29,4 +29,9 @@ export class ConstructionRoom extends RealmedObject {
     get name() {
         return getRielkLangString(`CONSTRUCTION_ROOM_NAME_ ${this.localID}`);
     }
+
+    sortFixtures() {
+        this.fixtures.sort((a, b) => a.level - b.level);
+        this.level = this.fixtures[0].level;
+    }
 }
