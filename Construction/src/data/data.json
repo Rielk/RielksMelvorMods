@@ -615,7 +615,7 @@
         "id": "ChuckTheBeaver",
         "name": "Chuck The Beaver",
         "media": "assets/chuck_the_beaver.png",
-        "ignoreCompletion": true,
+        "ignoreCompletion": false,
         "modifiers": {
           "skillPreservationChance": [
             {
