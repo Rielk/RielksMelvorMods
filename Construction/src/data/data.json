@@ -864,7 +864,7 @@
             {
               "id": "Materials",
               "name": "Materials",
-              "media": "assets/items/normal_planks.png",
+              "media": "assets/items/planks_normal.png",
               "type": "Artisan"
             },
             {
