@@ -103,4 +103,14 @@ export function patchTranslations(ctx) {
         }
         return ret;
     });
+    ctx.patch(MasteryLevelUnlock, 'description').get(function (patch) {
+        const ret = patch();
+        if (this._descriptionID !== undefined && ret.startsWith('UNDEFINED TRANSLATION')){
+            const ret2 = getRielkLangString(`MASTERY_BONUS_ ${this.skill.localID}_ ${this._descriptionID}`);
+            if (ret2.startsWith('UNDEFINED TRANSLATION'))
+                return ret;
+            return ret2;
+        }
+        return ret;
+    });
 }
