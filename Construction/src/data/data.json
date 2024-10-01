@@ -785,6 +785,7 @@
                 "skillPreservationChance": [
                   {
                     "skillID": "rielkConstruction:Construction",
+                    "actionID": "rielkConstruction:Iron_Nails",
                     "value": 0.2
                   }
                 ]
@@ -798,6 +799,7 @@
                 "skillPreservationChance": [
                   {
                     "skillID": "rielkConstruction:Construction",
+                    "actionID": "rielkConstruction:Iron_Nails",
                     "value": 5
                   }
                 ]
