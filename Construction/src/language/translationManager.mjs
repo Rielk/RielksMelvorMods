@@ -1,7 +1,15 @@
 const { loadModule } = mod.getContext(import.meta);
 
 const languages = {
-    'en': 'src/language/en.mjs'
+    'en': 'src/language/en.mjs',
+    'de': 'src/language/de.mjs',
+    'ru': 'src/language/ru.mjs',
+    'zh-CN': 'src/language/zh-CN.mjs',
+    'zh-TW': 'src/language/zh-TW.mjs',
+    'it': 'src/language/it.mjs',
+    'ko': 'src/language/ko.mjs',
+    'ja': 'src/language/ja.mjs',
+    'fr': 'src/language/fr.mjs',
 };
 
 class TranslationManager {

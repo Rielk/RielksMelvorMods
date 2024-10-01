@@ -151,7 +151,7 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.requires.setItemsFromRecipe(fixtureRecipe);
         this.haves.setItemsFromRecipe(fixtureRecipe, construction.game);
         this.grants.setSelected();
-        this.grants.updateGrants(Math.floor(construction.modifyXP(fixtureRecipe.baseExperience)), fixtureRecipe.baseExperience);
+        this.grants.xpIcon.setXP(Math.floor(construction.modifyXP(fixtureRecipe.baseExperience)), fixtureRecipe.baseExperience);
         this.grants.updateAbyssalGrants(Math.floor(construction.modifyAbyssalXP(fixtureRecipe.baseAbyssalExperience)), fixtureRecipe.baseAbyssalExperience);
         this.grants.setSources(construction, fixtureRecipe);
         this.grants.hideMastery();

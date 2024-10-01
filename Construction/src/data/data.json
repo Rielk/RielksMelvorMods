@@ -5004,6 +5004,14 @@
     ]
   },
   "modifications": {
+    "gamemodes": [
+      {
+        "id": "melvorAoD:AncientRelics",
+        "startingSkills": {
+          "add": ["rielkConstruction:Construction"]
+        }
+      }
+    ],
     "items": [
       {
         "id": "melvorF:Max_Skillcape",
