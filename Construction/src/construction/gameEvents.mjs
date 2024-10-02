@@ -34,7 +34,7 @@ class ConstructionActionEventMatcher extends SkillActionEventMatcher {
 }
 
 export function patchGameEventSystem(ctx) {
-    ctx.patch(GameEventSystem, 'constructMatcher').after((data) => {
+    ctx.patch(GameEventSystem, 'constructMatcher').after((_, data) => {
         if (data.type == 'ConstructionAction') {
             return new ConstructionActionEventMatcher(data, this.game);
         }
