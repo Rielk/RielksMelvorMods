@@ -655,7 +655,7 @@
             {
               "id": "AllotmentPlotRielk1",
               "categoryID": "melvorD:Allotment",
-              "level": 1,
+              "level": 5,
               "itemCosts": [
                 {
                   "id": "rielkConstruction:Allotment_Token_1",
@@ -666,7 +666,7 @@
             {
               "id": "AllotmentPlotRielk2",
               "categoryID": "melvorD:Allotment",
-              "level": 1,
+              "level": 15,
               "itemCosts": [
                 {
                   "id": "rielkConstruction:Allotment_Token_2",
@@ -677,7 +677,7 @@
             {
               "id": "HerbPlotRielk1",
               "categoryID": "melvorD:Herb",
-              "level": 1,
+              "level": 5,
               "itemCosts": [
                 {
                   "id": "rielkConstruction:Herb_Token_1",
@@ -688,7 +688,7 @@
             {
               "id": "HerbPlotRielk2",
               "categoryID": "melvorD:Herb",
-              "level": 1,
+              "level": 15,
               "itemCosts": [
                 {
                   "id": "rielkConstruction:Herb_Token_2",
@@ -699,7 +699,7 @@
             {
               "id": "TreePlotRielk1",
               "categoryID": "melvorD:Tree",
-              "level": 1,
+              "level": 15,
               "itemCosts": [
                 {
                   "id": "rielkConstruction:Tree_Token_1",
