@@ -79,9 +79,6 @@ export class Construction extends ArtisanSkill {
     get masteryAction() {
         return this.activeRecipe;
     }
-    get masteryBuildAction() {
-        return this.activeBuildRecipe;
-    }
     get unmodifiedActionQuantity() {
         return this.activeRecipe.baseQuantity;
     }
@@ -157,7 +154,7 @@ export class Construction extends ArtisanSkill {
             recipe.applyDataModification(modData, this.game);
         }
         );
-        (_d = data.fixtureRecipes) === null || _d === void 0 ? void 0 : _d.forEach((modData) => {
+        (_b = data.fixtureRecipes) === null || _b === void 0 ? void 0 : _b.forEach((modData) => {
             const fixtureRecipe = this.actions.getObjectByID(modData.id);
             if (fixtureRecipe === undefined)
                 throw new UnregisteredDataModError(ConstructionRecipe.name, modData.id);
@@ -281,6 +278,25 @@ export class Construction extends ArtisanSkill {
         this._events.emit('action', actionEvent);
         return rewards;
     }
+    addMasteryXPReward() {
+        switch (this._actionMode) {
+            case 0: {
+                this.addMasteryForAction(this.masteryAction, this.masteryModifiedInterval);
+                break;
+            }
+            case 1: {
+                const masteryActions = this.activeBuildRecipe.itemCosts.map(cost => {
+                    if (cost.item.namespace == 'rielkConstruction')
+                        return this.sortedMasteryActions.find(action => action.product == cost.item);
+                });
+                masteryActions.forEach(action => {
+                    if (action != undefined)
+                        this.addMasteryForAction(action, this.masteryModifiedInterval);
+                });
+                break;
+            }
+        }
+    }
     postAction() {
         this.stats.inc(ConstructionStats.Actions);
         this.stats.add(ConstructionStats.TimeSpent, this.currentActionInterval);
@@ -311,7 +327,7 @@ export class Construction extends ArtisanSkill {
             return;
         }
         this.preAction();
-        const preserve = rollPercentage(this.getPreservationChance(this.masteryBuildAction));
+        const preserve = rollPercentage(this.getPreservationChance(this.activeBuildRecipe));
         if (preserve) {
             this.game.combat.notifications.add({
                 type: 'Preserve',
