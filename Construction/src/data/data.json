@@ -2005,7 +2005,7 @@
                 }
               ],
               "modifiers": {
-                "maxHitpoints": 20,
+                "flatMaxHitpoints": 2,
                 "currencyGain": [
                   {
                     "currencyID": "melvorD:GP",
