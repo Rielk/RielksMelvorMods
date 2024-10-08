@@ -86,7 +86,10 @@ class ConstructionRoomPanelElement extends HTMLElement {
         this.selectedFixture = fixture;
         this.updateRoomInfo(construction);
         this.startButton.onclick = ()=>construction.toggleBuilding(room, fixture);
-        this.upgradesButton.onclick = ()=>construction.ui.showFixtureUnlocks(room, fixture, construction);
+        if (construction.ui.constructionHouseMenu.roomUnlocksPanel.classList.contains('d-none'))
+            this.upgradesButton.onclick = ()=>construction.ui.showFixtureUnlocks(room, fixture, construction);
+        else
+            this.upgradesButton.onclick = ()=>construction.ui.hideFixtureUnlocks(room, fixture, construction);
         
         const interval = construction.getFixtureInterval(fixture);
         this.interval.setInterval(interval, construction.getIntervalSources(fixture));
