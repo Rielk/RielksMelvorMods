@@ -1,0 +1,17 @@
+{
+  "$schema": "https://melvoridle.com/assets/schema/gameData.json",
+  "namespace": "rielkConstruction",
+  "modifications": {
+    "gamemodes": [
+      {
+        "id": "melvorAoD:AncientRelics",
+        "levelCapIncreases": {
+          "add": ["melvorAoD:Pre99Dungeons", "melvorAoD:ImpendingDarknessSet100"]
+        },
+        "startingSkills": {
+          "add": ["rielkConstruction:Construction"]
+        }
+      }
+    ]
+  }
+}

@@ -33,13 +33,23 @@ class Setup {
         await loadModule('src/interface/elements/rielkLangStringElement.mjs');
     }
 
-    async applyPatches() {
+    async applyPatches() {       
         patchGameEventSystem(this.ctx);
         patchTranslations(this.ctx);
         patchFarming(this.ctx);
+
+        this.ctx.patch(EventManager, 'loadEvents').before(() => {
+            if (game.construction.isUnlocked)
+                return;
+            if(game.currentGamemode.startingSkills != undefined && game.currentGamemode.startingSkills.has(game.construction)) {
+                game.construction.setUnlock(true);
+            }
+        });
     }
 
     async loadData() {
         await this.ctx.gameData.addPackage('src/data/data.json');
+        if (cloudManager.hasAoDEntitlementAndIsEnabled)
+            await this.ctx.gameData.addPackage('src/data/data_AoD.json');
     }
 }
