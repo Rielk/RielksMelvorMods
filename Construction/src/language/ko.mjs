@@ -33,11 +33,11 @@ export const language = {
     'ITEM_NAME_Mahogany_Planks': '마호가니 판자',
     'ITEM_NAME_Magic_Planks': '마법의 판자',
 
-    'ITEM_NAME_Allotment_Token_1': '할당 토큰 1',
-    'ITEM_NAME_Allotment_Token_2': '할당 토큰 2',
-    'ITEM_NAME_Herb_Token_1': '허브 토큰 1',
-    'ITEM_NAME_Herb_Token_2': '허브 토큰 2',
-    'ITEM_NAME_Tree_Token_1': '트리 토큰 1',
+    'ITEM_NAME_Flower_Pots_Token_1': '화분: 층 1',
+    'ITEM_NAME_Flower_Pots_Token_2': '화분: 층 2',
+    'ITEM_NAME_Flower_Pots_Token_3': '화분: 층 3',
+    'ITEM_NAME_Flower_Pots_Token_4': '화분: 층 4',
+    'ITEM_NAME_Flower_Pots_Token_5': '화분: 층 5',
 
     'ITEM_NAME_Mastery_Token_Construction': '마스터리 토큰(구조)',
 
@@ -51,6 +51,7 @@ export const language = {
     'MODIFIER_DATA_increaseConstructionActionsToUpgrade': '건설 업그레이드에 필요한 작업량 +${value}%',
 
     'DESCRIPTION_ADDS_ITEM': '준다 ${itemQuantity} ${itemName} ${itemImage}',
+    'DESCRIPTION_UNLOCKS_PLOT': '농장에서 ${plotCategory} 플롯 1개 잠금 해제',
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': '그것을 만드는 데 필요한 재료가 없습니다.',
 

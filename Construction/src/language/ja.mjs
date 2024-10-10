@@ -33,11 +33,11 @@ export const language = {
     'ITEM_NAME_Mahogany_Planks': 'マホガニーの板',
     'ITEM_NAME_Magic_Planks': '魔法の板',
 
-    'ITEM_NAME_Allotment_Token_1': '割り当てトークン 1',
-    'ITEM_NAME_Allotment_Token_2': '割り当てトークン 2',
-    'ITEM_NAME_Herb_Token_1': 'ハーブトークン1',
-    'ITEM_NAME_Herb_Token_2': 'ハーブトークン2',
-    'ITEM_NAME_Tree_Token_1': 'ツリートークン 1',
+    'ITEM_NAME_Flower_Pots_Token_1': '植木鉢: 階層 1',
+    'ITEM_NAME_Flower_Pots_Token_2': '植木鉢: 階層 2',
+    'ITEM_NAME_Flower_Pots_Token_3': '植木鉢: 階層 3',
+    'ITEM_NAME_Flower_Pots_Token_4': '植木鉢: 階層 4',
+    'ITEM_NAME_Flower_Pots_Token_5': '植木鉢: 階層 5',
 
     'ITEM_NAME_Mastery_Token_Construction': 'マスタリートークン（建設）',
 
@@ -51,6 +51,7 @@ export const language = {
     'MODIFIER_DATA_increaseConstructionActionsToUpgrade': '建設のアップグレードに必要なアクション数 +${value}%',
 
     'DESCRIPTION_ADDS_ITEM': '与える ${itemQuantity} ${itemName} ${itemImage}',
+    'DESCRIPTION_UNLOCKS_PLOT': '農業で 1 つの ${plotCategory} 区画のロックを解除します',
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': 'それを作るのに必要な資材がない',
 

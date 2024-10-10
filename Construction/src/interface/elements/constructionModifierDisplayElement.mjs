@@ -1,6 +1,6 @@
 const { loadModule, onInterfaceReady } = mod.getContext(import.meta);
 
-const { templateRielkLangStringWithNodes } = await loadModule('src/language/translationManager.mjs');
+const { templateRielkLangStringWithNodes, templateRielkLangString } = await loadModule('src/language/translationManager.mjs');
 
 class ConstructionModifierDisplayElement extends HTMLElement {
     constructor() {
@@ -77,6 +77,12 @@ class ConstructionModifierDisplayElement extends HTMLElement {
                 })
                 this.modifierText.append(...nodes)
             });
+        }
+        if (this.recipe.unlockPlot != undefined) {
+            const text = templateRielkLangString('DESCRIPTION_UNLOCKS_PLOT', {
+                plotCategory: this.recipe.unlockPlot.category.name
+            });
+            this.modifierText.append(formatter({ text: text }));
         }
     }
     setLocked(recipe, construction) {

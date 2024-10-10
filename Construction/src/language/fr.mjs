@@ -33,11 +33,11 @@ export const language = {
     'ITEM_NAME_Mahogany_Planks': 'Planches d\'acajou',
     'ITEM_NAME_Magic_Planks': 'Planches magiques',
 
-    'ITEM_NAME_Allotment_Token_1': 'Jeton d\'attribution 1',
-    'ITEM_NAME_Allotment_Token_2': 'Jeton d\'attribution 2',
-    'ITEM_NAME_Herb_Token_1': 'Jeton d\'herbe 1',
-    'ITEM_NAME_Herb_Token_2': 'Jeton d\'herbe 2',
-    'ITEM_NAME_Tree_Token_1': 'Jeton d\'arbre 1',
+    'ITEM_NAME_Flower_Pots_Token_1': 'Pots de fleurs: Étage 1',
+    'ITEM_NAME_Flower_Pots_Token_2': 'Pots de fleurs: Étage 2',
+    'ITEM_NAME_Flower_Pots_Token_3': 'Pots de fleurs: Étage 3',
+    'ITEM_NAME_Flower_Pots_Token_4': 'Pots de fleurs: Étage 4',
+    'ITEM_NAME_Flower_Pots_Token_5': 'Pots de fleurs: Étage 5',
 
     'ITEM_NAME_Mastery_Token_Construction': 'Jeton de maîtrise (construction)',
 
@@ -51,6 +51,7 @@ export const language = {
     'MODIFIER_DATA_increaseConstructionActionsToUpgrade': '+${value}% d\'actions requises pour la mise à niveau en construction',
 
     'DESCRIPTION_ADDS_ITEM': 'Donner ${itemQuantity} ${itemName} ${itemImage}',
+    'DESCRIPTION_UNLOCKS_PLOT': 'Débloque 1 Parcelle ${plotCategory} en Agriculture',
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': 'Vous n\'avez pas les matériaux nécessaires pour construire cela.',
 

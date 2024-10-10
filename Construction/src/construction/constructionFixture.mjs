@@ -72,4 +72,7 @@ export class ConstructionFixture extends RealmedObject {
     addProvidedStatsTo(statProvider) {
         this.providedStats.forEach((stat) => statProvider.addStatObject(this, stat));
     }
+    onLoad() {
+        this.recipes.forEach(recipe => recipe.onLoad());
+    }
 }

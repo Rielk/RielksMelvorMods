@@ -33,11 +33,11 @@ export const language = {
     'ITEM_NAME_Mahogany_Planks': 'доски из красного дерева',
     'ITEM_NAME_Magic_Planks': 'Волшебные доски',
 
-    'ITEM_NAME_Allotment_Token_1': 'Участки Токен 1',
-    'ITEM_NAME_Allotment_Token_2': 'Участки Токен 2',
-    'ITEM_NAME_Herb_Token_1': 'травы Токен 1',
-    'ITEM_NAME_Herb_Token_2': 'травы Токен 2',
-    'ITEM_NAME_Tree_Token_1': 'Деревья Токен 1',
+    'ITEM_NAME_Flower_Pots_Token_1': 'Цветочные горшки: Уровень 1',
+    'ITEM_NAME_Flower_Pots_Token_2': 'Цветочные горшки: Уровень 2',
+    'ITEM_NAME_Flower_Pots_Token_3': 'Цветочные горшки: Уровень 3',
+    'ITEM_NAME_Flower_Pots_Token_4': 'Цветочные горшки: Уровень 4',
+    'ITEM_NAME_Flower_Pots_Token_5': 'Цветочные горшки: Уровень 5',
 
     'ITEM_NAME_Mastery_Token_Construction': 'Жетон мастерства (Строительство)',
 
@@ -51,6 +51,7 @@ export const language = {
     'MODIFIER_DATA_increaseConstructionActionsToUpgrade': '+${value}% действий, необходимых для улучшения в строительстве',
 
     'DESCRIPTION_ADDS_ITEM': 'Дает ${itemQuantity} ${itemName} ${itemImage}',
+    'DESCRIPTION_UNLOCKS_PLOT': 'Разблокирует 1 участок ${plotCategory} в разделе «Фермерство»',
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': 'У вас нет необходимых материалов для его постройки.',
 

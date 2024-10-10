@@ -33,11 +33,11 @@ export const language = {
     'ITEM_NAME_Mahogany_Planks': '桃花心木板',
     'ITEM_NAME_Magic_Planks': '魔法木板',
 
-    'ITEM_NAME_Allotment_Token_1': '分配代幣1',
-    'ITEM_NAME_Allotment_Token_2': '分配代幣2',
-    'ITEM_NAME_Herb_Token_1': '草藥標記 1',
-    'ITEM_NAME_Herb_Token_2': '草藥標記 2',
-    'ITEM_NAME_Tree_Token_1': '樹標記 1',
+    'ITEM_NAME_Flower_Pots_Token_1': '花盆: 層 1',
+    'ITEM_NAME_Flower_Pots_Token_2': '花盆: 層 2',
+    'ITEM_NAME_Flower_Pots_Token_3': '花盆: 層 3',
+    'ITEM_NAME_Flower_Pots_Token_4': '花盆: 層 4',
+    'ITEM_NAME_Flower_Pots_Token_5': '花盆: 層 5',
 
     'ITEM_NAME_Mastery_Token_Construction': '精通代幣（結構）',
 
@@ -51,6 +51,7 @@ export const language = {
     'MODIFIER_DATA_increaseConstructionActionsToUpgrade': '+${value}% 升級建築所需的行動',
 
     'DESCRIPTION_ADDS_ITEM': '給出 ${itemQuantity} ${itemName} ${itemImage}',
+    'DESCRIPTION_UNLOCKS_PLOT': '在農業解鎖 1 個 ${plotCategory} 地塊',
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': '你沒有建造它所需的材料。',
 
