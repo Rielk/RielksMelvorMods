@@ -33,11 +33,11 @@ export const language = {
     'ITEM_NAME_Mahogany_Planks': 'Mahogany Planks',
     'ITEM_NAME_Magic_Planks': 'Magic Planks',
 
-    'ITEM_NAME_Allotment_Token_1': 'Allotment Token 1',
-    'ITEM_NAME_Allotment_Token_2': 'Allotment Token 2',
-    'ITEM_NAME_Herb_Token_1': 'Herb Token 1',
-    'ITEM_NAME_Herb_Token_2': 'Herb Token 2',
-    'ITEM_NAME_Tree_Token_1': 'Tree Token 1',
+    'ITEM_NAME_Flower_Pots_Token_1': 'Flower Pot: Tier 1',
+    'ITEM_NAME_Flower_Pots_Token_2': 'Flower Pot: Tier 2',
+    'ITEM_NAME_Flower_Pots_Token_3': 'Flower Pot: Tier 3',
+    'ITEM_NAME_Flower_Pots_Token_4': 'Flower Pot: Tier 4',
+    'ITEM_NAME_Flower_Pots_Token_5': 'Flower Pot: Tier 5',
 
     'ITEM_NAME_Mastery_Token_Construction': 'Mastery Token (Construction)',
 
@@ -51,6 +51,7 @@ export const language = {
     'MODIFIER_DATA_increaseConstructionActionsToUpgrade': '+${value}% actions required to upgrade in Construction',
 
     'DESCRIPTION_ADDS_ITEM': 'Gives ${itemQuantity} ${itemName} ${itemImage}',
+    'DESCRIPTION_UNLOCKS_PLOT': 'Unlocks 1 ${plotCategory} Plot in Farming',
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': 'You don\'t have the required materials to Build that.',
 

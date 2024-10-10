@@ -11,6 +11,8 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
             this.modifiers = new ConstructionModifiers(data, game, `${this.id}`);
             if (data.grantItem != undefined)
                 this.grantItems = game.items.getQuantities(data.grantItem);
+            if (data.unlockPlot != undefined)
+                this.unlockPlot = game.farming.plots.getObjectSafe(data.unlockPlot)
         } catch (e) {
             throw new DataConstructionError(ConstructionFixtureRecipes.name, e, this.id);
         }
@@ -22,6 +24,8 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
             this.modifiers.applyDataModification(data, game);
             if (data.grantItem != undefined)
                 this.grantItems = game.items.getQuantities(data.grantItem);
+            if (data.unlockPlot != undefined)
+                this.unlockPlot = game.farming.plots.getObjectSafe(data.unlockPlot)
         }
         catch (e) {
             throw new DataModificationError(ConstructionFixtureRecipes.name, e, this.id);
@@ -51,6 +55,19 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
         return this.grantItems != undefined && this.grantItems.length > 0;
     }
 
+    onLoad() {
+        if (this.isUnlocked)
+            this.doUnlockPlot();
+    }
+
+    doUnlockPlot() {
+        if (this.unlockPlot != undefined && this.unlockPlot.state == 0) {
+            this.unlockPlot.state = 1;
+            return true;
+        }
+        return false;
+    }
+
     makeProgress() {
         this.fixture.progress++;
         this.skill.renderQueue.menu = true;
@@ -58,6 +75,8 @@ export class ConstructionFixtureRecipes extends CategorizedArtisanRecipe {
             this.fixture.upgrade(this.skill);
             if (this.grantItems != undefined)
                 this.grantItems.forEach(iq => game.bank.addItem(iq.item, iq.quantity, true, true, true));
+            if (this.doUnlockPlot())
+                game.farming.showPlotsInCategory(this.unlockPlot.category);
             return false;
         }
         return true;

@@ -33,11 +33,11 @@ export const language = {
     'ITEM_NAME_Mahogany_Planks': 'Mahagonibretter',
     'ITEM_NAME_Magic_Planks': 'Magische Bretter',
 
-    'ITEM_NAME_Allotment_Token_1': 'Nutzpflanzen-Token 1',
-    'ITEM_NAME_Allotment_Token_2': 'Nutzpflanzen-Token 2',
-    'ITEM_NAME_Herb_Token_1': 'Kräuter-Token 1',
-    'ITEM_NAME_Herb_Token_2': 'Kräuter-Token 2',
-    'ITEM_NAME_Tree_Token_1': 'Baum-Token 1',
+    'ITEM_NAME_Flower_Pots_Token_1': 'Blumentöpfe: Stufe 1',
+    'ITEM_NAME_Flower_Pots_Token_2': 'Blumentöpfe: Stufe 2',
+    'ITEM_NAME_Flower_Pots_Token_3': 'Blumentöpfe: Stufe 3',
+    'ITEM_NAME_Flower_Pots_Token_4': 'Blumentöpfe: Stufe 4',
+    'ITEM_NAME_Flower_Pots_Token_5': 'Blumentöpfe: Stufe 5',
 
     'ITEM_NAME_Mastery_Token_Construction': 'Meisterungsmarke (Konstruktion)',
 
@@ -51,6 +51,7 @@ export const language = {
     'MODIFIER_DATA_increaseConstructionActionsToUpgrade': '+${value}% erforderliche Aktionen zur Aufwertung im Konstruktion',
 
     'DESCRIPTION_ADDS_ITEM': 'Gibt ${itemQuantity} ${itemName} ${itemImage}',
+    'DESCRIPTION_UNLOCKS_PLOT': 'Schaltet 1 ${plotCategory} Feld in der Landwirtschaft frei',
 
     'TOASTS_MATERIALS_REQUIRED_TO_BUILD': 'Sie haben nicht die erforderlichen Materialien, um das zu bauen',
 

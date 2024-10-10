@@ -402,6 +402,7 @@ export class Construction extends ArtisanSkill {
             this.ui.switchConstructionCategory(recipe.category)
             this.ui.selectFixture(recipe.fixture, recipe.fixture.room, this);
         }
+        this.fixtures.forEach(fixture => fixture.onLoad());
         this.render();
     }
     resetActionState() {
