@@ -412,6 +412,40 @@ export class Construction extends ArtisanSkill {
         this.selectedFixture = undefined;
         this.selectedFixtureRecipe = undefined;
     }
+    updateForExistingCapIncreases() {
+        this.game.activeLevelCapIncreases.forEach((capIncrease) => {
+            capIncrease.requirementSets.forEach((reqSet) => {
+                if (!reqSet.given)
+                    return;
+                switch (capIncrease.levelType) {
+                    case 'Standard':
+                        capIncrease.fixedIncreases.forEach((skillIncrease) => {
+                            if (skillIncrease.skill == this)
+                                this.applyLevelCapIncrease(skillIncrease);
+                        });
+                        capIncrease.setIncreases.forEach(({ value }) => {
+                            if (skillIncrease.skill == this)
+                                this.applySetLevelCap(value);
+                        }
+                        );
+                        break;
+                    case 'Abyssal':
+                        capIncrease.fixedIncreases.forEach((skillIncrease) => {
+                            if (skillIncrease.skill == this)
+                                this.skill.applyAbyssalLevelCapIncrease(skillIncrease);
+                        }
+                        );
+                        capIncrease.setIncreases.forEach(({ value }) => {
+                            if (skillIncrease.skill == this)
+                                this.setAbyssalLevelCap(value);
+                        }
+                        );
+                        break;
+                }
+                this.game.validateRandomLevelCapIncreases();
+            })
+        });
+    }
     encode(writer) {
         super.encode(writer);
         Encoder.encode(this, writer);
