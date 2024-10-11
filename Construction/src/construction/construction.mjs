@@ -229,13 +229,13 @@ export class Construction extends ArtisanSkill {
     }
     addProvidedStats() {
         super.addProvidedStats();
-        this.fixtures.forEach((fixture)=>{
+        this.fixtures.forEach((fixture) => {
             fixture.addProvidedStatsTo(this.providedStats)
         });
     }
     viewAllModifiersOnClick() {
         const summary = new StatObjectSummary();
-        this.fixtures.forEach((fixture)=>{
+        this.fixtures.forEach((fixture) => {
             fixture.addProvidedStatsTo(summary)
         });
         const html = summary.getAllDescriptions().map(getElementHTMLDescriptionFormatter('h5', 'font-w400 font-size-sm mb-1', false)).join('');
@@ -354,7 +354,7 @@ export class Construction extends ArtisanSkill {
         }
     }
 
-    toggleBuilding(room, fixture){
+    toggleBuilding(room, fixture) {
         if (this.isActive) {
             if (this._actionMode == 1) {
                 this.stop();
@@ -373,7 +373,7 @@ export class Construction extends ArtisanSkill {
         this.selectedFixture = fixture;
         this.selectedFixtureRecipe = fixture.currentRecipe;
         this.start();
-        
+
     }
     getRegistry(type) {
         switch (type) {
@@ -413,6 +413,7 @@ export class Construction extends ArtisanSkill {
         this.selectedFixtureRecipe = undefined;
     }
     updateForExistingCapIncreases() {
+        this.setLevelCap(10);
         this.game.activeLevelCapIncreases.forEach((capIncrease) => {
             capIncrease.requirementSets.forEach((reqSet) => {
                 if (!reqSet.given)

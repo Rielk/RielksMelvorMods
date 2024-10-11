@@ -2,7 +2,7 @@ const { onCharacterLoaded } = mod.getContext(import.meta);
 
 export class Encoder {
     static encode(construction, writer) {
-        const _constructionVersion = 1;
+        const _constructionVersion = 2;
         writer.writeUint32(_constructionVersion);
         writer.writeSet(construction.hiddenRooms, writeNamespaced);
         construction.stats.encode(writer);
@@ -49,7 +49,7 @@ export class Encoder {
                 construction.selectedFixtureRecipe = fixtureRecipe;
         }
 
-        if (_constructionVersion == 0)
+        if (_constructionVersion < 2)
             onCharacterLoaded(() => construction.updateForExistingCapIncreases());
 
         if (construction.shouldResetAction)
