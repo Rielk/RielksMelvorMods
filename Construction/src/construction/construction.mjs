@@ -413,7 +413,7 @@ export class Construction extends ArtisanSkill {
         this.selectedFixtureRecipe = undefined;
     }
     updateForExistingCapIncreases() {
-        this.setLevelCap(10);
+        this.setLevelCap(-1);
         this.game.activeLevelCapIncreases.forEach((capIncrease) => {
             capIncrease.requirementSets.forEach((reqSet) => {
                 if (!reqSet.given)
