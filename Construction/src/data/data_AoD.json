@@ -12,6 +12,31 @@
           "add": ["rielkConstruction:Construction"]
         }
       }
+    ],
+    "skillLevelCapIncreases": [
+      {
+        "id": "melvorAoD:Pre99Dungeons",
+        "randomIncreases": {
+          "add": [
+            {
+              "skillID": "rielkConstruction:Construction",
+              "increase": 15,
+              "maximum": 99
+            }
+          ]
+        }
+      },
+      {
+        "id": "melvorAoD:ImpendingDarknessSet100",
+        "setIncreases": {
+          "add": [
+            {
+              "skillID": "rielkConstruction:Construction",
+              "value": 100
+            }
+          ]
+        }
+      }
     ]
   }
 }
