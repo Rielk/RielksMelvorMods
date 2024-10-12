@@ -3236,7 +3236,7 @@
               "itemCosts": [
                 {
                   "id": "melvorD:Maple_Tree_Seed",
-                  "quantity": 2
+                  "quantity": 1
                 },
                 {
                   "id": "melvorD:Weird_Gloop",
@@ -3269,7 +3269,7 @@
               "itemCosts": [
                 {
                   "id": "melvorD:Yew_Tree_Seed",
-                  "quantity": 3
+                  "quantity": 1
                 },
                 {
                   "id": "melvorD:Weird_Gloop",
@@ -3302,7 +3302,7 @@
               "itemCosts": [
                 {
                   "id": "melvorD:Magic_Tree_Seed",
-                  "quantity": 4
+                  "quantity": 1
                 },
                 {
                   "id": "melvorD:Weird_Gloop",
