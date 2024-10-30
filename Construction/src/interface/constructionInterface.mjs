@@ -59,6 +59,11 @@ export class ConstructionInterface {
         };
     }
 
+    updateRealmSelection(newRealm) {
+        this.constructionCategoryMenu.setCurrentRealm(newRealm);
+        this.constructionCategoryMenu.addOptions(game.construction.categories.allObjects, getRielkLangString('MENU_TEXT_SELECT_CONSTRUCTION_CATEGORY'), this._createSwitchConstructionCategory());
+    }
+
     render() {
         this.renderMenu();
         this.renderProgressBar();

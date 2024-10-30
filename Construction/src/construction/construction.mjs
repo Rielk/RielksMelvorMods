@@ -195,6 +195,9 @@ export class Construction extends ArtisanSkill {
         if (this.isActive)
             this.renderQueue.progressBar = true;
     }
+    updateRealmSelection() {
+        this.ui.updateRealmSelection(this.currentRealm);
+    }
     render() {
         super.render();
         this.ui.render();
