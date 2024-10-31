@@ -89,11 +89,13 @@ export class ConstructionHouseMenu {
                 hideElement(panel);
             }
         });
+        this.roomUnlocksPanel.setFixture(fixture, construction);
         showElement(this.roomUnlocksPanel);
     }
     hideFixtureUnlocks(room, fixture, construction){
-        this.roomPanels.forEach((panel,room)=>{
-            panel.hideFixtureUnlocks(room, fixture, construction);
+        this.roomPanels.forEach((panel, roomOfPanel) => {
+            if (roomOfPanel == room)
+                panel.hideFixtureUnlocks(roomOfPanel, fixture, construction);
             showElement(panel);
         });
         hideElement(this.roomUnlocksPanel);
